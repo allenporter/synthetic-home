@@ -1,4 +1,4 @@
-"""Test for devife_types."""
+"""Test for device_types."""
 
 from synthetic_home import device_types
 
