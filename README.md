@@ -7,6 +7,61 @@ which creates instances of synthetic homes.
 
 See the [synthetic_home/registry](synthetic_home/registry) for details on the registry.
 
+## Example
+
+This is an example of a synthetic hoome configuration file:
+
+```yaml
+---
+name: Family Farmhouse
+devices:
+  Family Room:
+    - name: Family Room Lamp
+      device_type: light
+      device_info:
+        manufacturer: Phillips
+        model: Hue
+    - name: Family Room
+      device_type: hvac
+      device_info:
+        manufacturer: Nest
+        sw_version: 1.0.0
+      attributes:
+        unit_of_measurement: °F
+        current_temperature: 60
+    - name: Left Window
+      device_type: window-sensor
+    - name: Right Window
+      device_type: window-sensor
+  Entry:
+    - name: Front Door
+      device_type: smart-lock
+  Kitchen:
+    - name: Light
+      device_type: light-dimmable
+    - name: Coffe Maker
+      device_type: smart-plug
+      device_info:
+        manufacturer: Shelly
+  Master Bedroom:
+    - name: Bedroom Light
+      device_type: light-dimmable
+    - name: Bedroom Blinds
+      device_type: smart-blinds
+      device_info:
+        model: RollerBlinds
+        manufacturer: Motion Blinds
+        sw_version: 1.1.0
+    - name: Bedroom Window
+      device_type: window-sensor
+  Garage:
+    - name: Garage Door
+      device_type: garage-door
+  Front Yard:
+    - name: Front motion
+      device_type: motion-sensor
+```
+
 ## Device Type Registry
 
 A device type is a definition of a type of physical device in a smart home. A
