@@ -18,6 +18,7 @@ def test_load_synthetic_home() -> None:
     assert len(area) == 1
     device = area[0]
     assert device.name == "Outdoor Camera"
+    assert device.device_info
     assert device.device_info.model == "Spotlight Cam Battery"
     assert device.device_info.manufacturer == "Ring"
     assert device.device_info.sw_version == "2.4.1"
