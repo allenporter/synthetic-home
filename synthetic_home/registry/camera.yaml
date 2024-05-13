@@ -19,7 +19,6 @@ entities:
     - key: sound
       supported_attributes:
         - is_on=sound_detected
-  # TODO: In the future would be good to add an event entity here
 
 #
 # The states below are useful for evaluating the device.
