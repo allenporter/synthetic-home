@@ -20,7 +20,7 @@ Device types are defined to represent common configured household devices,
 but may not support every single feature in the smart home. That is, these
 are meant to be representative, but not necessarily exhaustive.
 
-Each file in `synthetic_home/registry` directory contains a device type name. New devic
+Each file in `synthetic_home/registry` directory contains a device type name. New device
 types may be added as new use cases are needed.
 
 ### Entities
