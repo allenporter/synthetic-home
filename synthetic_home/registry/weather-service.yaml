@@ -9,7 +9,7 @@ supported_attributes:
   - wind_speed
   - wind_speed_unit_of_measurement
 
-  # These forecasts are specified as a list of conditions in the 'restorable_attributes'
+  # These forecasts are specified as a list of conditions in the 'predefined_states'
   # below. e.g. daily_forecast: ['sunny', 'sunny', 'cloudy']
   # below by name to define their properties
   - daily_forecast
@@ -32,7 +32,7 @@ entities:
 #
 # The states below are useful for evaluating the device.
 #
-restorable_attributes:
+predefined_states:
   - key: fair
     attributes:
       condition: sunny

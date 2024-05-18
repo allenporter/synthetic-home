@@ -18,8 +18,8 @@ __all__ = [
     "DeviceType",
     "load_device_type_registry",
     "EntityEntry",
-    "load_restorable_attributes",
-    "RestorableAttributes"
+    "load_predefined_states",
+    "PredefinedStates"
 ]
 
 
@@ -58,12 +58,12 @@ class EntityEntry:
 
 
 @dataclass
-class RestorableAttributes:
+class PredefinedState:
     """Represents a device state that can be used to save a pre-canned restore state.
 
     This is used as a grouping of state values representing the "interesting"
     states of the device that can be enumerated during evaluation. For example,
-    instead of explicitly specifying specific temperature values, a restorable
+    instead of explicitly specifying specific temperature values, a predefined
     state could implement "warm" and "cool".
     """
 
@@ -93,7 +93,7 @@ class DeviceType:
     supported_state_attributes: list[str] = field(default_factory=list)
     """State values that can be set on this device, mapped to entity attributes."""
 
-    restorable_attributes: list[RestorableAttributes] = field(default_factory=list)
+    predefined_states: list[PredefinedState] = field(default_factory=list)
     """A series of different attribute values that are most interesting to use during evaluation."""
 
     @property
@@ -116,17 +116,15 @@ class DeviceType:
         return result
 
     @property
-    def all_restore_attribute_keys(self) -> list[str]:
-        """Return all restorable attribute keys supported."""
-        return [state.key for state in self.restorable_attributes]
+    def all_predefined_state_keys(self) -> list[str]:
+        """Return all predefined state keys supported."""
+        return [state.key for state in self.predefined_states]
 
-    def get_restorable_attributes_by_key(
-        self, restore_attribute_key: str
-    ) -> RestorableAttributes | None:
-        """Get the set of restorable attributes by the specified key."""
-        for restore_attribute in self.restorable_attributes:
-            if restore_attribute.key == restore_attribute_key:
-                return restore_attribute
+    def get_predefined_states_by_key(self, key: str) -> PredefinedState | None:
+        """Get the predefined state by the specified key."""
+        for state in self.predefined_states:
+            if state.key == key:
+                return state
         return None
 
 
@@ -181,8 +179,8 @@ def load_device_type_registry() -> DeviceTypeRegistry:
     return DeviceTypeRegistry(device_types=device_types)
 
 
-def load_restorable_attributes(device_type: str) -> list[str]:
+def load_predefined_states(device_type: str) -> list[str]:
     """Enumerate the evaluation states for the specified device type."""
     device_type_registry = load_device_type_registry()
     camera_device_type = device_type_registry.device_types[device_type]
-    return [eval_state.key for eval_state in camera_device_type.restorable_attributes]
+    return [eval_state.key for eval_state in camera_device_type.predefined_states]

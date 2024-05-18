@@ -37,9 +37,9 @@ An entity can map attributes with key value pair like `native_value=current_temp
 that maps the device attribute `current_temperature` to the entities
 `native_value`.
 
-## Restorable attributes
+## Predefined States
 
-A device type can define `restorable_attributes` that can support a pre-canned
+A device type can define `predefined_state` that can support a pre-canned
 restorable states that can be used for testing and evaluating the other systems
 using synthetic entities.
 

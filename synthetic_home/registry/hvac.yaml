@@ -21,7 +21,7 @@ entities:
         - native_value=current_temperature
         - native_unit_of_measurement=unit_of_measurement
     - humidity
-restorable_attributes:
+predefined_state:
   - key: cooling
     attributes:
       hvac_mode: cool
