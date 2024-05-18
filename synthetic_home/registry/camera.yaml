@@ -10,20 +10,20 @@ entities:
   camera:
     - camera
   binary_sensor:
-    - key: motion
+    - device_class: motion
       supported_attributes:
         - is_on=motion_detected
-    - key: person
+    - device_class: person
       supported_attributes:
         - is_on=person_detected
-    - key: sound
+    - device_class: sound
       supported_attributes:
         - is_on=sound_detected
 
 #
 # The states below are useful for evaluating the device.
 #
-restorable_attributes:
+predefined_state:
   - key: idle
   - key: motion-detected
     attributes:

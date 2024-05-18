@@ -3,8 +3,8 @@ device_type: smart-lock
 desc: A smart lock device that can be remotely monitored.
 entities:
   binary_sensor:
-    - lock
-    - tamper
-    - battery
+    - device_class: lock
+    - device_class: tamper
+    - device_class: battery
   sensor:
     - battery

@@ -5,7 +5,7 @@ supported_attributes:
   - is_on
 entities:
   binary_sensor:
-    - key: motion
+    - device_class: motion
       supported_attributes:
         - is_on
     - battery
