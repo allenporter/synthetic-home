@@ -3,10 +3,10 @@ device_type: smart-blinds
 desc: A remotely controllable set of window blinds.
 device_states:
   open:
-    cover.blind: True
+    cover.blind: true
     sensor.battery: 90
   closed:
-    cover.blind: False
+    cover.blind: false
     sensor.battery: 90
 entities:
   cover:

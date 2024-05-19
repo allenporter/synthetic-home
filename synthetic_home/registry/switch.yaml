@@ -3,9 +3,9 @@ device_type: switch
 desc: A generic switch.
 device_state:
   "on":
-    switch.switch: True
+    switch.switch: true
   "off":
-    switch.switch: False
+    switch.switch: false
 entities:
   switch:
     switch:

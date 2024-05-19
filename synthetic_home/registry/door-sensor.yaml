@@ -3,14 +3,14 @@ device_type: door-sensor
 desc: A device attached to a door that can detect if it is opened or closed.
 device_states:
   closed:
-    binary_sensor.door: False
+    binary_sensor.door: false
     sensor.battery: 90
   open:
-    binary_sensor.door: True
+    binary_sensor.door: true
     sensor.battery: 90
   battery-low:
-    binary_sensor.door: False  # Closed
-    binary_sensor.battery-low: True
+    binary_sensor.door: false  # Closed
+    binary_sensor.battery-low: true
     sensor.battery: 10
 entities:
   binary_sensor:

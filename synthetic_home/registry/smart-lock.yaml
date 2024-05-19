@@ -3,10 +3,10 @@ device_type: smart-lock
 desc: A smart lock device that can be remotely monitored.
 device_states:
   locked:
-    binary_sensor.lock: True
+    binary_sensor.lock: true
     sensor.battery: 90
   unlocked:
-    binary_sensor.lock: False
+    binary_sensor.lock: false
     sensor.battery: 90
 entities:
   binary_sensor:

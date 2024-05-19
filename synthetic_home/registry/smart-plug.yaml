@@ -3,10 +3,10 @@ device_type: smart-plug
 desc: A smart plug allows remote on/off of electrical devices.
 device_state:
   "on":
-    switch.switch: True
+    switch.switch: true
     sensor.energy: 1
   "off":
-    switch.switch: False
+    switch.switch: false
     sensor.energy: 0
 entities:
   sensor:
