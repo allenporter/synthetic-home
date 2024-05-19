@@ -189,8 +189,6 @@ class DeviceType(DataClassDictMixin):
         entity_dict = self.entity_dict
         for device_state in self.device_states:
             for entity_state in device_state.entity_states:
-                print(entity_state.domain_key)
-                print(entity_dict)
                 if entity_state.domain_key not in entity_dict:
                     raise ValueError(
                         f"Device '{self.device_type}' state '{device_state.name}' references "
