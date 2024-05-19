@@ -76,7 +76,7 @@ class SyntheticHome:
                 if (
                     self.device_type_registry is None
                     or (
-                        device_type := self.device_type_registry.device_types.get(
+                        self.device_type_registry.device_types.get(
                             device.device_type or ""
                         )
                     )
@@ -85,14 +85,6 @@ class SyntheticHome:
                     raise SyntheticHomeError(
                         f"Device {device} has device_type {device.device_type} not found in registry"
                     )
-                for attribute in device.attributes:
-                    if (
-                        attribute not in device_type.supported_attributes
-                        and attribute not in device_type.supported_state_attributes
-                    ):
-                        raise SyntheticHomeError(
-                            f"Device {device.name} has attribute '{attribute}' not supported by device type {device_type}"
-                        )
 
     def find_devices_by_name(
         self, area_name: str | None, device_name: str

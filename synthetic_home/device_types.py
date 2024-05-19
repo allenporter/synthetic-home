@@ -10,16 +10,18 @@ import yaml
 
 from mashumaro.codecs.yaml import yaml_decode
 from mashumaro.exceptions import MissingField
+from mashumaro import field_options, DataClassDictMixin
+from mashumaro.types import SerializationStrategy
 
 from .exceptions import SyntheticHomeError
 
 __all__ = [
     "DeviceTypeRegistry",
     "DeviceType",
-    "load_device_type_registry",
+    "DeviceState",
+    "EntityState",
     "EntityEntry",
-    "load_predefined_states",
-    "PredefinedStates"
+    "load_device_type_registry",
 ]
 
 
@@ -29,53 +31,123 @@ _LOGGER = logging.getLogger(__name__)
 DEVICE_TYPES_RESOURCE_PATH = resources.files().joinpath("registry")
 
 
+class KeyedObjectListStrategy(SerializationStrategy):
+    """A predefined entity state parser."""
+
+    def __init__(self, object_strategy: SerializationStrategy) -> None:
+        """Initialize KeyedObjectStrategy."""
+        self._object_strategy = object_strategy
+
+    def deserialize(self, value: Any) -> list[Any]:
+        """Deserialize the object."""
+        if not value:
+            return []
+        if isinstance(value, dict):
+            return [
+                self._object_strategy.deserialize((key, state))
+                for key, state in value.items()
+            ]
+        raise ValueError(f"Expected 'dict' representing the object list, got: {value}")
+
+
 @dataclass
-class EntityEntry:
+class EntityEntry(DataClassDictMixin):
     """Defines an entity type.
 
-    An entity is the lowest level object that maps to a device. The supported
-    attributes are used to map device level attributes to entity level attributes
-    used in the platforms when creating Home Assistant entities.
+    An entity is the lowest level object that maps to a behavior or trait of a device.
     """
 
-    key: str
+    key: str | None = None
     """The entity description key"""
 
-    supported_attributes: list[str] = field(default_factory=list)
+    attributes: dict[str, str] = field(default_factory=dict)
     """Attributes supported by this entity."""
 
-    @property
-    def attribute_keys(self) -> Generator[tuple[str, str], None, None]:
-        """Returns the of device attribute keys and paired entity attribute key."""
-        for attribute in self.supported_attributes:
-            device_attribute_key = attribute
-            entity_attribute_key = attribute
-            if "=" in attribute:
-                parts = attribute.split("=")
-                entity_attribute_key = parts[0]
-                device_attribute_key = parts[1]
-            yield device_attribute_key, entity_attribute_key
+
+class EntityDictStrategy(SerializationStrategy):
+    """A parser of the entity entry dict."""
+
+    def deserialize(
+        self, value: dict[str, dict[str, dict[str, str]]]
+    ) -> dict[str, list[EntityEntry]]:
+        """Deserialize the object."""
+        return {
+            domain: [
+                EntityEntry(key=key, attributes=attributes)
+                for key, attributes in values.items()
+            ]
+            for domain, values in value.items()
+        }
 
 
 @dataclass
-class PredefinedState:
-    """Represents a device state that can be used to save a pre-canned restore state.
+class EntityState(DataClassDictMixin):
+    """Represents a pre-defined entity state."""
 
-    This is used as a grouping of state values representing the "interesting"
-    states of the device that can be enumerated during evaluation. For example,
-    instead of explicitly specifying specific temperature values, a predefined
-    state could implement "warm" and "cool".
-    """
+    domain: str
+    """The domain of the entity."""
 
     key: str
-    """An identifier for this set of attributes used for labeling"""
+    """The entity key identifying the entity."""
 
-    attributes: dict[str, Any] = field(default_factory=dict)
-    """The key/values that map to the device `supported_state_attributes` for this evaluation state."""
+    state: Any
+    """The values that make up the entity state."""
+
+    @property
+    def domain_key(self) -> str:
+        """Return the full domain.key."""
+        return f"{self.domain}.{self.key}"
+
+
+class EntityStateStrategy(SerializationStrategy):
+    """A predefined entity state parser."""
+
+    def deserialize(self, value: tuple[str, Any]) -> EntityState:
+        """Deserialize the object."""
+        key = value[0]
+        state = value[1]
+        parts = key.split(".")
+        if len(parts) != 2:
+            raise ValueError(f"Expected '<domain>.<entitiy-key>', got {key}")
+        return EntityState(domain=parts[0], key=parts[1], state=state)
 
 
 @dataclass
-class DeviceType:
+class DeviceState(DataClassDictMixin):
+    """Represents a pre-defined device state.
+
+    This is used to map a pre-defined devie state to the values that should be
+    set on individual entities. These are typically "interesting" states of the
+    device that can be enumerated during evaluation. For example, instead of
+    explicitly specifying specific temperature values, a predefined state could
+    implement "warm" and "cool".
+    """
+
+    name: str
+    """An identifier that names this state."""
+
+    entity_states: list[EntityState]
+    """An identifier for this set of attributes used for labeling"""
+
+
+class DeviceStateStrategy(SerializationStrategy):
+    """A predefined device state parser."""
+
+    _child_strategy = KeyedObjectListStrategy(EntityStateStrategy())
+
+    def deserialize(self, value: tuple[str, Any]) -> DeviceState:
+        """Deserialize the object."""
+        if not isinstance(value, tuple):
+            raise ValueError(
+                f"Expected 'tuple' representing the DeviceState object, got: {value}"
+            )
+        return DeviceState(
+            name=value[0], entity_states=self._child_strategy.deserialize(value[1])
+        )
+
+
+@dataclass(frozen=True)
+class DeviceType(DataClassDictMixin):
     """Defines of device type."""
 
     device_type: str
@@ -84,48 +156,46 @@ class DeviceType:
     desc: str
     """The human readable description of the device."""
 
-    entities: dict[str, list[str | EntityEntry]] = field(default_factory=dict)
-    """Entity platforms and their entity description keys"""
-
-    supported_attributes: list[str] = field(default_factory=list)
-    """Attributes supported by this device, mapped to entity attributes."""
-
-    supported_state_attributes: list[str] = field(default_factory=list)
-    """State values that can be set on this device, mapped to entity attributes."""
-
-    predefined_states: list[PredefinedState] = field(default_factory=list)
+    device_states: list[DeviceState] = field(
+        metadata=field_options(
+            serialization_strategy=KeyedObjectListStrategy(DeviceStateStrategy())
+        ),
+        default_factory=list,
+    )
     """A series of different attribute values that are most interesting to use during evaluation."""
 
-    @property
-    def entity_entries(self) -> dict[str, list[EntityEntry]]:
-        """Return the parsed entitty attributes for consumption."""
-        result: dict[str, list[EntityEntry]] = {}
-        for key, entity_entries in self.entities.items():
-            updated_entries: list[EntityEntry] = []
-            for entity_entry in entity_entries:
-                # Map attributes from the device to this entity if appropriate
-                if isinstance(entity_entry, str):
-                    updated_entries.append(EntityEntry(key=entity_entry))
-                elif isinstance(entity_entry, dict):
-                    updated_entries.append(EntityEntry(**entity_entry))
-                else:
-                    raise SyntheticHomeError(
-                        f"Unknown Entity Entry type {entity_entry}"
-                    )
-            result[key] = updated_entries
-        return result
+    entities: dict[str, list[EntityEntry]] = field(
+        metadata=field_options(serialization_strategy=EntityDictStrategy()),
+        default_factory=dict,
+    )
+    """Entity platforms and their entity description keys"""
 
     @property
-    def all_predefined_state_keys(self) -> list[str]:
-        """Return all predefined state keys supported."""
-        return [state.key for state in self.predefined_states]
-
-    def get_predefined_states_by_key(self, key: str) -> PredefinedState | None:
+    def device_states_dict(self) -> dict[str, DeviceState]:
         """Get the predefined state by the specified key."""
-        for state in self.predefined_states:
-            if state.key == key:
-                return state
-        return None
+        return {state.name: state for state in self.device_states}
+
+    @property
+    def entity_dict(self) -> dict[str, EntityEntry]:
+        """Get a flat map of all entity entries."""
+        return {
+            f"{platform}.{entry.key}": entry
+            for platform, entries in self.entities.items()
+            for entry in entries
+        }
+
+    def __post_init__(self) -> None:
+        """Validate the DeviceType."""
+        entity_dict = self.entity_dict
+        for device_state in self.device_states:
+            for entity_state in device_state.entity_states:
+                print(entity_state.domain_key)
+                print(entity_dict)
+                if entity_state.domain_key not in entity_dict:
+                    raise ValueError(
+                        f"Device '{self.device_type}' state '{device_state.name}' references "
+                        f"invalid entity '{entity_state.domain_key}' not in {list(entity_dict.keys())}"
+                    )
 
 
 @dataclass
@@ -177,10 +247,3 @@ def load_device_type_registry() -> DeviceTypeRegistry:
             )
         device_types[device_type.device_type] = device_type
     return DeviceTypeRegistry(device_types=device_types)
-
-
-def load_predefined_states(device_type: str) -> list[str]:
-    """Enumerate the evaluation states for the specified device type."""
-    device_type_registry = load_device_type_registry()
-    camera_device_type = device_type_registry.device_types[device_type]
-    return [eval_state.key for eval_state in camera_device_type.predefined_states]

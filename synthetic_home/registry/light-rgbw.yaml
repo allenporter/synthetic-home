@@ -1,10 +1,21 @@
 ---
 device_type: light-rgbw
 desc: A light with rgbw color support.
-supported_attributes:
-  - rgbw_color
+device_states:
+  # TODO: Verify correct values of rgbw_color
+  "off":
+    light.light-rgbw:
+      rgbw_color: [0, 0, 0, 0]
+  white:
+    light.light-rgbw:
+      rgbw_color: [0, 0, 0, 255]
+  red:
+    light.light-rgbw:
+      rgbw_color: [255, 0, 0, 0]
 entities:
   light:
-    - key: light-rgbw
-      supported_attributes:
-        - rgbw_color
+    light-rgbw:
+      supported_color_modes:
+        - color.ColorMode.RGBW
+      color_mode:
+        - color.ColorMode.RGBW

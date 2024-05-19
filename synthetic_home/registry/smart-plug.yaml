@@ -1,8 +1,19 @@
 ---
 device_type: smart-plug
 desc: A smart plug allows remote on/off of electrical devices.
+device_state:
+  "on":
+    switch.switch: True
+    sensor.energy: 1
+  "off":
+    switch.switch: False
+    sensor.energy: 0
 entities:
   sensor:
-    - energy
+    energy:
+      device_class: sensor.SensorDeviceClass.ENERGY
+      satate_class: SensorStateClass.TOTAL_INCREASING
+      native_unit_of_measurement: UnitOfEnergy.KILO_WATT_HOUR
   switch:
-    - outlet
+    outlet:
+      device_class: witch.SwitchDeviceClass.SWITCH

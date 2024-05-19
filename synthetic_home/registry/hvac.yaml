@@ -1,45 +1,48 @@
 ---
 device_type: hvac
 desc: A climate device that supports HVAC Cool and Heat modes.
-supported_attributes:
-  - unit_of_measurement
-supported_state_attributes:
-  - current_temperature
-  - target_temperature
-  - hvac_action
-entities:
-  climate:
-    - key: hvac
-      supported_attributes:
-        - unit_of_measurement
-        - current_temperature
-        - target_temperature
-        - hvac_action
-  sensor:
-    - key: temperature
-      supported_attributes:
-        - native_value=current_temperature
-        - native_unit_of_measurement=unit_of_measurement
-    - humidity
-predefined_state:
-  - key: cooling
-    attributes:
-      hvac_mode: cool
-      hvac_action: cooling
-      current_temperature: 25
-      target_temperature: 23
-      unit_of_measurement: °C
-  - key: very-low
-    attributes:
-      hvac_mode: cool
-      hvac_action: cooling
-      current_temperature: 25
-      target_temperature: 12
-      unit_of_measurement: °C
-  - key: "off"
-    attributes:
+device_states:
+  "off":
+    climate.hvac:
       hvac_mode: "off"
       hvac_action: "off"
       current_temperature: 22
       target_temperature: 22
+    sensor.temperature: 22
+    sensor.humidity: 45
+
+  cooling:
+    climate.hvac:
+      hvac_mode: cool
+      hvac_action: cooling
+      current_temperature: 25
+      target_temperature: 23
+    sensor.temperature: 25
+    sensor.humidity: 45
+
+  very-low:
+    climate.hvac:
+      hvac_mode: cool
+      hvac_action: cooling
+      current_temperature: 25
+      target_temperature: 12
+    sensor.temperature: 25
+    sensor.humidity: 45
+entities:
+  climate:
+    hvac:
       unit_of_measurement: °C
+      supported_features:
+        - climate.ClimateEntityFeature.FAN_MODE
+        - climate.ClimateEntityFeature.TURN_ON
+        - climate.ClimateEntityFeature.TURN_OFF
+        - climate.ClimateEntityFeature.SET_TEMPERATURE_RANGE
+  sensor:
+    temperature:
+      native_unit_of_measurement: °C
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+    humidity:
+      native_unit_of_measurement: "%"
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT

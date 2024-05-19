@@ -1,13 +1,25 @@
 ---
 device_type: motion-sensor
 desc: A device that detects motion of a person or object.
-supported_attributes:
-  - is_on
+device_states:
+  on:
+    binary_sensor.motion: True
+    sensor.battery: 90
+  off:
+    binary_sensor.motion: False
+    sensor.battery: 90
+  battery-low:
+    binary_sensor.motion: False
+    binary_sensor.battery-low: True
+    sensor.battery: 15
 entities:
   binary_sensor:
-    - device_class: motion
-      supported_attributes:
-        - is_on
-    - battery
+    motion:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+    battery-low:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
   sensor:
-    - battery
+    battery:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: PERCENTAGE

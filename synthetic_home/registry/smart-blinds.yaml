@@ -1,8 +1,23 @@
 ---
 device_type: smart-blinds
 desc: A remotely controllable set of window blinds.
+device_states:
+  open:
+    cover.blind: True
+    sensor.battery: 90
+  closed:
+    cover.blind: False
+    sensor.battery: 90
 entities:
   cover:
-    - blinds-cover
+    blind:
+      device_class: cover.CoverDeviceClass.BLIND
+      supported_features:
+        - cover.CoverSupportedFeature.OPEN
+        - cover.CoverSupportedFeature.CLOSE
+        - cover.CoverSupportedFeature.SET_POSITION
   sensor:
-    - battery
+    battery:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: PERCENTAGE

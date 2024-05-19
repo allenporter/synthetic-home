@@ -1,97 +1,71 @@
 ---
 device_type: weather-service
 desc: A service that provides weather related integrations.
-supported_attributes:
-  - condition
-  - temperature
-  - temperature_unit_of_measurement
-  - humidity
-  - wind_speed
-  - wind_speed_unit_of_measurement
+device_states:
+  fair:
+    weather.weather:
+      condition: sunny
+      native_temperature: 72
+      humidity: 60
+      native_wind_speed: 5
 
-  # These forecasts are specified as a list of conditions in the 'predefined_states'
-  # below. e.g. daily_forecast: ['sunny', 'sunny', 'cloudy']
-  # below by name to define their properties
-  - daily_forecast
-  - hourly_forecast
-  - twice_daily_forecast
+  cloudy:
+    weather.weather:
+      condition: cloudy
+      native_temperature: 60
+      humidity: 70
+      native_wind_speed: 10
+
+  rainy:
+    weather.weather:
+      condition: rainy
+      native_temperature: 50
+      humidity: 80
+      native_wind_speed: 15
+
+  snowy:
+    weather.weather:
+      condition: snowy
+      native_temperature: 32
+      humidity: 90
+      native_wind_speed: 20
+
+  windy:
+    weather.weather:
+      condition: windy
+      native_temperature: 65
+      humidity: 50
+      native_wind_speed: 30
+
+  hot:
+    weather.weather:
+      condition: sunny
+      native_temperature: 90
+      humidity: 40
+      native_wind_speed: 10
+
+  cold:
+    weather.weather:
+      condition: partlycloudy
+      native_temperature: 20
+      humidity: 60
+      native_wind_speed: 5
+
+
+# TODO: Fix weather forecasts
+# These forecasts are specified as a list of conditions in the 'predefined_states'
+# below. e.g. daily_forecast: ['sunny', 'sunny', 'cloudy']
+# below by name to define their properties
+#   - daily_forecast
+#   - hourly_forecast
+#   - twice_daily_forecast
 entities:
   weather:
-    - key: weather
-      supported_attributes:
-        - condition
-        - native_temperature=temperature
-        - native_temperature_unit=temperature_unit_of_measurement
-        - humidity
-        - native_wind_speed=wind_speed
-        - native_wind_speed_unit=wind_speed_unit_of_measurement
-        - daily_forecast
-        - hourly_forecast
-        - twice_daily_forecast
+    weather:
+      native_temperature_unit: °F
+      native_wind_speed_unit: mph
 
-#
-# The states below are useful for evaluating the device.
-#
-predefined_states:
-  - key: fair
-    attributes:
-      condition: sunny
-      temperature: 72
-      temperature_unit_of_measurement: °F
-      humidity: 60
-      wind_speed: 5
-      wind_speed_unit_of_measurement: mph
-
-  - key: cloudy
-    attributes:
-      condition: cloudy
-      temperature: 60
-      temperature_unit_of_measurement: °F
-      humidity: 70
-      wind_speed: 10
-      wind_speed_unit_of_measurement: mph
-
-  - key: rainy
-    attributes:
-      condition: rainy
-      temperature: 50
-      temperature_unit_of_measurement: °F
-      humidity: 80
-      wind_speed: 15
-      wind_speed_unit_of_measurement: mph
-
-  - key: snowy
-    attributes:
-      condition: snowy
-      temperature: 32
-      temperature_unit_of_measurement: °F
-      humidity: 90
-      wind_speed: 20
-      wind_speed_unit_of_measurement: mph
-
-  - key: windy
-    attributes:
-      condition: windy
-      temperature: 65
-      temperature_unit_of_measurement: °F
-      humidity: 50
-      wind_speed: 30
-      wind_speed_unit_of_measurement: mph
-
-  - key: hot
-    attributes:
-      condition: sunny
-      temperature: 90
-      temperature_unit_of_measurement: °F
-      humidity: 40
-      wind_speed: 10
-      wind_speed_unit_of_measurement: mph
-
-  - key: cold
-    attributes:
-      condition: partlycloudy
-      temperature: 20
-      temperature_unit_of_measurement: °F
-      humidity: 60
-      wind_speed: 5
-      wind_speed_unit_of_measurement: mph
+      # attributes:
+      #   - daily_forecast
+      #   - hourly_forecast
+      #   - twice_daily_forecast

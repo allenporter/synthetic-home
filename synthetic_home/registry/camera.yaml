@@ -1,37 +1,22 @@
 ---
 device_type: camera
 desc: A video camera that supports motion detection and other events.
-supported_state_attributes:
-  - motion_detected
-  - person_detected
-  - sound_detected
+device_states:
+  idle:
+  motion-detected:
+    binary_sensor.motion-detected: True
+  person-detected:
+    binary_sensor.person-detected: True
+  sound-detected:
+    binary_sensor.sound-detected: True
 entities:
   # TODO: The camera entity is not currently implemented
-  camera:
-    - camera
+  # camera:
+  #   camera:
   binary_sensor:
-    - device_class: motion
-      supported_attributes:
-        - is_on=motion_detected
-    - device_class: person
-      supported_attributes:
-        - is_on=person_detected
-    - device_class: sound
-      supported_attributes:
-        - is_on=sound_detected
-
-#
-# The states below are useful for evaluating the device.
-#
-predefined_state:
-  - key: idle
-  - key: motion-detected
-    attributes:
-      motion_detected: true
-  - key: person-detected
-    attributes:
-      person_detected: true
-      motion_detected: true
-  - key: sound-detected
-    attributes:
-      sound_detected: true
+    motion-detected:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+    person-detected:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+    sound-detected:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND

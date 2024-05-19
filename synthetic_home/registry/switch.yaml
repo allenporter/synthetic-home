@@ -1,6 +1,12 @@
 ---
 device_type: switch
 desc: A generic switch.
+device_state:
+  "on":
+    switch.switch: True
+  "off":
+    switch.switch: False
 entities:
   switch:
-    - switch
+    switch:
+      device_class: switch.SwitchDeviceClass.SWITCH

@@ -3,4 +3,13 @@ device_type: smart-speaker
 desc: A music speaker that can be controlled remotely.
 entities:
   media_player:
-    - speaker
+    speaker:
+      device_class: media_player.MediaPlayerDeviceClass.SPEAKER
+      supported_features:
+        - media.MediaPlayerEntityFeature.PLAY
+        - media.MediaPlayerEntityFeature.STOP
+        - media.MediaPlayerEntityFeature.VOLUME_STEP
+        - media.MediaPlayerEntityFeature.VOLUME_MUTE
+        - media.MediaPlayerEntityFeature.VOLUME_SET
+        - media.MediaPlayerEntityFeature.TURN_ON
+        - media.MediaPlayerEntityFeature.TURN_OFF

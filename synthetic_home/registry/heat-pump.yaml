@@ -1,12 +1,36 @@
 ---
 device_type: heat-pump
 desc: A climate device that only supports heating.
-supported_attributes:
-  - unit_of_measurement
-  - current_temperature
+device_states:
+  "off":
+    climate.heat-pump:
+      hvac_mode: "off"
+      hvac_action: "off"
+      current_temperature: 22
+      target_temperature: 22
+    sensor.temperature: 22
+
+  "heating":
+    climate.heat-pump:
+      hvac_mode: heat
+      hvac_action: heating
+      current_temperature: 25
+      target_temperature: 27
+    sensor.temperature: 25
+
 entities:
   climate:
-    - key: heat-pump
-      supported_attributes:
-        - unit_of_measurement
-        - current_temperature
+    heat-pump:
+      unit_of_measurement: °C
+      hvac_modes:
+        - HVACMode.HEAT
+        - HVACMode.OFF
+      supported_features:
+        - climate.ClimateEntityFeature.FAN_MODE
+        - climate.ClimateEntityFeature.TURN_ON
+        - climate.ClimateEntityFeature.TURN_OFF
+  sensor:
+    temperature:
+      native_unit_of_measurement: °C
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT

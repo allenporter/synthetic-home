@@ -1,6 +1,15 @@
 ---
 device_type: gate
 desc: An movable barrier that can be monitored and opened and closed remotely.
+device_states:
+  closed:
+    cover.gate: False
+  open:
+    cover.gate: True
 entities:
   cover:
-    - gate-cover
+    gate:
+      device_class: cover.CoverDeviceClass.GATE
+      supported_features:
+        - cover.CoverEntityFeature.OPEN
+        - cover.CoverEntityFeature.CLOSE
