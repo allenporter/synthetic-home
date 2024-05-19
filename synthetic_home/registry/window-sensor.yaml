@@ -10,7 +10,7 @@ device_states:
     sensor.battery: 90
   battery-low:
     binary_sensor.window: false  # Closed
-    binary_sensor.battery-low: True
+    binary_sensor.battery-low: true
     sensor.battery: 10
 entities:
   binary_sensor:
