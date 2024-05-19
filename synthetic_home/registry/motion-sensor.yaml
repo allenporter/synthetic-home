@@ -2,10 +2,10 @@
 device_type: motion-sensor
 desc: A device that detects motion of a person or object.
 device_states:
-  on:
+  "on":
     binary_sensor.motion: true
     sensor.battery: 90
-  off:
+  "off":
     binary_sensor.motion: false
     sensor.battery: 90
   battery-low:

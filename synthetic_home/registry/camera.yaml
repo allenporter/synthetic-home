@@ -8,7 +8,7 @@ device_states:
   person-detected:
     binary_sensor.person-detected: true
   sound-detected:
-    binary_sensor.sound-detected: true
+    binary_sensor.sound-detected: rue
 entities:
   # TODO: The camera entity is not currently implemented
   # camera:
