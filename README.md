@@ -99,3 +99,19 @@ but there may only be a few _interesting_ states to evaluate such as:
 We use the pre-canned device states to simplify data generation to not need
 to consider every possibibility. This is implemented effectively as if setting
 these attributes in the config file.
+
+### Device State Example
+
+You can set a `device_state` inline in the home. A `motion-sensor` devices three
+states by default `on`, `off`, and `battery-low`.  Be careful for special yaml
+truthy values, hense the value below is in quotes:
+
+```yaml
+---
+name: Family Farmhouse
+devices:
+  Front Yard:
+    - name: Front Yard Motion
+      device_type: motion-sensor
+      device_state: "on"
+```
