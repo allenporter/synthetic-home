@@ -43,15 +43,15 @@ def test_camera_device() -> None:
         for entry in camera.entities.get("binary_sensor", [])
     ] == [
         (
-            "motion-detected",
+            "motion",
             {"device_class": "binary_sensor.BinarySensorDeviceClass.MOTION"},
         ),
         (
-            "person-detected",
+            "person",
             {"device_class": "binary_sensor.BinarySensorDeviceClass.OCCUPANCY"},
         ),
         (
-            "sound-detected",
+            "sound",
             {"device_class": "binary_sensor.BinarySensorDeviceClass.SOUND"},
         ),
     ]

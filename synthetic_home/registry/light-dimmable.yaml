@@ -15,6 +15,5 @@ entities:
   light:
     light-dimmable:
       supported_color_modes:
-        - color.ColorMode.BRIGHTNESS
-      color_mode:
-        - color.ColorMode.BRIGHTNESS
+        - brightness
+      color_mode: brightness

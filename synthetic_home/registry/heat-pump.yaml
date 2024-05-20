@@ -23,8 +23,8 @@ entities:
     heat-pump:
       unit_of_measurement: °C
       hvac_modes:
-        - HVACMode.HEAT
-        - HVACMode.OFF
+        - heat
+        - "off"
       supported_features:
         - climate.ClimateEntityFeature.FAN_MODE
         - climate.ClimateEntityFeature.TURN_ON

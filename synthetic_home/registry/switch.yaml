@@ -1,7 +1,7 @@
 ---
 device_type: switch
 desc: A generic switch.
-device_state:
+device_states:
   "on":
     switch.switch: true
   "off":

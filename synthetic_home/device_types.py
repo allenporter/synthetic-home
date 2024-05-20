@@ -57,10 +57,10 @@ class EntityEntry(DataClassDictMixin):
     An entity is the lowest level object that maps to a behavior or trait of a device.
     """
 
-    key: str | None = None
+    key: str
     """The entity description key"""
 
-    attributes: dict[str, str] = field(default_factory=dict)
+    attributes: dict[str, str | list[str]] = field(default_factory=dict)
     """Attributes supported by this entity."""
 
 
@@ -68,7 +68,7 @@ class EntityDictStrategy(SerializationStrategy):
     """A parser of the entity entry dict."""
 
     def deserialize(
-        self, value: dict[str, dict[str, dict[str, str]]]
+        self, value: dict[str, dict[str, dict[str, str | list[str]]]]
     ) -> dict[str, list[EntityEntry]]:
         """Deserialize the object."""
         return {
@@ -90,13 +90,59 @@ class EntityState(DataClassDictMixin):
     key: str
     """The entity key identifying the entity."""
 
-    state: Any
+    state: str | bool | dict[str, Any]
     """The values that make up the entity state."""
 
     @property
     def domain_key(self) -> str:
         """Return the full domain.key."""
         return f"{self.domain}.{self.key}"
+
+    def merge(self, new: "EntityState") -> "EntityState":
+        """Merge with an additional value."""
+        merged_state: str | bool | dict[str, Any]
+        if isinstance(new.state, dict):
+            if isinstance(self.state, dict):
+                merged_state = {
+                    **self.state,
+                    **new.state,
+                }
+            else:
+                merged_state = {"state": self.state, **new.state}
+        else:
+            if isinstance(self.state, dict):
+                merged_state = {
+                    **self.state,
+                    "state": new.state,
+                }
+            else:
+                merged_state = new.state
+        return EntityState(
+            domain=self.domain,
+            key=self.key,
+            state=merged_state,
+        )
+
+
+def merge_entity_state_attributes(
+    platform: str, entry: EntityEntry, entity_states: list[EntityState]
+) -> EntityEntry:
+    """Merge state values from an EntityEntry into a new EntityEntry."""
+    for state in entity_states:
+        if state.domain == platform and state.key == entry.key:
+            if isinstance(state.state, dict):
+                extras = state.state
+            else:
+                extras = {"state": state.state}
+            return EntityEntry(
+                key=entry.key,
+                attributes={
+                    **entry.attributes,
+                    **extras,
+                },
+            )
+    _LOGGER.debug("No state to merge: %s", entry)
+    return entry
 
 
 class EntityStateStrategy(SerializationStrategy):
@@ -129,6 +175,16 @@ class DeviceState(DataClassDictMixin):
     entity_states: list[EntityState]
     """An identifier for this set of attributes used for labeling"""
 
+    def merge(self, new_state: "DeviceState") -> "DeviceState":
+        """Return a new DeviceState with merged entity states."""
+        states = {entity.domain_key: entity for entity in self.entity_states}
+        for entity in new_state.entity_states:
+            if entity.domain_key in states:
+                states[entity.domain_key] = states[entity.domain_key].merge(entity)
+            else:
+                states[entity.domain_key] = entity
+        return DeviceState(name=self.name, entity_states=list(states.values()))
+
 
 class DeviceStateStrategy(SerializationStrategy):
     """A predefined device state parser."""
@@ -160,7 +216,6 @@ class DeviceType(DataClassDictMixin):
         metadata=field_options(
             serialization_strategy=KeyedObjectListStrategy(DeviceStateStrategy())
         ),
-        default_factory=list,
     )
     """A series of different attribute values that are most interesting to use during evaluation."""
 

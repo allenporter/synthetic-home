@@ -4,12 +4,17 @@ import itertools
 from dataclasses import dataclass, field
 import pathlib
 import logging
-from typing import Any
 
 from mashumaro.codecs.yaml import yaml_decode
 
 from synthetic_home.exceptions import SyntheticHomeError
-from synthetic_home.device_types import DeviceTypeRegistry
+from synthetic_home.device_types import (
+    DeviceTypeRegistry,
+    DeviceStateStrategy,
+    DeviceState,
+    EntityEntry,
+    merge_entity_state_attributes,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -41,10 +46,7 @@ class Device:
     device_info: SyntheticDeviceInfo | None = None
     """Device make and model information."""
 
-    attributes: dict[str, Any] = field(default_factory=dict)
-    """Attributes that determine how the entities are configured or their state"""
-
-    restorable_attribute_keys: list[str] = field(default_factory=list)
+    device_state: str | DeviceState | None = None
     """A list of pre-canned RestorableStateAttributes specified by the key.
 
     These are used for restoring a device into a specific state supported by the
@@ -54,6 +56,76 @@ class Device:
     Restorable attributes overwrite normal attributes since they can be reloaded
     at runtime.
     """
+
+    entity_entries: dict[str, list[EntityEntry]] = field(default_factory=dict)
+    """The validated set of entity entries"""
+
+    def merge(
+        self,
+        device_state: DeviceState | None = None,
+        entity_entries: dict[str, list[EntityEntry]] | None = None,
+    ) -> "Device":
+        """Merge the existing device with a new device state."""
+        return Device(
+            name=self.name,
+            device_type=self.device_type,
+            device_info=self.device_info,
+            device_state=device_state or self.device_state,
+            entity_entries=entity_entries or self.entity_entries,
+        )
+
+
+def build_device_state(device: Device, registry: DeviceTypeRegistry) -> Device:
+    """Validate the device and return a new instance."""
+    if (device_type := registry.device_types.get(device.device_type or "")) is None:
+        raise SyntheticHomeError(
+            f"Device {device} has device_type {device.device_type} not found in: {registry.device_types}"
+        )
+
+    if device.device_state is not None:
+        if (
+            isinstance(device.device_state, str)
+            and device.device_state not in device_type.device_states_dict
+        ):
+            raise SyntheticHomeError(
+                f"Device {device} has state '{device.device_state}' not in: {device_type.device_states_dict}"
+            )
+        if isinstance(device.device_state, dict):
+            _LOGGER.debug(
+                "Parsing device state from dictionary: %s", device.device_state
+            )
+            strategy = DeviceStateStrategy()
+            device = device.merge(
+                device_state=strategy.deserialize(("custom", device.device_state))
+            )
+            _LOGGER.debug("Parsed=%s", device)
+
+    device_state: DeviceState | None = None
+    _LOGGER.debug("Checking device state: %s", device.device_state)
+    if (
+        device.device_state is None or isinstance(device.device_state, DeviceState)
+    ) and device_type.device_states:
+        # Pick the first device state as the default
+        device_state = device_type.device_states[0]
+        if isinstance(device.device_state, DeviceState):
+            device_state = device_state.merge(device.device_state)
+            _LOGGER.debug("1 device_state=%s", device_state)
+    elif device.device_state is not None and isinstance(device.device_state, str):
+        device_state = device_type.device_states_dict[device.device_state]
+        _LOGGER.debug("2 device_state=%s", device_state)
+    else:
+        raise SyntheticHomeError(f"Device did not declare a device state: {device}")
+    _LOGGER.debug("Merging entity attributes for device state: %s", device_state)
+    entity_entries = {
+        platform: [
+            merge_entity_state_attributes(
+                platform, entity_entry, device_state.entity_states
+            )
+            for entity_entry in entity_entries
+        ]
+        for platform, entity_entries in device_type.entities.items()
+    }
+    return device.merge(device_state=device_state, entity_entries=entity_entries)
 
 
 @dataclass
@@ -69,22 +141,24 @@ class SyntheticHome:
     # Device types supported by the home.
     device_type_registry: DeviceTypeRegistry | None = None
 
-    def validate(self) -> None:
-        """Validate a SyntheticHome configuration."""
-        for devices_list in self.devices.values():
-            for device in devices_list:
-                if (
-                    self.device_type_registry is None
-                    or (
-                        self.device_type_registry.device_types.get(
-                            device.device_type or ""
-                        )
-                    )
-                    is None
-                ):
-                    raise SyntheticHomeError(
-                        f"Device {device} has device_type {device.device_type} not found in registry"
-                    )
+    def build(self) -> "SyntheticHome":
+        """Validate and build the complete SyntheticHome device state."""
+        if self.device_type_registry is None:
+            return self
+        return SyntheticHome(
+            devices={
+                key: [
+                    build_device_state(device, self.device_type_registry)
+                    for device in devices
+                ]
+                for key, devices in self.devices.items()
+            },
+            services=[
+                build_device_state(device, self.device_type_registry)
+                for device in self.services
+            ],
+            device_type_registry=self.device_type_registry,
+        )
 
     def find_devices_by_name(
         self, area_name: str | None, device_name: str

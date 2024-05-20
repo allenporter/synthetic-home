@@ -4,19 +4,19 @@ desc: A video camera that supports motion detection and other events.
 device_states:
   idle:
   motion-detected:
-    binary_sensor.motion-detected: true
+    binary_sensor.motion: true
   person-detected:
-    binary_sensor.person-detected: true
+    binary_sensor.person: true
   sound-detected:
-    binary_sensor.sound-detected: rue
+    binary_sensor.sound: true
 entities:
   # TODO: The camera entity is not currently implemented
   # camera:
   #   camera:
   binary_sensor:
-    motion-detected:
+    motion:
       device_class: binary_sensor.BinarySensorDeviceClass.MOTION
-    person-detected:
+    person:
       device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
-    sound-detected:
+    sound:
       device_class: binary_sensor.BinarySensorDeviceClass.SOUND

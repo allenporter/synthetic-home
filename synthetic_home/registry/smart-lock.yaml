@@ -3,10 +3,10 @@ device_type: smart-lock
 desc: A smart lock device that can be remotely monitored.
 device_states:
   locked:
-    binary_sensor.lock: true
+    binary_sensor.lock: false
     sensor.battery: 90
   unlocked:
-    binary_sensor.lock: false
+    binary_sensor.lock: true
     sensor.battery: 90
 entities:
   binary_sensor:
@@ -14,10 +14,10 @@ entities:
       device_class: binary_sensor.BinarySensorDeviceClass.LOCK
     tamper:
       device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-    battery-low:
+    battery:
       device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
   sensor:
     battery:
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
-      native_unit_of_measurement: PERCENTAGE
+      native_unit_of_measurement: "%"

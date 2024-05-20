@@ -10,16 +10,16 @@ device_states:
     sensor.battery: 90
   battery-low:
     binary_sensor.door: false  # Closed
-    binary_sensor.battery-low: true
+    binary_sensor.battery: true
     sensor.battery: 10
 entities:
   binary_sensor:
     door:
       device_class: binary_sensor.BinarySensorDeviceClass.DOOR
-    battery-low:
+    battery:
       device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
   sensor:
     battery:
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
-      native_unit_of_measurement: PERCENTAGE
+      native_unit_of_measurement: "%"

@@ -16,6 +16,5 @@ entities:
   light:
     light-rgbw:
       supported_color_modes:
-        - color.ColorMode.RGBW
-      color_mode:
-        - color.ColorMode.RGBW
+        - rgbw
+      color_mode: rgbw

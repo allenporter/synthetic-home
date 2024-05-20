@@ -2,22 +2,22 @@
 device_type: garage-door
 desc: A a garage door that can be controlled remotely.
 device_states:
-  open:
-    cover.garage-door: true
-    light.light: true
   closed:
     cover.garage-door: false
     light.light: false
+  open:
+    cover.garage-door: true
+    light.light: true
 entities:
   cover:
     garage-door:
       device_class: cover.CoverDeviceClass.GARAGE
-      supported_featues:
+      supported_features:
         - cover.CoverEntityFeature.OPEN
         - cover.CoverEntityFeature.CLOSE
   light:
     light:
       supported_color_modes:
-        - color.ColorMode.ONOFF
+        - onoff
       color_mode:
-        - color.ColorMode.ONOFF
+        - onoff

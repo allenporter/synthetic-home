@@ -8,8 +8,10 @@ device_states:
       hvac_action: "off"
       current_temperature: 22
       target_temperature: 22
-    sensor.temperature: 22
-    sensor.humidity: 45
+    sensor.temperature:
+      native_value: 22
+    sensor.humidity:
+      native_value: 45
 
   cooling:
     climate.hvac:
@@ -17,8 +19,10 @@ device_states:
       hvac_action: cooling
       current_temperature: 25
       target_temperature: 23
-    sensor.temperature: 25
-    sensor.humidity: 45
+    sensor.temperature:
+      native_value: 25
+    sensor.humidity:
+      native_value: 45
 
   very-low:
     climate.hvac:
@@ -26,8 +30,10 @@ device_states:
       hvac_action: cooling
       current_temperature: 25
       target_temperature: 12
-    sensor.temperature: 25
-    sensor.humidity: 45
+    sensor.temperature:
+      native_value: 25
+    sensor.humidity:
+      native_value: 45
 entities:
   climate:
     hvac:
@@ -36,7 +42,12 @@ entities:
         - climate.ClimateEntityFeature.FAN_MODE
         - climate.ClimateEntityFeature.TURN_ON
         - climate.ClimateEntityFeature.TURN_OFF
-        - climate.ClimateEntityFeature.SET_TEMPERATURE_RANGE
+        - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+      hvac_modes:
+        - "off"
+        - cool
+        - heat
+        - auto
   sensor:
     temperature:
       native_unit_of_measurement: °C

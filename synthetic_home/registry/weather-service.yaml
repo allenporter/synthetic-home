@@ -50,12 +50,8 @@ device_states:
       native_temperature: 20
       humidity: 60
       native_wind_speed: 5
-
-
-# TODO: Fix weather forecasts
-# These forecasts are specified as a list of conditions in the 'predefined_states'
-# below. e.g. daily_forecast: ['sunny', 'sunny', 'cloudy']
-# below by name to define their properties
+# These forecasts are specified as a list of conditions in the 'device_state'
+# above. e.g. daily_forecast: ['sunny', 'sunny', 'cloudy']
 #   - daily_forecast
 #   - hourly_forecast
 #   - twice_daily_forecast
@@ -64,8 +60,3 @@ entities:
     weather:
       native_temperature_unit: °F
       native_wind_speed_unit: mph
-
-      # attributes:
-      #   - daily_forecast
-      #   - hourly_forecast
-      #   - twice_daily_forecast
