@@ -104,7 +104,7 @@ these attributes in the config file.
 
 You can set a `device_state` inline in the home. A `motion-sensor` devices three
 states by default `on`, `off`, and `battery-low`.  Be careful for special yaml
-truthy values, hense the value below is in quotes:
+truthy values, hence the value below is in quotes:
 
 ```yaml
 ---
