@@ -1,0 +1,13 @@
+---
+device_type: todo-list
+desc: A To-do list contains To-do items which are ordered and have a status (complete or in progress).
+device_states:
+  empty:
+    todo.todo-list:
+      todo_items: []
+entities:
+  todo:
+    todo-list:
+      supported_features:
+        - todo.TodoListEntityFeature.CREATE_TODO_ITEM
+        - todo.TodoListEntityFeature.DELETE_TODO_ITEM

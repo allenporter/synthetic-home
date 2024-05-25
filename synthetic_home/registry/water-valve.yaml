@@ -1,0 +1,27 @@
+---
+device_type: water-valve
+desc: A water shutoff and flow measurement device.
+device_states:
+  closed:
+    valve.water-valve: closed
+    sensor.meter-reading: 2000
+    sensor.battery: 75
+  open:
+    valve.water-valve: open
+    sensor.meter-reading: 2001
+    sensor.battery: 75
+entities:
+  valve:
+    water-valve:
+      supported_features:
+        - fan.FanEntityFeature.OSCILLATE
+        - fan.FanEntityFeature.SET_SPEED
+  sensor:
+    meter-reading:
+      native_unit_of_measurement: m³
+      device_class: sensor.SensorDeviceClass.WATER
+      state_class: sensor.SensorStateClass.TOTAL_INCREASING
+    battery:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: "%"
