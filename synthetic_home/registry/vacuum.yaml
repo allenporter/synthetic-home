@@ -1,0 +1,21 @@
+---
+device_type: vacuum
+desc: A robot vacuum that can be remotely controlled.
+device_states:
+  "off":
+    vacuum.vacuum: docked
+  cleaning:
+    vacuum.vacuum: cleaning
+  paused:
+    vacuum.vacuum: paused
+  returning:
+    vacuum.vacuum: returning
+entities:
+  vacuum:
+    vacuum:
+      supported_features:
+        - vacuum.VacuumEntityFeature.START
+        - vacuum.VacuumEntityFeature.STOP
+        - vacuum.VacuumEntityFeature.STATE
+        - vacuum.VacuumEntityFeature.PAUSE
+        - vacuum.VacuumEntityFeature.RETURN_HOME
