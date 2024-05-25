@@ -1,0 +1,22 @@
+---
+device_type: fan-oscilating
+desc: A fan that supports speed and oscillation control.
+device_states:
+  "off":
+    fan.osciliating_fan:
+      is_on: false
+      oscillating: false
+  "on":
+    fan.osciliating_fan:
+      is_on: true
+      oscillating: false
+  oscillating:
+    fan.osciliating_fan:
+      is_on: true
+      oscillating: true
+entities:
+  fan:
+    osciliating_fan:
+      supported_features:
+        - fan.FanEntityFeature.OSCILLATE
+        - fan.FanEntityFeature.SET_SPEED
