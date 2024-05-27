@@ -16,4 +16,4 @@ entities:
       native_unit_of_measurement: kWh
   switch:
     outlet:
-      device_class: switch.SwitchDeviceClass.SWITCH
+      device_class: switch.SwitchDeviceClass.OUTLET
