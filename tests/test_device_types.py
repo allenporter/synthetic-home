@@ -18,7 +18,9 @@ def test_load_device_type_registry() -> None:
             assert entity_entries, "Domain must have at least one entity entry"
             for entry in entity_entries:
                 assert entry.key
-                assert entry.attributes, f"Entity for device {name} has no attributes"
+                assert (
+                    entry.attributes is not None
+                ), f"Entity for device {name} has no attributes"
 
 
 def test_camera_device() -> None:
