@@ -1,0 +1,22 @@
+---
+device_type: exhaust-fan
+desc: A mechanical ventilation device which that draws out stale or humid air to improve air quality.
+device_states:
+  "off":
+    fan.exhaust_fan:
+      is_on: false
+    sensor.humidity: 45
+  "on":
+    fan.exhaust_fan:
+      is_on: true
+    sensor.humidity: 45
+  humid:
+    sensor.humidity: 85
+entities:
+  fan:
+    exhaust_fan: {}
+  sensor:
+    humidity:
+      native_unit_of_measurement: "%"
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT
