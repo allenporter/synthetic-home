@@ -21,3 +21,5 @@ entities:
         - media_player.MediaPlayerEntityFeature.VOLUME_SET
         - media_player.MediaPlayerEntityFeature.TURN_ON
         - media_player.MediaPlayerEntityFeature.TURN_OFF
+        - media_player.MediaPlayerEntityFeature.NEXT_TRACK
+        - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
