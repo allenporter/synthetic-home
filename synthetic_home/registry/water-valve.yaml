@@ -14,8 +14,9 @@ entities:
   valve:
     water-valve:
       supported_features:
-        - fan.FanEntityFeature.OSCILLATE
-        - fan.FanEntityFeature.SET_SPEED
+        - valve.ValveEntityFeature.OPEN
+        - valve.ValveEntityFeature.CLOSE
+        - valve.ValveEntityFeature.SET_POSITION
   sensor:
     meter-reading:
       native_unit_of_measurement: m³
