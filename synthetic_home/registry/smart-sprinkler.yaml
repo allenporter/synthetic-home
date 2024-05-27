@@ -1,0 +1,14 @@
+---
+device_type: smart-sprinkler
+desc: A remote controlled sprinkler irrigation system.
+device_states:
+  closed:
+    valve.sprinkler: closed
+  open:
+    valve.sprinkler: open
+entities:
+  valve:
+    sprinkler:
+      supported_features:
+        - valve.ValveEntityFeature.OPEN
+        - valve.ValveEntityFeature.CLOSE
