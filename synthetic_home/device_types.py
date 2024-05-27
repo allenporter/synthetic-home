@@ -1,5 +1,6 @@
 """Data model for home assistant synthetic home."""
 
+from functools import cache
 from collections.abc import Generator
 from dataclasses import dataclass, field
 from importlib import resources
@@ -289,7 +290,7 @@ def _read_device_types(
 
         yield device_type
 
-
+@cache
 def load_device_type_registry() -> DeviceTypeRegistry:
     """Load device types from the yaml configuration files."""
     device_types = {}
