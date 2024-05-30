@@ -175,7 +175,7 @@ class SyntheticHome:
         )
         if area_name is not None and not devices:
             raise SyntheticHomeError(f"Area name '{area_name}' matched no devices")
-        found_devices = [device for device in devices if device.name == device_name]
+        found_devices = [device for device in [*devices, *self.services] if device.name == device_name]
         if len(found_devices) == 0:
             raise SyntheticHomeError(f"Device name '{device_name}' matched no devices")
         if len(found_devices) > 1:
