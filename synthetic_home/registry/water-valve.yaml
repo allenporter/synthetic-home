@@ -3,16 +3,19 @@ device_type: water-valve
 desc: A water shutoff and flow measurement device.
 device_states:
   closed:
-    valve.water-valve: closed
+    valve.water-valve:
+      current_valve_position: 0
     sensor.meter-reading: 2000
     sensor.battery: 75
   open:
-    valve.water-valve: open
+    valve.water-valve:
+      current_valve_position: 100
     sensor.meter-reading: 2001
     sensor.battery: 75
 entities:
   valve:
     water-valve:
+      reports_position: true
       supported_features:
         - valve.ValveEntityFeature.OPEN
         - valve.ValveEntityFeature.CLOSE
