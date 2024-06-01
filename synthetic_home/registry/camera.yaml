@@ -3,6 +3,9 @@ device_type: camera
 desc: A video camera that supports motion detection and other events.
 device_states:
   idle:
+    binary_sensor.motion: false
+    binary_sensor.person: false
+    binary_sensor.sound: false
   motion-detected:
     binary_sensor.motion: true
   person-detected:

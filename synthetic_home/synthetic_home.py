@@ -1,9 +1,9 @@
 """Data model for home assistant synthetic home."""
 
-import itertools
 from dataclasses import dataclass, field
 import pathlib
 import logging
+import slugify
 
 from mashumaro.codecs.yaml import yaml_decode
 
@@ -15,22 +15,20 @@ from synthetic_home.device_types import (
     EntityEntry,
     merge_entity_state_attributes,
 )
+from . import common, inventory
+from .inventory import DEFAULT_SEPARATOR
+from .device_types import load_device_type_registry
+
+__all__ = [
+    "SyntheticHome",
+    "Device",
+    "build_device_state",
+    "load_synthetic_home",
+    "read_config_content",
+]
+
 
 _LOGGER = logging.getLogger(__name__)
-
-
-@dataclass
-class SyntheticDeviceInfo:
-    """Device model information."""
-
-    model: str | None = None
-    """The model name of the device e.g. 'Learning Thermostat'."""
-
-    manufacturer: str | None = None
-    """The manufacturer of the device e.g. 'Nest'."""
-
-    sw_version: str | None = None
-    """The firmware version string of the device e.g. '1.0.2'."""
 
 
 @dataclass
@@ -43,7 +41,7 @@ class Device:
     device_type: str | None = None
     """The type of the device in the device registry that determines how it maps to entities."""
 
-    device_info: SyntheticDeviceInfo | None = None
+    device_info: common.DeviceInfo | None = None
     """Device make and model information."""
 
     device_state: str | DeviceState | None = None
@@ -83,6 +81,7 @@ def build_device_state(device: Device, registry: DeviceTypeRegistry) -> Device:
         )
 
     if device.device_state is not None:
+        # Lookup a device state and merge it into the current state
         if (
             isinstance(device.device_state, str)
             and device.device_state not in device_type.device_states_dict
@@ -109,12 +108,11 @@ def build_device_state(device: Device, registry: DeviceTypeRegistry) -> Device:
         device_state = device_type.device_states[0]
         if isinstance(device.device_state, DeviceState):
             device_state = device_state.merge(device.device_state)
-            _LOGGER.debug("1 device_state=%s", device_state)
     elif device.device_state is not None and isinstance(device.device_state, str):
         device_state = device_type.device_states_dict[device.device_state]
-        _LOGGER.debug("2 device_state=%s", device_state)
     else:
         raise SyntheticHomeError(f"Device did not declare a device state: {device}")
+
     _LOGGER.debug("Merging entity attributes for device state: %s", device_state)
     entity_entries = {
         platform: [
@@ -141,48 +139,21 @@ class SyntheticHome:
     # Device types supported by the home.
     device_type_registry: DeviceTypeRegistry | None = None
 
-    def build(self) -> "SyntheticHome":
-        """Validate and build the complete SyntheticHome device state."""
+    def __post__(self) -> None:
+        """Build the complete device state."""
         if self.device_type_registry is None:
-            return self
-        return SyntheticHome(
-            devices={
-                key: [
-                    build_device_state(device, self.device_type_registry)
-                    for device in devices
-                ]
-                for key, devices in self.devices.items()
-            },
-            services=[
+            self.device_type_registry = load_device_type_registry()
+        self.devices = {
+            key: [
                 build_device_state(device, self.device_type_registry)
-                for device in self.services
-            ],
-            device_type_registry=self.device_type_registry,
-        )
-
-    def find_devices_by_name(
-        self, area_name: str | None, device_name: str
-    ) -> Device | None:
-        """Find devices by optional area and device name."""
-        devices = list(
-            itertools.chain.from_iterable(
-                [
-                    area_devices
-                    for area, area_devices in self.devices.items()
-                    if area_name is None or area == area_name
-                ]
-            )
-        )
-        if area_name is not None and not devices:
-            raise SyntheticHomeError(f"Area name '{area_name}' matched no devices")
-        found_devices = [device for device in [*devices, *self.services] if device.name == device_name]
-        if len(found_devices) == 0:
-            raise SyntheticHomeError(f"Device name '{device_name}' matched no devices")
-        if len(found_devices) > 1:
-            raise SyntheticHomeError(
-                f"Device name '{device_name}' matched multiple devices, must specify an area"
-            )
-        return found_devices[0]
+                for device in devices
+            ]
+            for key, devices in self.devices.items()
+        }
+        self.services = [
+            build_device_state(device, self.device_type_registry)
+            for device in self.services
+        ]
 
 
 def read_config_content(config_file: pathlib.Path) -> str:
@@ -201,3 +172,74 @@ def load_synthetic_home(config_file: pathlib.Path) -> SyntheticHome:
         return yaml_decode(content, SyntheticHome)
     except ValueError as err:
         raise SyntheticHomeError(f"Could not parse config file '{config_file}': {err}")
+
+
+def build_inventory(home: SyntheticHome) -> inventory.Inventory:
+    """Build a home inventory from the synthetic home definition.
+
+    This is a flattened set of areas, entities, and devices.
+    """
+
+    inv = inventory.Inventory()
+    for area_name, devices in home.devices.items():
+        area_id = slugify.slugify(area_name, separator=DEFAULT_SEPARATOR)
+        inv.areas.append(inventory.Area(name=area_name, id=area_id))
+
+        for device in devices:
+            if (
+                area_name.lower() in device.name.lower()
+            ):  # Avoids bedroom-bedroom-curtain
+                # Assumes device names are unique across areas
+                entity_device_name = device.name
+                device_id = slugify.slugify(
+                    entity_device_name, separator=DEFAULT_SEPARATOR
+                )
+            else:
+                entity_device_name = f"{area_name} {device.name}"
+                device_id = slugify.slugify(
+                    entity_device_name, separator=DEFAULT_SEPARATOR
+                )
+            inv.devices.append(
+                inventory.Device(
+                    name=device.name,
+                    id=device_id,
+                    area=area_id,
+                    info=device.device_info,
+                )
+            )
+
+            for platform, entity_entries in device.entity_entries.items():
+                for entity_entry in entity_entries:
+                    if len(entity_entries) == 1:
+                        # The device + platform are unique
+                        entity_id = f"{platform}.{device_id}"
+                        entity_name = None
+                    else:
+                        # Each entity in this platform needs a unique name
+                        entity_id = f"{platform}.{device_id}_{entity_entry.key}"
+                        if (
+                            entity_entry.key not in device.name.lower()
+                        ):  # Avoid "Motion Motion"
+                            entity_name = (
+                                f"{entity_device_name} {entity_entry.key.capitalize()}"
+                            )
+                        else:
+                            entity_name = entity_device_name
+                    entity_id = f"{platform}.{device_id}_{entity_entry.key}"
+                    entity = inventory.Entity(
+                        name=entity_name,
+                        id=entity_id,
+                        area=area_id,
+                        device=device_id,
+                    )
+                    attributes = {}
+                    if entity.attributes:
+                        attributes.update(entity.attributes)
+                    state = attributes.pop("state", None)
+                    if state is not None:
+                        entity.state = str(state)
+                    if attributes:
+                        entity.attributes = attributes
+                    inv.entities.append(entity)
+
+    return inv

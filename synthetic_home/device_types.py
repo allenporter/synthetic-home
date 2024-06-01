@@ -1,4 +1,8 @@
-"""Data model for home assistant synthetic home."""
+"""Data model for device type definitions.
+
+These device devices and how they map to a set of entities. States can be set
+on a device then translated into how that state affects entities.
+"""
 
 from functools import cache
 from collections.abc import Generator
@@ -289,6 +293,7 @@ def _read_device_types(
             )
 
         yield device_type
+
 
 @cache
 def load_device_type_registry() -> DeviceTypeRegistry:

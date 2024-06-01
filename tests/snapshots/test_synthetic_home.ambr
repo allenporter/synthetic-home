@@ -1,0 +1,19 @@
+# serializer version: 1
+# name: test_inventory
+  '''
+  ---
+  areas:
+  - name: Backyard
+    id: backyard
+  devices:
+  - name: Outdoor Camera
+    id: backyard_outdoor_camera
+    area: backyard
+    info:
+      model: Spotlight Cam Battery
+      manufacturer: Ring
+      sw_version: 2.4.1
+  entities: []
+
+  '''
+# ---
