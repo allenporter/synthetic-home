@@ -95,7 +95,7 @@ class EntityState(DataClassDictMixin):
     key: str
     """The entity key identifying the entity."""
 
-    state: str | bool | dict[str, Any]
+    state: str | dict[str, Any]
     """The values that make up the entity state."""
 
     @property
