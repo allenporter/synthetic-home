@@ -139,7 +139,7 @@ class SyntheticHome:
     # Device types supported by the home.
     device_type_registry: DeviceTypeRegistry | None = None
 
-    def __post__(self) -> None:
+    def __post_init__(self) -> None:
         """Build the complete device state."""
         if self.device_type_registry is None:
             self.device_type_registry = load_device_type_registry()
@@ -186,22 +186,25 @@ def build_inventory(home: SyntheticHome) -> inventory.Inventory:
         inv.areas.append(inventory.Area(name=area_name, id=area_id))
 
         for device in devices:
+            # Make computer generated device names more friendly
+            device_name = device.name.replace("_", " ").title()
+
             if (
                 area_name.lower() in device.name.lower()
             ):  # Avoids bedroom-bedroom-curtain
                 # Assumes device names are unique across areas
-                entity_device_name = device.name
+                entity_device_name = device_name
                 device_id = slugify.slugify(
                     entity_device_name, separator=DEFAULT_SEPARATOR
                 )
             else:
-                entity_device_name = f"{area_name} {device.name}"
+                entity_device_name = f"{area_name} {device_name}"
                 device_id = slugify.slugify(
                     entity_device_name, separator=DEFAULT_SEPARATOR
                 )
             inv.devices.append(
                 inventory.Device(
-                    name=device.name,
+                    name=device_name,
                     id=device_id,
                     area=area_id,
                     info=device.device_info,
