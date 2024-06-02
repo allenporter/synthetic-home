@@ -11,7 +11,7 @@ test LLM device actions on their own homes or with their own test homes. And
 since we ultimately decided on intents as the LLM API in Home Assistant, there
 is a desire to reuse the existing tests from [intent test fixtures](https://github.com/home-assistant/intents/blob/main/tests/) where possible.
 
-## Intent Test Fixtures
+## Comparison Intent Test Fixtures
 
 The intent test fixtures were designed for testing NLP to intent calls that are
 determininstic from the nlp library. There are some differences in design goals:
@@ -22,8 +22,20 @@ determininstic from the nlp library. There are some differences in design goals:
 | Entities are named by hand. Makes it easier to override and reference in the test, though less realistic for how integrations work. | Entities are not specifically named, instead using the entity naming scheme based on devices built into Home Assistant and not in the fixtures. Harder to reference in tests, but more realistic for how integrations work, which helps catch LLM bugs when it gets confused about multiple entities with the same name but in different patforms. |
 | Supports a single entity state for all tests. The intent library does not look at the current state when suggesting an intent to call, and the intent implementation will handle the details. | Supports changing entity states across different tests. For example, when you ask an LLM to open an door and the door is already open it may decide not to call and intent and answer with a text response. States are reflected across all entities associated with the device e.g. the `lock` and the `binary_sensor` for the same device are in sync. |
 | Floors are supported. | Floors are not currently supported. |
-| Very simple, designed for specific intent test fixtures inputs and slots. | Complex as it has more use cases powering entity state in a custom component. |
+| Low level. Simple and flexible, and less opinionated, limited on some use cases. | Higher level. More opinionated and less flexible. |
 
 More generally, the intent test fixure is used to exercise intents only but the synthetic
 home dataset evals can handle conversation responses or checking other entity states since
 the outputs may not be fixed.
+
+## Approach
+
+The lower level description used by the intent test fixtures is close to the lower level
+representation used by the synthetic home custom component internally. We will use the higher
+level device based description when creating homes but ultimately it will generate the
+lower level description that is equivalent to the intent test fixture description and
+used insie the synthetic home component.
+
+If you want to use the the device description, it can generate the lower level entity descriptions.
+
+If you want to use the low level entity descriptions you can use that too, directly.
