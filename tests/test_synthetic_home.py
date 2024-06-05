@@ -2,12 +2,14 @@
 
 import pathlib
 
+import pytest
 from syrupy import SnapshotAssertion
 
 from synthetic_home import synthetic_home
 
 
-HOME1 = pathlib.Path("tests/testdata/home1.yaml")
+TESTDATA = pathlib.Path("tests/testdata")
+HOME1 = TESTDATA / "home1.yaml"
 
 
 def test_load_synthetic_home() -> None:
@@ -26,9 +28,14 @@ def test_load_synthetic_home() -> None:
     assert device.device_info.sw_version == "2.4.1"
 
 
-def test_inventory(snapshot: SnapshotAssertion) -> None:
+@pytest.mark.parametrize(
+    ("filename"),
+    list(TESTDATA.glob("*.yaml")),
+    ids=[str(filename) for filename in TESTDATA.glob("*.yaml")],
+)
+def test_inventory(filename: pathlib.Path, snapshot: SnapshotAssertion) -> None:
     """Test converting the home into an inventory yaml file."""
 
-    home = synthetic_home.load_synthetic_home(HOME1)
+    home = synthetic_home.load_synthetic_home(filename)
     inventory = synthetic_home.build_inventory(home)
     assert inventory.yaml() == snapshot

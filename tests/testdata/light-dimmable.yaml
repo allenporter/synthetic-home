@@ -1,0 +1,9 @@
+---
+name: Family Farmhouse
+devices:
+  Family Room:
+    - name: Family Room
+      device_type: light-dimmable
+      device_state:
+        light.light-dimmable:
+          brightness: 30

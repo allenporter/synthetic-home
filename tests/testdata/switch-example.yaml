@@ -1,0 +1,6 @@
+---
+name: Family Farmhouse
+devices:
+  Chicken Coop:
+  - name: Smart Feeder
+    device_type: switch

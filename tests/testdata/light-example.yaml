@@ -1,0 +1,6 @@
+---
+name: Family Farmhouse
+devices:
+  Family Room:
+  - name: Family Room
+    device_type: light

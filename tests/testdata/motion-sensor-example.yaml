@@ -1,0 +1,7 @@
+---
+name: Family Farmhouse
+devices:
+  Front Yard:
+    - name: Front Yard Motion
+      device_type: motion-sensor
+      device_state: "on"

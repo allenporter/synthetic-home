@@ -1,0 +1,22 @@
+---
+name: Family Farmhouse
+services:
+  - name: Home
+    device_type: weather-service
+    device_info:
+      manufacturer: AccuWeather
+    device_state:
+      weather.weather:
+        daily_forecast:
+          - cloudy
+          - rainy
+        hourly_forecast:
+          - fair
+          - fair
+          - cloudy
+          - cloudy
+        twice_daily_forecast:
+          - fair
+          - cloudy
+          - rainy
+          - cloudy

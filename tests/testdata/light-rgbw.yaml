@@ -1,0 +1,9 @@
+---
+name: Family Farmhouse
+devices:
+  Family Room:
+    - name: Family Room
+      device_type: light-rgbw
+      device_state:
+        light.light-rgbw:
+          rgbw_color: [255, 255, 0, 255]

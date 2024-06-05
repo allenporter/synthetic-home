@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 import pathlib
 import logging
 import slugify
+from typing import Any
 
 from mashumaro.codecs.yaml import yaml_decode
 
@@ -174,6 +175,13 @@ def load_synthetic_home(config_file: pathlib.Path) -> SyntheticHome:
         raise SyntheticHomeError(f"Could not parse config file '{config_file}': {err}")
 
 
+def yaml_state_value(v: Any) -> Any:
+    """Convert a entity state value to yaml."""
+    if isinstance(v, bool) or isinstance(v, float) or isinstance(v, list):
+        return v
+    return str(v)
+
+
 def build_inventory(home: SyntheticHome) -> inventory.Inventory:
     """Build a home inventory from the synthetic home definition.
 
@@ -181,66 +189,55 @@ def build_inventory(home: SyntheticHome) -> inventory.Inventory:
     """
 
     inv = inventory.Inventory()
-    for area_name, devices in home.devices.items():
-        area_id = slugify.slugify(area_name, separator=DEFAULT_SEPARATOR)
-        inv.areas.append(inventory.Area(name=area_name, id=area_id))
+    pairs: list[tuple[str | None, list[Device]]] = [*home.devices.items()]
+    if home.services:
+        pairs.append((None, home.services))
 
-        for device in devices:
+    for area_name, devices in pairs:
+        if area_name:
+            area_id = slugify.slugify(area_name, separator=DEFAULT_SEPARATOR)
+            inv.areas.append(inventory.Area(name=area_name, id=area_id))
+        else:
+            area_id = None
+
+        for device_entry in devices:
             # Make computer generated device names more friendly
-            device_name = device.name.replace("_", " ").title()
-
-            if (
-                area_name.lower() in device.name.lower()
-            ):  # Avoids bedroom-bedroom-curtain
-                # Assumes device names are unique across areas
-                entity_device_name = device_name
-                device_id = slugify.slugify(
-                    entity_device_name, separator=DEFAULT_SEPARATOR
-                )
-            else:
-                entity_device_name = f"{area_name} {device_name}"
-                device_id = slugify.slugify(
-                    entity_device_name, separator=DEFAULT_SEPARATOR
-                )
-            inv.devices.append(
-                inventory.Device(
-                    name=device_name,
-                    id=device_id,
-                    area=area_id,
-                    info=device.device_info,
-                )
+            device_name = device_entry.name.replace("_", " ").title()
+            device_id = slugify.slugify(device_entry.name, separator=DEFAULT_SEPARATOR)
+            device = inventory.Device(
+                name=device_name,
+                id=device_id,
+                info=device_entry.device_info,
             )
+            if area_id:
+                device.area = area_id
+            inv.devices.append(device)
 
-            for platform, entity_entries in device.entity_entries.items():
+            for platform, entity_entries in device_entry.entity_entries.items():
                 for entity_entry in entity_entries:
-                    if len(entity_entries) == 1:
-                        # The device + platform are unique
-                        entity_id = f"{platform}.{device_id}"
-                        entity_name = None
-                    else:
-                        # Each entity in this platform needs a unique name
-                        entity_id = f"{platform}.{device_id}_{entity_entry.key}"
-                        if (
-                            entity_entry.key not in device.name.lower()
-                        ):  # Avoid "Motion Motion"
-                            entity_name = (
-                                f"{entity_device_name} {entity_entry.key.capitalize()}"
-                            )
-                        else:
-                            entity_name = entity_device_name
-                    entity_id = f"{platform}.{device_id}_{entity_entry.key}"
+                    # Each entity in this platform needs a unique name, but
+                    # if the key is in the name it's the primary to avoid "Motion motion"
+                    entity_name = device_name
+                    if platform == "sensor" or (
+                        platform == "binary_sensor"
+                        and entity_entry.key not in device_entry.name.lower()
+                    ):
+                        entity_name = f"{device_name} {entity_entry.key.capitalize()}"
+                    entity_id = f"{platform}.{slugify.slugify(entity_name, separator=DEFAULT_SEPARATOR)}"
                     entity = inventory.Entity(
                         name=entity_name,
                         id=entity_id,
-                        area=area_id,
                         device=device_id,
                     )
-                    attributes = {}
-                    if entity.attributes:
-                        attributes.update(entity.attributes)
+                    if area_id:
+                        entity.area = area_id
+                    _LOGGER.debug("updating ")
+                    attributes: dict[str, str | list[str] | int | float] = {}
+                    if entity_entry.attributes:
+                        attributes.update(entity_entry.attributes)
                     state = attributes.pop("state", None)
                     if state is not None:
-                        entity.state = str(state)
+                        entity.state = yaml_state_value(state)
                     if attributes:
                         entity.attributes = attributes
                     inv.entities.append(entity)

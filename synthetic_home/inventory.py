@@ -97,7 +97,7 @@ class Entity(DataClassYAMLMixin):
     state: str | None = None
     """The current state value for the entity."""
 
-    attributes: dict[str, str | int] | None = None
+    attributes: dict[str, str | int | float | bool | list[str]] | None = None
     """The current state attributes for the entity."""
 
     def __post_init__(self) -> None:
