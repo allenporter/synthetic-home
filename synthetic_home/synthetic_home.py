@@ -182,6 +182,42 @@ def yaml_state_value(v: Any) -> Any:
     return str(v)
 
 
+def build_entities(area_id: str | None, device_entry: Device) -> list[inventory.Entity]:
+    """Build the set of entities for the device entry."""
+    entities = []
+    device_name = device_entry.name.replace("_", " ").title()
+    device_id = slugify.slugify(device_entry.name, separator=DEFAULT_SEPARATOR)
+    for platform, entity_entries in device_entry.entity_entries.items():
+        for entity_entry in entity_entries:
+            # Each entity in this platform needs a unique name, but
+            # if the key is in the name it's the primary to avoid "Motion motion"
+            entity_name = device_name
+            if platform == "sensor" or (
+                platform == "binary_sensor"
+                and entity_entry.key not in device_entry.name.lower()
+            ):
+                entity_name = f"{device_name} {entity_entry.key.capitalize()}"
+            entity_id = f"{platform}.{slugify.slugify(entity_name, separator=DEFAULT_SEPARATOR)}"
+            entity = inventory.Entity(
+                name=entity_name,
+                id=entity_id,
+                device=device_id,
+            )
+            if area_id:
+                entity.area = area_id
+            _LOGGER.debug("updating ")
+            attributes: dict[str, str | list[str] | int | float] = {}
+            if entity_entry.attributes:
+                attributes.update(entity_entry.attributes)
+            state = attributes.pop("state", None)
+            if state is not None:
+                entity.state = yaml_state_value(state)
+            if attributes:
+                entity.attributes = attributes
+            entities.append(entity)
+    return entities
+
+
 def build_inventory(home: SyntheticHome) -> inventory.Inventory:
     """Build a home inventory from the synthetic home definition.
 
@@ -193,6 +229,7 @@ def build_inventory(home: SyntheticHome) -> inventory.Inventory:
     if home.services:
         pairs.append((None, home.services))
 
+    entities = []
     for area_name, devices in pairs:
         if area_name:
             area_id = slugify.slugify(area_name, separator=DEFAULT_SEPARATOR)
@@ -212,34 +249,7 @@ def build_inventory(home: SyntheticHome) -> inventory.Inventory:
             if area_id:
                 device.area = area_id
             inv.devices.append(device)
-
-            for platform, entity_entries in device_entry.entity_entries.items():
-                for entity_entry in entity_entries:
-                    # Each entity in this platform needs a unique name, but
-                    # if the key is in the name it's the primary to avoid "Motion motion"
-                    entity_name = device_name
-                    if platform == "sensor" or (
-                        platform == "binary_sensor"
-                        and entity_entry.key not in device_entry.name.lower()
-                    ):
-                        entity_name = f"{device_name} {entity_entry.key.capitalize()}"
-                    entity_id = f"{platform}.{slugify.slugify(entity_name, separator=DEFAULT_SEPARATOR)}"
-                    entity = inventory.Entity(
-                        name=entity_name,
-                        id=entity_id,
-                        device=device_id,
-                    )
-                    if area_id:
-                        entity.area = area_id
-                    _LOGGER.debug("updating ")
-                    attributes: dict[str, str | list[str] | int | float] = {}
-                    if entity_entry.attributes:
-                        attributes.update(entity_entry.attributes)
-                    state = attributes.pop("state", None)
-                    if state is not None:
-                        entity.state = yaml_state_value(state)
-                    if attributes:
-                        entity.attributes = attributes
-                    inv.entities.append(entity)
-
+            entities.extend(build_entities(area_id, device_entry))
+    if entities:
+        inv.entities = entities
     return inv

@@ -1,4 +1,1798 @@
 # serializer version: 1
+# name: test_device_state_to_entity_state[tests/testdata/camera-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/camera-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/camera-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/camera-example.yaml].3
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/door-sensor-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Door Sensor
+    id: binary_sensor.front_door_sensor
+    device: front_door_sensor
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.DOOR
+  - name: Front Door Sensor Battery
+    id: binary_sensor.front_door_sensor_battery
+    device: front_door_sensor
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Door Sensor Battery
+    id: sensor.front_door_sensor_battery
+    device: front_door_sensor
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/door-sensor-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Door Sensor
+    id: binary_sensor.front_door_sensor
+    device: front_door_sensor
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.DOOR
+  - name: Front Door Sensor Battery
+    id: binary_sensor.front_door_sensor_battery
+    device: front_door_sensor
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Door Sensor Battery
+    id: sensor.front_door_sensor_battery
+    device: front_door_sensor
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/door-sensor-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Door Sensor
+    id: binary_sensor.front_door_sensor
+    device: front_door_sensor
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.DOOR
+  - name: Front Door Sensor Battery
+    id: binary_sensor.front_door_sensor_battery
+    device: front_door_sensor
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Door Sensor Battery
+    id: sensor.front_door_sensor_battery
+    device: front_door_sensor
+    state: '10'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/fan-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Counter Fan
+    id: fan.counter_fan
+    device: counter_fan
+    attributes:
+      supported_features:
+      - fan.FanEntityFeature.OSCILLATE
+      - fan.FanEntityFeature.SET_SPEED
+      is_on: false
+      oscillating: false
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/fan-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Counter Fan
+    id: fan.counter_fan
+    device: counter_fan
+    attributes:
+      supported_features:
+      - fan.FanEntityFeature.OSCILLATE
+      - fan.FanEntityFeature.SET_SPEED
+      is_on: true
+      oscillating: false
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/fan-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Counter Fan
+    id: fan.counter_fan
+    device: counter_fan
+    attributes:
+      supported_features:
+      - fan.FanEntityFeature.OSCILLATE
+      - fan.FanEntityFeature.SET_SPEED
+      is_on: true
+      oscillating: true
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/garage-door-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Garage Door
+    id: cover.garage_door
+    device: garage_door
+    state: false
+    attributes:
+      device_class: cover.CoverDeviceClass.GARAGE
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+  - name: Garage Door
+    id: light.garage_door
+    device: garage_door
+    state: false
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode:
+      - onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/garage-door-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Garage Door
+    id: cover.garage_door
+    device: garage_door
+    state: true
+    attributes:
+      device_class: cover.CoverDeviceClass.GARAGE
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+  - name: Garage Door
+    id: light.garage_door
+    device: garage_door
+    state: true
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode:
+      - onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/gate-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Driveway Gate
+    id: cover.driveway_gate
+    device: driveway_gate
+    state: false
+    attributes:
+      device_class: cover.CoverDeviceClass.GATE
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/gate-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Driveway Gate
+    id: cover.driveway_gate
+    device: driveway_gate
+    state: true
+    attributes:
+      device_class: cover.CoverDeviceClass.GATE
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/heat-pump-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: climate.family_room
+    device: family_room
+    attributes:
+      unit_of_measurement: "\xB0C"
+      hvac_modes:
+      - heat
+      - 'off'
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      hvac_mode: 'off'
+      hvac_action: 'off'
+      current_temperature: 22
+      target_temperature: 22
+  - name: Family Room Temperature
+    id: sensor.family_room_temperature
+    device: family_room
+    state: '22'
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/heat-pump-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: climate.family_room
+    device: family_room
+    attributes:
+      unit_of_measurement: "\xB0C"
+      hvac_modes:
+      - heat
+      - 'off'
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      hvac_mode: heat
+      hvac_action: heating
+      current_temperature: 25
+      target_temperature: 27
+  - name: Family Room Temperature
+    id: sensor.family_room_temperature
+    device: family_room
+    state: '25'
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Fireplace Light
+    id: light.fireplace_light
+    device: fireplace_light
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Fireplace Light
+    id: light.fireplace_light
+    device: fireplace_light
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 0
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].10
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Bedroom 1 Light
+    id: light.bedroom_1_light
+    device: bedroom_1_light
+    state: 'off'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].11
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Bedroom 1 Light
+    id: light.bedroom_1_light
+    device: bedroom_1_light
+    state: 'on'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].12
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Kitchen Light
+    id: light.kitchen_light
+    device: kitchen_light
+    state: 'off'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].13
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Kitchen Light
+    id: light.kitchen_light
+    device: kitchen_light
+    state: 'on'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].14
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Coffee Maker Energy
+    id: sensor.coffee_maker_energy
+    device: coffee_maker
+    state: '1'
+    attributes:
+      device_class: sensor.SensorDeviceClass.ENERGY
+      state_class: sensor.SensorStateClass.TOTAL_INCREASING
+      native_unit_of_measurement: kWh
+  - name: Coffee Maker
+    id: switch.coffee_maker
+    device: coffee_maker
+    state: true
+    attributes:
+      device_class: switch.SwitchDeviceClass.OUTLET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].15
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Coffee Maker Energy
+    id: sensor.coffee_maker_energy
+    device: coffee_maker
+    state: '0'
+    attributes:
+      device_class: sensor.SensorDeviceClass.ENERGY
+      state_class: sensor.SensorStateClass.TOTAL_INCREASING
+      native_unit_of_measurement: kWh
+  - name: Coffee Maker
+    id: switch.coffee_maker
+    device: coffee_maker
+    state: false
+    attributes:
+      device_class: switch.SwitchDeviceClass.OUTLET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].16
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Bathroom Light
+    id: light.bathroom_light
+    device: bathroom_light
+    state: 'off'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].17
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Bathroom Light
+    id: light.bathroom_light
+    device: bathroom_light
+    state: 'on'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Fireplace Light
+    id: light.fireplace_light
+    device: fireplace_light
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 5
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].3
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Thermostat
+    id: climate.thermostat
+    device: thermostat
+    attributes:
+      unit_of_measurement: "\xB0C"
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+      hvac_modes:
+      - 'off'
+      - cool
+      - heat
+      - auto
+      hvac_mode: 'off'
+      hvac_action: 'off'
+      current_temperature: 22
+      target_temperature: 22
+  - name: Thermostat Temperature
+    id: sensor.thermostat_temperature
+    device: thermostat
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 22
+  - name: Thermostat Humidity
+    id: sensor.thermostat_humidity
+    device: thermostat
+    attributes:
+      native_unit_of_measurement: '%'
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 45
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].4
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Thermostat
+    id: climate.thermostat
+    device: thermostat
+    attributes:
+      unit_of_measurement: "\xB0C"
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+      hvac_modes:
+      - 'off'
+      - cool
+      - heat
+      - auto
+      hvac_mode: cool
+      hvac_action: cooling
+      current_temperature: 25
+      target_temperature: 23
+  - name: Thermostat Temperature
+    id: sensor.thermostat_temperature
+    device: thermostat
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 25
+  - name: Thermostat Humidity
+    id: sensor.thermostat_humidity
+    device: thermostat
+    attributes:
+      native_unit_of_measurement: '%'
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 45
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].5
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Thermostat
+    id: climate.thermostat
+    device: thermostat
+    attributes:
+      unit_of_measurement: "\xB0C"
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+      hvac_modes:
+      - 'off'
+      - cool
+      - heat
+      - auto
+      hvac_mode: cool
+      hvac_action: cooling
+      current_temperature: 25
+      target_temperature: 12
+  - name: Thermostat Temperature
+    id: sensor.thermostat_temperature
+    device: thermostat
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 25
+  - name: Thermostat Humidity
+    id: sensor.thermostat_humidity
+    device: thermostat
+    attributes:
+      native_unit_of_measurement: '%'
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 45
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].6
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].7
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].8
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/home1.yaml].9
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Outdoor Camera Motion
+    id: binary_sensor.outdoor_camera_motion
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Outdoor Camera Person
+    id: binary_sensor.outdoor_camera_person
+    device: outdoor_camera
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+  - name: Outdoor Camera Sound
+    id: binary_sensor.outdoor_camera_sound
+    device: outdoor_camera
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/hvac-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: climate.family_room
+    device: family_room
+    attributes:
+      unit_of_measurement: "\xB0C"
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+      hvac_modes:
+      - 'off'
+      - cool
+      - heat
+      - auto
+      hvac_mode: 'off'
+      hvac_action: 'off'
+      current_temperature: 22
+      target_temperature: 22
+  - name: Family Room Temperature
+    id: sensor.family_room_temperature
+    device: family_room
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 22
+  - name: Family Room Humidity
+    id: sensor.family_room_humidity
+    device: family_room
+    attributes:
+      native_unit_of_measurement: '%'
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 45
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/hvac-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: climate.family_room
+    device: family_room
+    attributes:
+      unit_of_measurement: "\xB0C"
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+      hvac_modes:
+      - 'off'
+      - cool
+      - heat
+      - auto
+      hvac_mode: cool
+      hvac_action: cooling
+      current_temperature: 25
+      target_temperature: 23
+  - name: Family Room Temperature
+    id: sensor.family_room_temperature
+    device: family_room
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 25
+  - name: Family Room Humidity
+    id: sensor.family_room_humidity
+    device: family_room
+    attributes:
+      native_unit_of_measurement: '%'
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 45
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/hvac-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: climate.family_room
+    device: family_room
+    attributes:
+      unit_of_measurement: "\xB0C"
+      supported_features:
+      - climate.ClimateEntityFeature.FAN_MODE
+      - climate.ClimateEntityFeature.TURN_ON
+      - climate.ClimateEntityFeature.TURN_OFF
+      - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+      hvac_modes:
+      - 'off'
+      - cool
+      - heat
+      - auto
+      hvac_mode: cool
+      hvac_action: cooling
+      current_temperature: 25
+      target_temperature: 12
+  - name: Family Room Temperature
+    id: sensor.family_room_temperature
+    device: family_room
+    attributes:
+      native_unit_of_measurement: "\xB0C"
+      device_class: sensor.SensorDeviceClass.TEMPERATURE
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 25
+  - name: Family Room Humidity
+    id: sensor.family_room_humidity
+    device: family_room
+    attributes:
+      native_unit_of_measurement: '%'
+      device_class: sensor.SensorDeviceClass.HUMIDITY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_value: 45
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-dimmable.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-dimmable.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 0
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-dimmable.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 5
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    state: 'off'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    state: 'on'
+    attributes:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-rgbw.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    attributes:
+      supported_color_modes:
+      - rgbw
+      color_mode: rgbw
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 0
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-rgbw.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    attributes:
+      supported_color_modes:
+      - rgbw
+      color_mode: rgbw
+      rgbw_color:
+      - 0
+      - 0
+      - 0
+      - 255
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/light-rgbw.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Family Room
+    id: light.family_room
+    device: family_room
+    attributes:
+      supported_color_modes:
+      - rgbw
+      color_mode: rgbw
+      rgbw_color:
+      - 255
+      - 0
+      - 0
+      - 0
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/motion-sensor-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Yard Motion
+    id: binary_sensor.front_yard_motion
+    device: front_yard_motion
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Front Yard Motion Battery
+    id: binary_sensor.front_yard_motion_battery
+    device: front_yard_motion
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Yard Motion Battery
+    id: sensor.front_yard_motion_battery
+    device: front_yard_motion
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/motion-sensor-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Yard Motion
+    id: binary_sensor.front_yard_motion
+    device: front_yard_motion
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Front Yard Motion Battery
+    id: binary_sensor.front_yard_motion_battery
+    device: front_yard_motion
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Yard Motion Battery
+    id: sensor.front_yard_motion_battery
+    device: front_yard_motion
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/motion-sensor-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Yard Motion
+    id: binary_sensor.front_yard_motion
+    device: front_yard_motion
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+  - name: Front Yard Motion Battery
+    id: binary_sensor.front_yard_motion_battery
+    device: front_yard_motion
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Yard Motion Battery
+    id: sensor.front_yard_motion_battery
+    device: front_yard_motion
+    state: '15'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-blinds-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Left Shade
+    id: cover.left_shade
+    device: left_shade
+    state: false
+    attributes:
+      device_class: cover.CoverDeviceClass.BLIND
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+      - cover.CoverEntityFeature.SET_POSITION
+  - name: Left Shade Battery
+    id: sensor.left_shade_battery
+    device: left_shade
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-blinds-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Left Shade
+    id: cover.left_shade
+    device: left_shade
+    state: true
+    attributes:
+      device_class: cover.CoverDeviceClass.BLIND
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+      - cover.CoverEntityFeature.SET_POSITION
+  - name: Left Shade Battery
+    id: sensor.left_shade_battery
+    device: left_shade
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-blinds-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Right Shade
+    id: cover.right_shade
+    device: right_shade
+    state: false
+    attributes:
+      device_class: cover.CoverDeviceClass.BLIND
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+      - cover.CoverEntityFeature.SET_POSITION
+  - name: Right Shade Battery
+    id: sensor.right_shade_battery
+    device: right_shade
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-blinds-example.yaml].3
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Right Shade
+    id: cover.right_shade
+    device: right_shade
+    state: true
+    attributes:
+      device_class: cover.CoverDeviceClass.BLIND
+      supported_features:
+      - cover.CoverEntityFeature.OPEN
+      - cover.CoverEntityFeature.CLOSE
+      - cover.CoverEntityFeature.SET_POSITION
+  - name: Right Shade Battery
+    id: sensor.right_shade_battery
+    device: right_shade
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-lock-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Door Lock
+    id: lock.front_door_lock
+    device: front_door_lock
+    state: locked
+  - name: Front Door Lock
+    id: binary_sensor.front_door_lock
+    device: front_door_lock
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.LOCK
+  - name: Front Door Lock Tamper
+    id: binary_sensor.front_door_lock_tamper
+    device: front_door_lock
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Front Door Lock Battery
+    id: binary_sensor.front_door_lock_battery
+    device: front_door_lock
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Door Lock Battery
+    id: sensor.front_door_lock_battery
+    device: front_door_lock
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-lock-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Front Door Lock
+    id: lock.front_door_lock
+    device: front_door_lock
+    state: unlocked
+  - name: Front Door Lock
+    id: binary_sensor.front_door_lock
+    device: front_door_lock
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.LOCK
+  - name: Front Door Lock Tamper
+    id: binary_sensor.front_door_lock_tamper
+    device: front_door_lock
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Front Door Lock Battery
+    id: binary_sensor.front_door_lock_battery
+    device: front_door_lock
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Front Door Lock Battery
+    id: sensor.front_door_lock_battery
+    device: front_door_lock
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-plug-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Floor Lamp Energy
+    id: sensor.floor_lamp_energy
+    device: floor_lamp
+    state: '1'
+    attributes:
+      device_class: sensor.SensorDeviceClass.ENERGY
+      state_class: sensor.SensorStateClass.TOTAL_INCREASING
+      native_unit_of_measurement: kWh
+  - name: Floor Lamp
+    id: switch.floor_lamp
+    device: floor_lamp
+    state: true
+    attributes:
+      device_class: switch.SwitchDeviceClass.OUTLET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-plug-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Floor Lamp Energy
+    id: sensor.floor_lamp_energy
+    device: floor_lamp
+    state: '0'
+    attributes:
+      device_class: sensor.SensorDeviceClass.ENERGY
+      state_class: sensor.SensorStateClass.TOTAL_INCREASING
+      native_unit_of_measurement: kWh
+  - name: Floor Lamp
+    id: switch.floor_lamp
+    device: floor_lamp
+    state: false
+    attributes:
+      device_class: switch.SwitchDeviceClass.OUTLET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-speaker-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Smart Speaker
+    id: media_player.smart_speaker
+    device: smart_speaker
+    state: playing
+    attributes:
+      device_class: media_player.MediaPlayerDeviceClass.SPEAKER
+      supported_features:
+      - media_player.MediaPlayerEntityFeature.PLAY
+      - media_player.MediaPlayerEntityFeature.PAUSE
+      - media_player.MediaPlayerEntityFeature.STOP
+      - media_player.MediaPlayerEntityFeature.VOLUME_STEP
+      - media_player.MediaPlayerEntityFeature.VOLUME_MUTE
+      - media_player.MediaPlayerEntityFeature.VOLUME_SET
+      - media_player.MediaPlayerEntityFeature.TURN_ON
+      - media_player.MediaPlayerEntityFeature.TURN_OFF
+      - media_player.MediaPlayerEntityFeature.NEXT_TRACK
+      - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-speaker-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Smart Speaker
+    id: media_player.smart_speaker
+    device: smart_speaker
+    state: 'off'
+    attributes:
+      device_class: media_player.MediaPlayerDeviceClass.SPEAKER
+      supported_features:
+      - media_player.MediaPlayerEntityFeature.PLAY
+      - media_player.MediaPlayerEntityFeature.PAUSE
+      - media_player.MediaPlayerEntityFeature.STOP
+      - media_player.MediaPlayerEntityFeature.VOLUME_STEP
+      - media_player.MediaPlayerEntityFeature.VOLUME_MUTE
+      - media_player.MediaPlayerEntityFeature.VOLUME_SET
+      - media_player.MediaPlayerEntityFeature.TURN_ON
+      - media_player.MediaPlayerEntityFeature.TURN_OFF
+      - media_player.MediaPlayerEntityFeature.NEXT_TRACK
+      - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/smart-speaker-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Smart Speaker
+    id: media_player.smart_speaker
+    device: smart_speaker
+    state: paused
+    attributes:
+      device_class: media_player.MediaPlayerDeviceClass.SPEAKER
+      supported_features:
+      - media_player.MediaPlayerEntityFeature.PLAY
+      - media_player.MediaPlayerEntityFeature.PAUSE
+      - media_player.MediaPlayerEntityFeature.STOP
+      - media_player.MediaPlayerEntityFeature.VOLUME_STEP
+      - media_player.MediaPlayerEntityFeature.VOLUME_MUTE
+      - media_player.MediaPlayerEntityFeature.VOLUME_SET
+      - media_player.MediaPlayerEntityFeature.TURN_ON
+      - media_player.MediaPlayerEntityFeature.TURN_OFF
+      - media_player.MediaPlayerEntityFeature.NEXT_TRACK
+      - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/switch-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Smart Feeder
+    id: switch.smart_feeder
+    device: smart_feeder
+    state: true
+    attributes:
+      device_class: switch.SwitchDeviceClass.SWITCH
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/switch-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Smart Feeder
+    id: switch.smart_feeder
+    device: smart_feeder
+    state: false
+    attributes:
+      device_class: switch.SwitchDeviceClass.SWITCH
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/todo-list-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities: []
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/vacuum-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Robot Vacuum
+    id: vacuum.robot_vacuum
+    device: robot_vacuum
+    state: docked
+    attributes:
+      supported_features:
+      - vacuum.VacuumEntityFeature.START
+      - vacuum.VacuumEntityFeature.STOP
+      - vacuum.VacuumEntityFeature.STATE
+      - vacuum.VacuumEntityFeature.PAUSE
+      - vacuum.VacuumEntityFeature.RETURN_HOME
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/vacuum-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Robot Vacuum
+    id: vacuum.robot_vacuum
+    device: robot_vacuum
+    state: cleaning
+    attributes:
+      supported_features:
+      - vacuum.VacuumEntityFeature.START
+      - vacuum.VacuumEntityFeature.STOP
+      - vacuum.VacuumEntityFeature.STATE
+      - vacuum.VacuumEntityFeature.PAUSE
+      - vacuum.VacuumEntityFeature.RETURN_HOME
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/vacuum-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Robot Vacuum
+    id: vacuum.robot_vacuum
+    device: robot_vacuum
+    state: paused
+    attributes:
+      supported_features:
+      - vacuum.VacuumEntityFeature.START
+      - vacuum.VacuumEntityFeature.STOP
+      - vacuum.VacuumEntityFeature.STATE
+      - vacuum.VacuumEntityFeature.PAUSE
+      - vacuum.VacuumEntityFeature.RETURN_HOME
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/vacuum-example.yaml].3
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Robot Vacuum
+    id: vacuum.robot_vacuum
+    device: robot_vacuum
+    state: returning
+    attributes:
+      supported_features:
+      - vacuum.VacuumEntityFeature.START
+      - vacuum.VacuumEntityFeature.STOP
+      - vacuum.VacuumEntityFeature.STATE
+      - vacuum.VacuumEntityFeature.PAUSE
+      - vacuum.VacuumEntityFeature.RETURN_HOME
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/valve-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Back Yard Water Valve
+    id: valve.back_yard_water_valve
+    device: back_yard_water_valve
+    attributes:
+      reports_position: true
+      supported_features:
+      - valve.ValveEntityFeature.OPEN
+      - valve.ValveEntityFeature.CLOSE
+      - valve.ValveEntityFeature.SET_POSITION
+      current_valve_position: 0
+  - name: Back Yard Water Valve Meter-reading
+    id: sensor.back_yard_water_valve_meter_reading
+    device: back_yard_water_valve
+    state: '2000'
+    attributes:
+      native_unit_of_measurement: "m\xB3"
+      device_class: sensor.SensorDeviceClass.WATER
+      state_class: sensor.SensorStateClass.TOTAL_INCREASING
+  - name: Back Yard Water Valve Battery
+    id: sensor.back_yard_water_valve_battery
+    device: back_yard_water_valve
+    state: '75'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/valve-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Back Yard Water Valve
+    id: valve.back_yard_water_valve
+    device: back_yard_water_valve
+    attributes:
+      reports_position: true
+      supported_features:
+      - valve.ValveEntityFeature.OPEN
+      - valve.ValveEntityFeature.CLOSE
+      - valve.ValveEntityFeature.SET_POSITION
+      current_valve_position: 100
+  - name: Back Yard Water Valve Meter-reading
+    id: sensor.back_yard_water_valve_meter_reading
+    device: back_yard_water_valve
+    state: '2001'
+    attributes:
+      native_unit_of_measurement: "m\xB3"
+      device_class: sensor.SensorDeviceClass.WATER
+      state_class: sensor.SensorStateClass.TOTAL_INCREASING
+  - name: Back Yard Water Valve Battery
+    id: sensor.back_yard_water_valve_battery
+    device: back_yard_water_valve
+    state: '75'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/weather-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities: []
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/window-sensor-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Left Window Sensor
+    id: binary_sensor.left_window_sensor
+    device: left_window_sensor
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.WINDOW
+  - name: Left Window Sensor Battery
+    id: binary_sensor.left_window_sensor_battery
+    device: left_window_sensor
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Left Window Sensor Battery
+    id: sensor.left_window_sensor_battery
+    device: left_window_sensor
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/window-sensor-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Left Window Sensor
+    id: binary_sensor.left_window_sensor
+    device: left_window_sensor
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.WINDOW
+  - name: Left Window Sensor Battery
+    id: binary_sensor.left_window_sensor_battery
+    device: left_window_sensor
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Left Window Sensor Battery
+    id: sensor.left_window_sensor_battery
+    device: left_window_sensor
+    state: '90'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/testdata/window-sensor-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Left Window Sensor
+    id: binary_sensor.left_window_sensor
+    device: left_window_sensor
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.WINDOW
+  - name: Left Window Sensor Battery
+    id: binary_sensor.left_window_sensor_battery
+    device: left_window_sensor
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
+  - name: Left Window Sensor Battery
+    id: sensor.left_window_sensor_battery
+    device: left_window_sensor
+    state: '10'
+    attributes:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: '%'
+  
+  '''
+# ---
 # name: test_inventory[tests/testdata/camera-example.yaml]
   '''
   ---
