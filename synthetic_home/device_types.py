@@ -272,7 +272,6 @@ def _read_device_types(
     for device_type_file in device_types_path.iterdir():
         if not device_type_file.name.endswith(".yaml"):
             continue
-        _LOGGER.debug("Loading %s", device_type_file)
         try:
             with device_type_file.open("r") as f:
                 content = f.read()
