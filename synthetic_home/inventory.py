@@ -130,6 +130,13 @@ class Inventory(DataClassYAMLMixin):
         """Render the inventory as yaml."""
         return str(self.to_yaml(omit_none=True, encoder=_custom_encoder))
 
+    def device_dict(self) -> dict[str, Device]:
+        """Dictionary of devices by device id."""
+        return {
+            device.id: device
+            for device in self.devices
+        }
+
     class Config(BaseConfig):
         code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False

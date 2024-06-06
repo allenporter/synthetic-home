@@ -22,6 +22,7 @@ determininstic from the nlp library. There are some differences in design goals:
 | Entities are named by hand. Makes it easier to override and reference in the test, though less realistic for how integrations work. | Entities are not specifically named, instead using the entity naming scheme based on devices built into Home Assistant and not in the fixtures. Harder to reference in tests, but more realistic for how integrations work, which helps catch LLM bugs when it gets confused about multiple entities with the same name but in different patforms. |
 | Supports a single entity state for all tests. The intent library does not look at the current state when suggesting an intent to call, and the intent implementation will handle the details. | Supports changing entity states across different tests. For example, when you ask an LLM to open an door and the door is already open it may decide not to call and intent and answer with a text response. States are reflected across all entities associated with the device e.g. the `lock` and the `binary_sensor` for the same device are in sync. |
 | Floors are supported. | Floors are not currently supported. |
+| States are expressed as the entity outputs. For example, binary sensors for device classes are expressed with  states such as 'connected, 'normal', 'closed'.  Requires knowing the device class details and getting them correct. | States expressed as entity inputs e.g. 'True', 'False'. This allows home assistant platforms to convert an input such as `is_on` to the device class output to avoid accidental mistakes. |
 | Low level. Simple and flexible, and less opinionated, limited on some use cases. | Higher level. More opinionated and less flexible. |
 
 More generally, the intent test fixure is used to exercise intents only but the synthetic
@@ -33,8 +34,8 @@ the outputs may not be fixed.
 The lower level description used by the intent test fixtures is close to the lower level
 representation used by the synthetic home custom component internally. We will use the higher
 level device based description when creating homes but ultimately it will generate the
-lower level description that is equivalent to the intent test fixture description and
-used insie the synthetic home component.
+lower level description that is similar to the intent test fixture description and
+used inside the synthetic home component.
 
 If you want to use the the device description, it can generate the lower level entity descriptions.
 
