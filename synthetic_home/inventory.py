@@ -135,6 +135,7 @@ class Inventory(DataClassYAMLMixin):
         return {
             device.id: device
             for device in self.devices
+            if device.id is not None
         }
 
     class Config(BaseConfig):
