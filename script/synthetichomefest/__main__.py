@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 from typing import cast
 
-from . import list_device_types
+from . import list_device_types, create_inventory
 
 
 def get_base_arg_parser() -> argparse.ArgumentParser:
@@ -14,6 +14,11 @@ def get_base_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Synthetic Home Utility")
     parser.add_argument("--debug", action="store_true", help="Enable log output")
     subparsers = parser.add_subparsers(dest="action", help="Action", required=True)
+    create_inventory.create_arguments(
+        subparsers.add_parser(
+            "create_inventory",
+        )
+    )
     list_device_types.create_arguments(
         subparsers.add_parser(
             "list_device_types",
