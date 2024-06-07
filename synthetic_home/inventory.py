@@ -1,5 +1,6 @@
 """Data model for the lower level inventory of a home, usable for fixtures and evaluations."""
 
+import pathlib
 from dataclasses import dataclass, field
 import logging
 import slugify
@@ -8,7 +9,7 @@ from typing import Any
 import yaml
 from mashumaro.mixins.yaml import DataClassYAMLMixin, EncodedData
 from mashumaro.config import BaseConfig
-
+from mashumaro.codecs.yaml import yaml_decode
 
 from . import common
 from .exceptions import SyntheticHomeError
@@ -134,6 +135,29 @@ class Inventory(DataClassYAMLMixin):
         """Dictionary of devices by device id."""
         return {device.id: device for device in self.devices if device.id is not None}
 
+    def area_dict(self) -> dict[str, Device]:
+        """Dictionary of areas by area id."""
+        return {area.id: area for area in self.areas if area.id is not None}
+
+
     class Config(BaseConfig):
         code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False
+
+
+def read_config_content(config_file: pathlib.Path) -> str:
+    """Create configuration file content, exposed for patching."""
+    with config_file.open("r") as f:
+        return f.read()
+
+
+def load_inventory(config_file: pathlib.Path) -> Inventory:
+    """Load synthetic home configuration from disk."""
+    try:
+        content = read_config_content(config_file)
+    except FileNotFoundError:
+        raise SyntheticHomeError(f"Configuration file '{config_file}' does not exist")
+    try:
+        return yaml_decode(content, Inventory)
+    except ValueError as err:
+        raise SyntheticHomeError(f"Could not parse config file '{config_file}': {err}")
