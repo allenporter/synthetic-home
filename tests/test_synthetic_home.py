@@ -8,8 +8,9 @@ from syrupy import SnapshotAssertion
 from synthetic_home import synthetic_home, device_types, inventory
 
 
-TESTDATA = pathlib.Path("tests/testdata")
-HOME1 = TESTDATA / "home1.yaml"
+TEST_HOMES = pathlib.Path("tests/homes")
+TEST_FIXTURES = pathlib.Path("tests/fixtures")
+HOME1 = TEST_HOMES / "home1.yaml"
 
 
 def test_load_synthetic_home() -> None:
@@ -29,22 +30,29 @@ def test_load_synthetic_home() -> None:
 
 
 @pytest.mark.parametrize(
-    ("filename"),
-    list(TESTDATA.glob("*.yaml")),
-    ids=[str(filename) for filename in TESTDATA.glob("*.yaml")],
+    ("home_filename"),
+    list(TEST_HOMES.glob("*.yaml")),
+    ids=[str(filename) for filename in TEST_HOMES.glob("*.yaml")],
 )
-def test_inventory(filename: pathlib.Path, snapshot: SnapshotAssertion) -> None:
+def test_inventory(home_filename: pathlib.Path, snapshot: SnapshotAssertion) -> None:
     """Test converting the home into an inventory yaml file."""
 
-    home = synthetic_home.load_synthetic_home(filename)
+    # Load the inventory fixture
+    inventory_filename = TEST_FIXTURES / home_filename.name
+    inventory_content = inventory_filename.read_text().strip()
+
+    # Generate the inventory fixture from the synthetic home device state
+    home = synthetic_home.load_synthetic_home(home_filename)
     inventory = synthetic_home.build_inventory(home)
-    assert inventory.yaml() == snapshot
+    generated_yaml = inventory.yaml().strip()
+
+    assert generated_yaml.split("\n") == inventory_content.split("\n")
 
 
 @pytest.mark.parametrize(
     ("filename"),
-    list(TESTDATA.glob("*.yaml")),
-    ids=[str(filename) for filename in TESTDATA.glob("*.yaml")],
+    list(TEST_HOMES.glob("*.yaml")),
+    ids=[str(filename) for filename in TEST_HOMES.glob("*.yaml")],
 )
 def test_device_state_to_entity_state(
     filename: pathlib.Path, snapshot: SnapshotAssertion

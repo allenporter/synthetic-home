@@ -1,0 +1,175 @@
+---
+areas:
+- name: Living Room
+  id: living_room
+- name: Backyard
+  id: backyard
+- name: Bedroom 1
+  id: bedroom_1
+- name: Kitchen
+  id: kitchen
+- name: Bathroom
+  id: bathroom
+devices:
+- name: Fireplace Light
+  id: fireplace_light
+  area: living_room
+  info:
+    model: Smart LED Bulb
+    manufacturer: Philips
+    sw_version: 1.2.3
+- name: Thermostat
+  id: thermostat
+  area: living_room
+  info:
+    model: Ecobee4 Smart Thermostat
+    manufacturer: Ecobee
+    sw_version: 4.0.0
+- name: Outdoor Camera
+  id: outdoor_camera
+  area: backyard
+  info:
+    model: Spotlight Cam Battery
+    manufacturer: Ring
+    sw_version: 2.4.1
+- name: Bedroom 1 Light
+  id: bedroom_1_light
+  area: bedroom_1
+  info:
+    model: Smart LED Bulb
+    manufacturer: Philips
+    sw_version: 1.2.3
+- name: Kitchen Light
+  id: kitchen_light
+  area: kitchen
+  info:
+    model: null
+    manufacturer: Philips
+    sw_version: 2.47.8
+- name: Coffee Maker
+  id: coffee_maker
+  area: kitchen
+  info:
+    model: S31 Lite zb
+    manufacturer: SONOFF
+    sw_version: 2.3.3.140
+- name: Bathroom Light
+  id: bathroom_light
+  area: bathroom
+  info:
+    model: Smart LED Bulb
+    manufacturer: Philips
+    sw_version: 1.2.3
+entities:
+- name: Fireplace Light
+  id: light.fireplace_light
+  area: living_room
+  device: fireplace_light
+  attributes:
+    supported_color_modes:
+    - brightness
+    color_mode: brightness
+    brightness: 100
+- name: Thermostat
+  id: climate.thermostat
+  area: living_room
+  device: thermostat
+  attributes:
+    unit_of_measurement: "\xB0C"
+    supported_features:
+    - climate.ClimateEntityFeature.FAN_MODE
+    - climate.ClimateEntityFeature.TURN_ON
+    - climate.ClimateEntityFeature.TURN_OFF
+    - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
+    hvac_modes:
+    - 'off'
+    - cool
+    - heat
+    - auto
+    hvac_mode: 'off'
+    hvac_action: 'off'
+    current_temperature: 22
+    target_temperature: 22
+- name: Thermostat Temperature
+  id: sensor.thermostat_temperature
+  area: living_room
+  device: thermostat
+  attributes:
+    native_unit_of_measurement: "\xB0C"
+    device_class: sensor.SensorDeviceClass.TEMPERATURE
+    state_class: sensor.SensorStateClass.MEASUREMENT
+    native_value: 22
+- name: Thermostat Humidity
+  id: sensor.thermostat_humidity
+  area: living_room
+  device: thermostat
+  attributes:
+    native_unit_of_measurement: '%'
+    device_class: sensor.SensorDeviceClass.HUMIDITY
+    state_class: sensor.SensorStateClass.MEASUREMENT
+    native_value: 45
+- name: Outdoor Camera Motion
+  id: binary_sensor.outdoor_camera_motion
+  area: backyard
+  device: outdoor_camera
+  state: false
+  attributes:
+    device_class: binary_sensor.BinarySensorDeviceClass.MOTION
+- name: Outdoor Camera Person
+  id: binary_sensor.outdoor_camera_person
+  area: backyard
+  device: outdoor_camera
+  state: false
+  attributes:
+    device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
+- name: Outdoor Camera Sound
+  id: binary_sensor.outdoor_camera_sound
+  area: backyard
+  device: outdoor_camera
+  state: false
+  attributes:
+    device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+- name: Bedroom 1 Light
+  id: light.bedroom_1_light
+  area: bedroom_1
+  device: bedroom_1_light
+  state: 'off'
+  attributes:
+    supported_color_modes:
+    - onoff
+    color_mode: onoff
+- name: Kitchen Light
+  id: light.kitchen_light
+  area: kitchen
+  device: kitchen_light
+  state: 'off'
+  attributes:
+    supported_color_modes:
+    - onoff
+    color_mode: onoff
+- name: Coffee Maker Energy
+  id: sensor.coffee_maker_energy
+  area: kitchen
+  device: coffee_maker
+  state: '1'
+  attributes:
+    device_class: sensor.SensorDeviceClass.ENERGY
+    state_class: sensor.SensorStateClass.TOTAL_INCREASING
+    native_unit_of_measurement: kWh
+- name: Coffee Maker
+  id: switch.coffee_maker
+  area: kitchen
+  device: coffee_maker
+  state: true
+  attributes:
+    device_class: switch.SwitchDeviceClass.OUTLET
+- name: Bathroom Light
+  id: light.bathroom_light
+  area: bathroom
+  device: bathroom_light
+  state: 'off'
+  attributes:
+    supported_color_modes:
+    - onoff
+    color_mode: onoff
+
