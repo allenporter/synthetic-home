@@ -135,10 +135,9 @@ class Inventory(DataClassYAMLMixin):
         """Dictionary of devices by device id."""
         return {device.id: device for device in self.devices if device.id is not None}
 
-    def area_dict(self) -> dict[str, Device]:
+    def area_dict(self) -> dict[str, Area]:
         """Dictionary of areas by area id."""
         return {area.id: area for area in self.areas if area.id is not None}
-
 
     class Config(BaseConfig):
         code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
