@@ -2,9 +2,6 @@
 
 import argparse
 import pathlib
-import dataclasses
-
-import yaml
 
 from synthetic_home import synthetic_home
 
