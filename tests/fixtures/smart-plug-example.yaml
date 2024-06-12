@@ -7,9 +7,7 @@ devices:
   id: floor_lamp
   area: family_room
   info:
-    model: null
     manufacturer: Wyze
-    sw_version: null
 entities:
 - name: Floor Lamp Energy
   id: sensor.floor_lamp_energy
@@ -27,4 +25,3 @@ entities:
   state: true
   attributes:
     device_class: switch.SwitchDeviceClass.OUTLET
-

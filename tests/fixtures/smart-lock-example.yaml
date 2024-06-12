@@ -7,9 +7,7 @@ devices:
   id: front_door_lock
   area: front_door
   info:
-    model: null
     manufacturer: Yale
-    sw_version: null
 entities:
 - name: Front Door Lock
   id: lock.front_door_lock
@@ -44,4 +42,3 @@ entities:
     device_class: sensor.SensorDeviceClass.BATTERY
     state_class: sensor.SensorStateClass.MEASUREMENT
     native_unit_of_measurement: '%'
-

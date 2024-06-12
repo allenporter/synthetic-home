@@ -43,7 +43,6 @@ devices:
   id: kitchen_light
   area: kitchen
   info:
-    model: null
     manufacturer: Philips
     sw_version: 2.47.8
 - name: Coffee Maker
@@ -172,4 +171,3 @@ entities:
     supported_color_modes:
     - onoff
     color_mode: onoff
-

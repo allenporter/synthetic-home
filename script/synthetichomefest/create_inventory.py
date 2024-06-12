@@ -15,7 +15,7 @@ def create_arguments(args: argparse.ArgumentParser) -> None:
     )
 
 
-def run(args: argparse.Namespace) -> int:
+async def run(args: argparse.Namespace) -> int:
     home = synthetic_home.load_synthetic_home(pathlib.Path(args.config_file))
     inventory = synthetic_home.build_inventory(home)
     print(inventory.yaml())

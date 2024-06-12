@@ -4,9 +4,7 @@ devices:
 - name: Home
   id: home
   info:
-    model: null
     manufacturer: AccuWeather
-    sw_version: null
 entities:
 - name: Home
   id: weather.home
@@ -31,4 +29,3 @@ entities:
     - cloudy
     - rainy
     - cloudy
-

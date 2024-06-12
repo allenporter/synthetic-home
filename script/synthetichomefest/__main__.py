@@ -2,11 +2,16 @@
 
 import argparse
 import importlib
+import logging
 import sys
 from pathlib import Path
-from typing import cast
 
-from . import list_device_types, create_inventory
+import asyncio
+
+from . import list_device_types, create_inventory, export_inventory
+
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def get_base_arg_parser() -> argparse.ArgumentParser:
@@ -14,16 +19,12 @@ def get_base_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Synthetic Home Utility")
     parser.add_argument("--debug", action="store_true", help="Enable log output")
     subparsers = parser.add_subparsers(dest="action", help="Action", required=True)
-    create_inventory.create_arguments(
-        subparsers.add_parser(
-            "create_inventory",
-        )
-    )
-    list_device_types.create_arguments(
-        subparsers.add_parser(
-            "list_device_types",
-        )
-    )
+
+    # Subcommands
+    create_inventory.create_arguments(subparsers.add_parser("create_inventory"))
+    list_device_types.create_arguments(subparsers.add_parser("list_device_types"))
+    export_inventory.create_arguments(subparsers.add_parser("export_inventory"))
+
     return parser
 
 
@@ -39,8 +40,13 @@ def main() -> int:
         return 1
 
     args = get_arguments()
+
+    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
+
     module = importlib.import_module(f".{args.action}", "script.synthetichomefest")
-    return cast(int, module.run(args))
+    _LOGGER.info("Running action %s", args.action)
+    result: int = asyncio.run(module.run(args))
+    return result
 
 
 if __name__ == "__main__":

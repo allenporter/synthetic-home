@@ -17,7 +17,7 @@ def create_arguments(args: argparse.ArgumentParser) -> None:
     )
 
 
-def run(args: argparse.Namespace) -> int:
+async def run(args: argparse.Namespace) -> int:
     registry = device_types.load_device_type_registry()
     data = registry.device_types
     if args.device_type is not None:

@@ -7,9 +7,7 @@ devices:
   id: front_door_sensor
   area: front_door
   info:
-    model: null
     manufacturer: Aqara
-    sw_version: null
 entities:
 - name: Front Door Sensor
   id: binary_sensor.front_door_sensor
@@ -33,4 +31,3 @@ entities:
     device_class: sensor.SensorDeviceClass.BATTERY
     state_class: sensor.SensorStateClass.MEASUREMENT
     native_unit_of_measurement: '%'
-

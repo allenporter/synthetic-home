@@ -7,9 +7,7 @@ devices:
   id: left_window_sensor
   area: family_room
   info:
-    model: null
     manufacturer: Aqara
-    sw_version: null
 entities:
 - name: Left Window Sensor
   id: binary_sensor.left_window_sensor
@@ -33,4 +31,3 @@ entities:
     device_class: sensor.SensorDeviceClass.BATTERY
     state_class: sensor.SensorStateClass.MEASUREMENT
     native_unit_of_measurement: '%'
-
