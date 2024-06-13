@@ -14,6 +14,7 @@ AREA_REGISTRY_LIST = "config/area_registry/list"
 DEVICE_REGISTRY_LIST = "config/device_registry/list"
 ENTITY_REGISTRY_LIST = "config/entity_registry/list"
 GET_STATES = "get_states"
+GET_CONFIG = "get_config"
 
 DOMAINS = {
     "binary_sensor",
@@ -61,11 +62,45 @@ def create_arguments(args: argparse.ArgumentParser) -> None:
     )
 
 
+class Counter:
+
+    def __init__(self) -> None:
+        """Counter."""
+        self._value = 0
+
+    def increment(self) -> int:
+        """Return next value."""
+        self._value += 1
+        return self._value
+
+
+next_id = Counter()
+
+
+async def auth_login(ws: aiohttp.ClientWebSocketResponse, auth_token: str) -> None:
+    """Login to the websocket."""
+    auth_resp = await ws.receive_json()
+    assert auth_resp["type"] == "auth_required"
+
+    await ws.send_json({"type": "auth", "access_token": auth_token})
+
+    auth_ok = await ws.receive_json()
+    assert auth_ok["type"] == "auth_ok"
+
+
+async def fetch_config(ws: aiohttp.ClientWebSocketResponse) -> str:
+    """Fetch areas from websocket."""
+    await ws.send_json({"id": next_id.increment(), "type": GET_CONFIG})
+    data = await ws.receive_json()
+    _LOGGER.info(data["result"])
+    assert data["result"]
+    return data["result"]
+
+
 async def fetch_areas(ws: aiohttp.ClientWebSocketResponse) -> dict[str, inventory.Area]:
     """Fetch areas from websocket."""
-    await ws.send_json({"id": 1, "type": AREA_REGISTRY_LIST})
+    await ws.send_json({"id": next_id.increment(), "type": AREA_REGISTRY_LIST})
     data = await ws.receive_json()
-    assert data["id"] == 1
     areas = {
         area["area_id"]: inventory.Area(
             id=slugify.slugify(area["name"], separator="_"),
@@ -82,9 +117,8 @@ async def fetch_devices(
 ) -> dict[str, inventory.Device]:
     """Fetch areas from websocket."""
 
-    await ws.send_json({"id": 2, "type": DEVICE_REGISTRY_LIST})
+    await ws.send_json({"id": next_id.increment(), "type": DEVICE_REGISTRY_LIST})
     data = await ws.receive_json()
-    assert data["id"] == 2
 
     devices = {}
     for device in data["result"]:
@@ -115,9 +149,8 @@ async def fetch_entities(
     devices: dict[str, inventory.Device],
 ) -> dict[str, inventory.Entity]:
     """Fetch devices from websocket."""
-    await ws.send_json({"id": 3, "type": ENTITY_REGISTRY_LIST})
+    await ws.send_json({"id": next_id.increment(), "type": ENTITY_REGISTRY_LIST})
     data = await ws.receive_json()
-    assert data["id"] == 3
 
     entities = {}
     for entity in data["result"]:
@@ -144,25 +177,30 @@ async def fetch_entities(
             inv_entity.area = areas[area_id].id
         if device_id := entity.get("device_id"):
             inv_entity.device = devices[device_id].id
-
         entities[entity_id] = inv_entity
     return entities
 
 
 async def build_states(
-    ws: aiohttp.ClientWebSocketResponse, entities: dict[str, inventory.Entity]
-) -> None:
+    ws: aiohttp.ClientWebSocketResponse,
+    entities: dict[str, inventory.Entity],
+    unit_system: dict[str, str],
+) -> list[inventory.Entity]:
     """Fetch states from websocket and update inventory."""
 
-    await ws.send_json({"id": 4, "type": GET_STATES})
+    await ws.send_json({"id": next_id.increment(), "type": GET_STATES})
     data = await ws.receive_json()
-    assert data["id"] == 4
 
+    temperature_unit = unit_system["temperature"]
+    results = []
     for state in data["result"]:
         entity_id = state["entity_id"]
         if (inv_entity := entities.get(entity_id)) is None:
             continue
-        inv_entity.state = state["state"]
+        entity_state = state["state"]
+        if entity_state in ("unavailable", "unknown"):
+            continue
+        inv_entity.state = entity_state
         if (attributes := state.get("attributes")) is not None:
             if friendly_name := attributes.get("friendly_name"):
                 inv_entity.name = friendly_name.strip()
@@ -171,56 +209,45 @@ async def build_states(
                 for k, v in attributes.items()
                 if (v is not None) and (k not in STRIP_ATTRIBUTES)
             }
+
+            if entity_id.startswith("climate."):
+                inv_attributes["unit_of_measurement"] = temperature_unit
             if inv_attributes:
                 inv_entity.attributes = inv_attributes
+        results.append(inv_entity)
+    return results
 
 
 async def run(args: argparse.Namespace) -> int:
     url = args.homeassistant_url
     auth_token = args.auth_token
 
-    # if url.startswith("https://"):
-    #     url = "wss://" + url[6:]
-    # elif url.startswith("http://"):
-    #     url = "ws://" + url[5:]
-    # else:
-    #     raise ValueError("Unable to parse url did not start with 'http://' or 'https://': {url}")
-    # print(url)
-
     async with aiohttp.ClientSession() as session:
         area_url = f"{url}/api/websocket"
         _LOGGER.info("Fetching areas from %s", url)
         async with session.ws_connect(area_url) as ws:
-            auth_resp = await ws.receive_json()
-            assert auth_resp["type"] == "auth_required"
+            await auth_login(ws, auth_token)
 
-            await ws.send_json({"type": "auth", "access_token": auth_token})
-
-            auth_ok = await ws.receive_json()
-            assert auth_ok["type"] == "auth_ok"
-
+            config = await fetch_config(ws)
+            unit_system = config["unit_system"]
             areas = await fetch_areas(ws)
             devices = await fetch_devices(ws, areas)
             entities = await fetch_entities(ws, areas, devices)
 
             required_device_ids = set({entity.device for entity in entities.values()})
 
-            # Fetch state for all relevant entities
-            await build_states(ws, entities)
-
             # Only include required devices for entities
             inv = inventory.Inventory()
+
+            # Fetch state for all relevant entities
+            inv.entities = await build_states(ws, entities, unit_system)
             inv.areas = list(areas.values())
             inv.devices = [
                 device
                 for device in devices.values()
                 if device.id in required_device_ids
             ]
-            inv.entities = list(entities.values())
 
             print(inv.yaml())
 
-    # home = synthetic_home.load_synthetic_home(pathlib.Path(args.config_file))
-    # inventory = synthetic_home.build_inventory(home)
-    # print(inventory.yaml())
     return 0
