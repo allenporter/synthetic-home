@@ -1,15 +1,109 @@
 # synthetic-home
 
-Library for managing synthetic home device registry. This project is primarily
+Library for generating synthethic homes, devices, and entities. This project is primarily
 used by the [home-assistant-synthetic-home](https://github.com/allenporter/home-assistant-synthetic-home)
-custom component and the [home-assistant-datasets](https://github.com/allenporter/home-assistant-datasets)
-which creates instances of synthetic homes.
+custom component that can make a home out of an inventory and the [home-assistant-datasets](https://github.com/allenporter/home-assistant-datasets)
+which creates instances of synthetic homes and devices.
+
+## Overview
+
+### Home
+
+A home contains a definition of home with areas and devices. This example home is
+called *Family Farmhouse* with two devices in the *Kitchen*.
+
+```yaml
+---
+name: Family Farmhouse
+devices:
+  Kitchen:
+    - name: Light
+      device_type: light-dimmable
+    - name: Coffe Maker
+      device_type: smart-plug
+      device_info:
+        manufacturer: Shelly
+```
+
+### Device Registry
+
+The above devices are of type *light-dimmable* and *smart-plug*. These device types
+are defined in a *Device Registry* that maps a higher level device type into lower
+level entities. For example, a *smart-plug* device is represented by a *switch*
+and a *sensor* that measures power draw. A device can also define device states
+which are mapped to the individual entity states.
+
+The [home-assistant-datasets](https://github.com/allenporter/home-assistant-datasets) project
+uses an LLM to create devices within a home without having to worry about the lower
+level details of entites and attributes.
 
 See the [synthetic_home/registry](synthetic_home/registry) for details on the registry.
 
-## Example
+### Device types
 
-This is an example of a synthetic hoome configuration file:
+Device types are defined to represent common configured household devices,
+but may not support every single feature in the smart home. That is, these
+are meant to be representative, but not necessarily exhaustive.
+
+Each file in `synthetic_home/registry` directory contains a device type name. New device
+types may be added as new use cases are needed.
+
+### Inventory
+
+An inventory is set of devies, areas, and most importantly invidual *Entities*, and a default state and set of attributes.  An inventory can be used by [home-assistant-synthetic-home](https://github.com/allenporter/home-assistant-synthetic-home) to actually load a Home Assistant instance with these
+areas, devices, and entities.
+
+```yaml
+---
+areas:
+- name: Family room
+  id: family_room
+devices:
+- name: Floor Lamp
+  id: floor_lamp
+  area: family_room
+  info:
+    manufacturer: Wyze
+entities:
+- name: Floor Lamp Energy
+  id: sensor.floor_lamp_energy
+  area: family_room
+  device: floor_lamp
+  state: '1'
+  attributes:
+    device_class: sensor.SensorDeviceClass.ENERGY
+    state_class: sensor.SensorStateClass.TOTAL_INCREASING
+    native_unit_of_measurement: kWh
+- name: Floor Lamp
+  id: switch.floor_lamp
+  area: family_room
+  device: floor_lamp
+  state: true
+  attributes:
+    device_class: switch.SwitchDeviceClass.OUTLET
+```
+
+## Inventory Creation
+
+There are multiple ways to create an inventory.
+
+### Export from Home Assistant
+
+You can create a synthetic home inventory copied from an existing home assistant
+instance. You need to create an access token and export an inventory like this:
+
+```bash
+$ HASS_URL="http://home-assistant.home-assistant:8123"
+$ API_TOKEN="XXXXXXXXXXX"
+$ python3 -m script.synthetichomefest --debug export_inventory "${HASS_URL}" "${API_TOKEN}" > inventory.yaml
+```
+
+### Manual Inventory
+
+You can manually create an inventory by hand, but even better is to use a home definition
+for a set of devies. See [home-asssistant-datasets](https://github.com/allenporter/home-assistant-datasets)
+for some existing repos of synthetic homes created by an LLM. Or create one yourself based on
+devices you want to test defined in the device registry. Given an example `famhouse-home.yaml`:
 
 ```yaml
 ---
@@ -62,56 +156,10 @@ devices:
       device_type: motion-sensor
 ```
 
-## Device Type Registry
+You can export an inventory file:
 
-A device type is a definition of a type of physical device in a smart home. A
-device may additionally be represented by multiple entities. For example, a
-`climate-hvac` device may be represented by a *climate entity* and a *temperature
-sensor entity*.
-
-### Device types
-
-Device types are defined to represent common configured household devices,
-but may not support every single feature in the smart home. That is, these
-are meant to be representative, but not necessarily exhaustive.
-
-Each file in `synthetic_home/registry` directory contains a device type name. New device
-types may be added as new use cases are needed.
-
-### Entities
-
-Entities are specified by platform, where each value is an entity description
-key defined in the code somewhere. That is, adding a new entity type requires
-it being implemented somewhere in the smart home (e.g. `home-assistant-synthetic-home` custom component).
-
-### Device State
-
-A device type defines `device_states` that can support a pre-defined states that
-can be used for testing and evaluating the other systems using synthetic entities.
-
-For example: When testing an HVAC device there are many different state attributes
-but there may only be a few _interesting_ states to evaluate such as:
-
-- The device is not running
-- The device target temperature is set to a normal range
-- The device target temperature is set to an abnormal range
-
-We use the pre-canned device states to simplify data generation to not need
-to consider every possibibility. This is implemented effectively as if setting
-these attributes in the config file.
-
-### Device State Example
-
-You can set a `device_state` inline in the home. A `motion-sensor` devices three
-states by default `on`, `off`, and `battery-low`.  Be careful for special yaml
-truthy values, hence the value below is in quotes:
-
-```yaml
----
-name: Family Farmhouse
-devices:
-  Front Yard:
-    - name: Front Yard Motion
-      device_type: motion-sensor
-      device_state: "on"
+```bash
+$ python3 -m script.synthetichomefest create_inventory famhouse-home.yaml > inventory.yaml
 ```
+
+This can then be loaded into a [home-assistants-synthetic-home](https://github.com/allenporter/home-assistant-synthetic-home/) custom component.
