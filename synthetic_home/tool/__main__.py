@@ -43,7 +43,7 @@ def main() -> int:
 
     logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
 
-    module = importlib.import_module(f".{args.action}", "script.synthetichomefest")
+    module = importlib.import_module(f".{args.action}", "synthetic_home.tool")
     _LOGGER.info("Running action %s", args.action)
     result: int = asyncio.run(module.run(args))
     return result
