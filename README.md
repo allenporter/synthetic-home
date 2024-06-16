@@ -1,6 +1,6 @@
 # synthetic-home
 
-Library for generating synthethic homes, devices, and entities. This project is primarily
+Library for generating synthetic homes, devices, and entities. This project is primarily
 used by the [home-assistant-synthetic-home](https://github.com/allenporter/home-assistant-synthetic-home)
 custom component that can make a home out of an inventory and the [home-assistant-datasets](https://github.com/allenporter/home-assistant-datasets)
 which creates instances of synthetic homes and devices.
@@ -35,7 +35,7 @@ which are mapped to the individual entity states.
 
 The [home-assistant-datasets](https://github.com/allenporter/home-assistant-datasets) project
 uses an LLM to create devices within a home without having to worry about the lower
-level details of entites and attributes.
+level details of entities and attributes.
 
 See the [synthetic_home/registry](synthetic_home/registry) for details on the registry.
 
@@ -50,7 +50,7 @@ types may be added as new use cases are needed.
 
 ### Inventory
 
-An inventory is set of devies, areas, and most importantly invidual *Entities*, and a default state and set of attributes.  An inventory can be used by [home-assistant-synthetic-home](https://github.com/allenporter/home-assistant-synthetic-home) to actually load a Home Assistant instance with these
+An inventory is set of devies, areas, and most importantly individual *Entities*, and a default state and set of attributes.  An inventory can be used by [home-assistant-synthetic-home](https://github.com/allenporter/home-assistant-synthetic-home) to actually load a Home Assistant instance with these
 areas, devices, and entities.
 
 ```yaml
