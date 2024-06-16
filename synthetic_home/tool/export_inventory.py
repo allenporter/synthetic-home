@@ -1,4 +1,14 @@
-"""Script to export an inventory from a Home Assistant instance."""
+"""Export an inventory from a Home Assistant instance.
+
+You can create a synthetic home inventory copied from an existing home assistant
+instance. You need to create an access token and export an inventory like this:
+
+```bash
+$ HASS_URL="http://home-assistant.home-assistant:8123"
+$ API_TOKEN="XXXXXXXXXXX"
+$ synthetic-home --debug export_inventory "${HASS_URL}" "${API_TOKEN}" > inventory.yaml
+```
+"""
 
 import argparse
 import logging

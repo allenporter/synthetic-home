@@ -16,6 +16,7 @@ from .exceptions import SyntheticHomeError
 
 __all__ = [
     "Inventory",
+    "load_inventory",
     "Area",
     "Device",
     "Entity",

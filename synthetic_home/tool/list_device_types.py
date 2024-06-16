@@ -1,4 +1,4 @@
-"""Script to dump out all of the synthetic home device types."""
+"""Command to dump out all of the synthetic home device types."""
 
 import argparse
 import dataclasses

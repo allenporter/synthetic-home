@@ -7,4 +7,5 @@ __all__ = [
     "device_types",
     "exceptions",
     "registry",
+    "tool",
 ]
