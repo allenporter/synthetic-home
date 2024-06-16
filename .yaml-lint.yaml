@@ -1,8 +1,9 @@
 ---
 ignore: |
   venv
-  tests/testdata
   tests/snapshots
+  tests/fixtures
+  tests/homes
 extends: default
 rules:
   truthy:

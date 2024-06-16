@@ -34,7 +34,7 @@ repos:
     rev: v1.35.1
     hooks:
       - id: yamllint
-        exclude: '^tests/tool/testdata/.*\.yaml$'
+        exclude: '^tests/snapshots/.*\.yaml$'
         args:
           - --strict
           - -c
