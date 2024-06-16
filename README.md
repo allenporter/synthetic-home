@@ -95,7 +95,7 @@ instance. You need to create an access token and export an inventory like this:
 ```bash
 $ HASS_URL="http://home-assistant.home-assistant:8123"
 $ API_TOKEN="XXXXXXXXXXX"
-$ python3 -m script.synthetichomefest --debug export_inventory "${HASS_URL}" "${API_TOKEN}" > inventory.yaml
+$ synthetic-home --debug export_inventory "${HASS_URL}" "${API_TOKEN}" > inventory.yaml
 ```
 
 ### Manual Inventory
@@ -159,7 +159,7 @@ devices:
 You can export an inventory file:
 
 ```bash
-$ python3 -m script.synthetichomefest create_inventory famhouse-home.yaml > inventory.yaml
+$ synthetic-home create_inventory famhouse-home.yaml > inventory.yaml
 ```
 
 This can then be loaded into a [home-assistants-synthetic-home](https://github.com/allenporter/home-assistant-synthetic-home/) custom component.
