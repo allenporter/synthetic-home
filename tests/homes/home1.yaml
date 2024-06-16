@@ -19,12 +19,12 @@ devices:
     attributes:
     - unit_of_measure: "\xB0F"
   Backyard:
-    - name: Outdoor Camera
-      device_type: camera
-      device_info:
-        model: Spotlight Cam Battery
-        manufacturer: Ring
-        sw_version: 2.4.1
+  - name: Outdoor Camera
+    device_type: camera
+    device_info:
+      model: Spotlight Cam Battery
+      manufacturer: Ring
+      sw_version: 2.4.1
   Bedroom 1:
   - name: Bedroom 1 Light
     device_type: light

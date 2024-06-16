@@ -3,7 +3,6 @@ ignore: |
   venv
   tests/snapshots
   tests/fixtures
-  tests/homes
 extends: default
 rules:
   truthy:
