@@ -2,6 +2,7 @@
 ignore: |
   venv
   tests/testdata
+  tests/snapshots
 extends: default
 rules:
   truthy:
