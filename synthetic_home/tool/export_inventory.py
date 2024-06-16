@@ -3,6 +3,7 @@
 import argparse
 import logging
 import slugify
+from typing import Any
 
 import aiohttp
 
@@ -88,13 +89,13 @@ async def auth_login(ws: aiohttp.ClientWebSocketResponse, auth_token: str) -> No
     assert auth_ok["type"] == "auth_ok"
 
 
-async def fetch_config(ws: aiohttp.ClientWebSocketResponse) -> str:
+async def fetch_config(ws: aiohttp.ClientWebSocketResponse) -> dict[str, Any]:
     """Fetch areas from websocket."""
     await ws.send_json({"id": next_id.increment(), "type": GET_CONFIG})
     data = await ws.receive_json()
     _LOGGER.info(data["result"])
     assert data["result"]
-    return data["result"]
+    return data["result"]  # type: ignore[no-any-return]
 
 
 async def fetch_areas(ws: aiohttp.ClientWebSocketResponse) -> dict[str, inventory.Area]:
