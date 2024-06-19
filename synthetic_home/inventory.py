@@ -133,9 +133,9 @@ class Inventory(DataClassYAMLMixin):
         return str(self.to_yaml(omit_none=True, encoder=_custom_encoder))
 
     @property
-    def floors(self) -> list[str]:
+    def floors(self) -> set[str]:
         """Return the set of floors across all areas."""
-        return set({ area.floor for area in self.areas if area.floor is not None })
+        return set({area.floor for area in self.areas if area.floor is not None})
 
     def device_dict(self) -> dict[str, Device]:
         """Dictionary of devices by device id."""
@@ -154,6 +154,7 @@ def read_config_content(config_file: pathlib.Path) -> str:
     """Create configuration file content, exposed for patching."""
     with config_file.open("r") as f:
         return f.read()
+
 
 def decode_inventory(content: str) -> Inventory:
     """Load synthetic home configuration from disk."""
