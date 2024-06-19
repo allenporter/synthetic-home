@@ -132,6 +132,11 @@ class Inventory(DataClassYAMLMixin):
         """Render the inventory as yaml."""
         return str(self.to_yaml(omit_none=True, encoder=_custom_encoder))
 
+    @property
+    def floors(self) -> list[str]:
+        """Return the set of floors across all areas."""
+        return set({ area.floor for area in self.areas if area.floor is not None })
+
     def device_dict(self) -> dict[str, Device]:
         """Dictionary of devices by device id."""
         return {device.id: device for device in self.devices if device.id is not None}
@@ -150,6 +155,10 @@ def read_config_content(config_file: pathlib.Path) -> str:
     with config_file.open("r") as f:
         return f.read()
 
+def decode_inventory(content: str) -> Inventory:
+    """Load synthetic home configuration from disk."""
+    return yaml_decode(content, Inventory)
+
 
 def load_inventory(config_file: pathlib.Path) -> Inventory:
     """Load synthetic home configuration from disk."""
@@ -158,6 +167,6 @@ def load_inventory(config_file: pathlib.Path) -> Inventory:
     except FileNotFoundError:
         raise SyntheticHomeError(f"Configuration file '{config_file}' does not exist")
     try:
-        return yaml_decode(content, Inventory)
+        return decode_inventory(content)
     except ValueError as err:
         raise SyntheticHomeError(f"Could not parse config file '{config_file}': {err}")
