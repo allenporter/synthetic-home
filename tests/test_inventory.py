@@ -1,10 +1,5 @@
 """Test for inventory."""
 
-import pathlib
-
-import pytest
-from syrupy import SnapshotAssertion
-
 from synthetic_home import inventory
 
 
