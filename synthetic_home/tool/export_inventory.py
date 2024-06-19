@@ -34,6 +34,7 @@ DOMAINS = {
     "camera",
     "climate",
     "cover",
+    "fan",
     # TODO: Support event
     # "event",
     "light",
