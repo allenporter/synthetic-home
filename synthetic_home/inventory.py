@@ -135,7 +135,7 @@ class Inventory(DataClassYAMLMixin):
     @property
     def floors(self) -> set[str]:
         """Return the set of floors across all areas."""
-        return set({area.floor for area in self.areas if area.floor is not None})
+        return {area.floor for area in self.areas if area.floor is not None}
 
     def device_dict(self) -> dict[str, Device]:
         """Dictionary of devices by device id."""
