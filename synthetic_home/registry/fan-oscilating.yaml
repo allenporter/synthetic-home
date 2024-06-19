@@ -4,15 +4,15 @@ desc: A fan that supports speed and oscillation control.
 device_states:
   "off":
     fan.osciliating_fan:
-      is_on: false
+      state: "off"
       oscillating: false
   "on":
     fan.osciliating_fan:
-      is_on: true
+      state: "on"
       oscillating: false
   oscillating:
     fan.osciliating_fan:
-      is_on: true
+      state: "on"
       oscillating: true
 entities:
   fan:

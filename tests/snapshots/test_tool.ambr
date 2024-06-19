@@ -93,11 +93,11 @@
     id: fan.counter_fan
     area: kitchen
     device: counter_fan
+    state: 'off'
     attributes:
       supported_features:
       - fan.FanEntityFeature.OSCILLATE
       - fan.FanEntityFeature.SET_SPEED
-      is_on: false
       oscillating: false
   
   
@@ -1188,7 +1188,7 @@
       - domain: fan
         key: exhaust_fan
         state:
-          is_on: false
+          state: 'off'
       - domain: sensor
         key: humidity
         state: 45
@@ -1197,7 +1197,7 @@
       - domain: fan
         key: exhaust_fan
         state:
-          is_on: true
+          state: 'on'
       - domain: sensor
         key: humidity
         state: 45
@@ -1334,21 +1334,21 @@
       - domain: fan
         key: osciliating_fan
         state:
-          is_on: false
+          state: 'off'
           oscillating: false
     - name: 'on'
       entity_states:
       - domain: fan
         key: osciliating_fan
         state:
-          is_on: true
+          state: 'on'
           oscillating: false
     - name: oscillating
       entity_states:
       - domain: fan
         key: osciliating_fan
         state:
-          is_on: true
+          state: 'on'
           oscillating: true
     entities:
       fan:

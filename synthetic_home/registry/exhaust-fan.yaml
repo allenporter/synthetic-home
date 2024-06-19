@@ -4,11 +4,11 @@ desc: A mechanical ventilation device which that draws out stale or humid air to
 device_states:
   "off":
     fan.exhaust_fan:
-      is_on: false
+      state: "off"
     sensor.humidity: 45
   "on":
     fan.exhaust_fan:
-      is_on: true
+      state: "on"
     sensor.humidity: 45
   humid:
     sensor.humidity: 85
