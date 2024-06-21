@@ -14,7 +14,7 @@ entities:
   id: cover.left_shade
   area: family_room
   device: left_shade
-  state: false
+  state: closed
   attributes:
     device_class: cover.CoverDeviceClass.BLIND
     supported_features:
@@ -34,7 +34,7 @@ entities:
   id: cover.right_shade
   area: family_room
   device: right_shade
-  state: false
+  state: closed
   attributes:
     device_class: cover.CoverDeviceClass.BLIND
     supported_features:
@@ -50,4 +50,3 @@ entities:
     device_class: sensor.SensorDeviceClass.BATTERY
     state_class: sensor.SensorStateClass.MEASUREMENT
     native_unit_of_measurement: '%'
-

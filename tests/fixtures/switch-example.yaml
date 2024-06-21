@@ -11,7 +11,6 @@ entities:
   id: switch.smart_feeder
   area: chicken_coop
   device: smart_feeder
-  state: true
+  state: 'on'
   attributes:
     device_class: switch.SwitchDeviceClass.SWITCH
-

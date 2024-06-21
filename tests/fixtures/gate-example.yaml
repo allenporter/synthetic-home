@@ -11,10 +11,9 @@ entities:
   id: cover.driveway_gate
   area: front_yard
   device: driveway_gate
-  state: false
+  state: closed
   attributes:
     device_class: cover.CoverDeviceClass.GATE
     supported_features:
     - cover.CoverEntityFeature.OPEN
     - cover.CoverEntityFeature.CLOSE
-

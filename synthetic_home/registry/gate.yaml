@@ -3,9 +3,9 @@ device_type: gate
 desc: An movable barrier that can be monitored and opened and closed remotely.
 device_states:
   closed:
-    cover.gate: false
+    cover.gate: closed
   open:
-    cover.gate: true
+    cover.gate: open
 entities:
   cover:
     gate:

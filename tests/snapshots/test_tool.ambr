@@ -153,7 +153,7 @@
     id: cover.driveway_gate
     area: front_yard
     device: driveway_gate
-    state: false
+    state: closed
     attributes:
       device_class: cover.CoverDeviceClass.GATE
       supported_features:
@@ -575,7 +575,7 @@
     id: cover.left_shade
     area: family_room
     device: left_shade
-    state: false
+    state: closed
     attributes:
       device_class: cover.CoverDeviceClass.BLIND
       supported_features:
@@ -595,7 +595,7 @@
     id: cover.right_shade
     area: family_room
     device: right_shade
-    state: false
+    state: closed
     attributes:
       device_class: cover.CoverDeviceClass.BLIND
       supported_features:
@@ -750,7 +750,7 @@
     id: switch.smart_feeder
     area: chicken_coop
     device: smart_feeder
-    state: true
+    state: 'on'
     attributes:
       device_class: switch.SwitchDeviceClass.SWITCH
   
@@ -1056,12 +1056,12 @@
       entity_states:
       - domain: switch
         key: switch
-        state: true
+        state: 'on'
     - name: 'off'
       entity_states:
       - domain: switch
         key: switch
-        state: false
+        state: 'off'
     entities:
       switch:
       - key: switch
@@ -1270,12 +1270,12 @@
       entity_states:
       - domain: cover
         key: gate
-        state: false
+        state: closed
     - name: open
       entity_states:
       - domain: cover
         key: gate
-        state: true
+        state: open
     entities:
       cover:
       - key: gate
@@ -1642,7 +1642,7 @@
       entity_states:
       - domain: cover
         key: blind
-        state: false
+        state: closed
       - domain: sensor
         key: battery
         state: 90
@@ -1650,7 +1650,7 @@
       entity_states:
       - domain: cover
         key: blind
-        state: true
+        state: open
       - domain: sensor
         key: battery
         state: 90

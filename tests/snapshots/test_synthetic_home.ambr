@@ -309,7 +309,7 @@
   - name: Driveway Gate
     id: cover.driveway_gate
     device: driveway_gate
-    state: false
+    state: closed
     attributes:
       device_class: cover.CoverDeviceClass.GATE
       supported_features:
@@ -327,7 +327,7 @@
   - name: Driveway Gate
     id: cover.driveway_gate
     device: driveway_gate
-    state: true
+    state: open
     attributes:
       device_class: cover.CoverDeviceClass.GATE
       supported_features:
@@ -1215,7 +1215,7 @@
   - name: Left Shade
     id: cover.left_shade
     device: left_shade
-    state: false
+    state: closed
     attributes:
       device_class: cover.CoverDeviceClass.BLIND
       supported_features:
@@ -1242,7 +1242,7 @@
   - name: Left Shade
     id: cover.left_shade
     device: left_shade
-    state: true
+    state: open
     attributes:
       device_class: cover.CoverDeviceClass.BLIND
       supported_features:
@@ -1269,7 +1269,7 @@
   - name: Right Shade
     id: cover.right_shade
     device: right_shade
-    state: false
+    state: closed
     attributes:
       device_class: cover.CoverDeviceClass.BLIND
       supported_features:
@@ -1296,7 +1296,7 @@
   - name: Right Shade
     id: cover.right_shade
     device: right_shade
-    state: true
+    state: open
     attributes:
       device_class: cover.CoverDeviceClass.BLIND
       supported_features:
@@ -1521,7 +1521,7 @@
   - name: Smart Feeder
     id: switch.smart_feeder
     device: smart_feeder
-    state: true
+    state: 'on'
     attributes:
       device_class: switch.SwitchDeviceClass.SWITCH
   
@@ -1536,7 +1536,7 @@
   - name: Smart Feeder
     id: switch.smart_feeder
     device: smart_feeder
-    state: false
+    state: 'off'
     attributes:
       device_class: switch.SwitchDeviceClass.SWITCH
   
