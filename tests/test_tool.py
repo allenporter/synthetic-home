@@ -50,10 +50,3 @@ async def test_build(home_filename: pathlib.Path, snapshot: SnapshotAssertion) -
     result = await run([BIN, "create_inventory", str(home_filename)])
     str_result = result.decode("utf-8")
     assert str_result == snapshot
-
-
-async def test_list_device_types(snapshot: SnapshotAssertion) -> None:
-    """Test build commands."""
-    result = await run([BIN, "list_device_types"])
-    str_result = result.decode("utf-8")
-    assert str_result == snapshot

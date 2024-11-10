@@ -3,5 +3,4 @@
 __all__ = [
     "create_inventory",
     "export_inventory",
-    "list_device_types",
 ]

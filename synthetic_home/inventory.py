@@ -28,7 +28,7 @@ DEFAULT_SEPARATOR = "_"
 
 
 def _custom_encoder(data: dict[str, Any]) -> EncodedData:
-    return yaml.safe_dump(data, sort_keys=False, explicit_start=True)
+    return yaml.safe_dump(data, sort_keys=False, explicit_start=True)  # type: ignore[no-any-return]
 
 
 @dataclass

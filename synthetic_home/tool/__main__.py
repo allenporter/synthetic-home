@@ -8,7 +8,7 @@ from pathlib import Path
 
 import asyncio
 
-from . import list_device_types, create_inventory, export_inventory
+from . import create_inventory, export_inventory
 
 
 _LOGGER = logging.getLogger(__name__)
@@ -22,7 +22,6 @@ def get_base_arg_parser() -> argparse.ArgumentParser:
 
     # Subcommands
     create_inventory.create_arguments(subparsers.add_parser("create_inventory"))
-    list_device_types.create_arguments(subparsers.add_parser("list_device_types"))
     export_inventory.create_arguments(subparsers.add_parser("export_inventory"))
 
     return parser

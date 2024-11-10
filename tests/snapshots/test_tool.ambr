@@ -35,8 +35,8 @@
     state: false
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.SOUND
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/door-sensor-example.yaml]
@@ -74,8 +74,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/fan-example.yaml]
@@ -99,8 +99,8 @@
       - fan.FanEntityFeature.OSCILLATE
       - fan.FanEntityFeature.SET_SPEED
       oscillating: false
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/garage-door-example.yaml]
@@ -134,8 +134,8 @@
       - onoff
       color_mode:
       - onoff
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/gate-example.yaml]
@@ -159,8 +159,8 @@
       supported_features:
       - cover.CoverEntityFeature.OPEN
       - cover.CoverEntityFeature.CLOSE
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/heat-pump-example.yaml]
@@ -204,8 +204,8 @@
       native_unit_of_measurement: "\xB0C"
       device_class: sensor.SensorDeviceClass.TEMPERATURE
       state_class: sensor.SensorStateClass.MEASUREMENT
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/home1.yaml]
@@ -383,8 +383,8 @@
       supported_color_modes:
       - onoff
       color_mode: onoff
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/hvac-example.yaml]
@@ -440,8 +440,8 @@
       device_class: sensor.SensorDeviceClass.HUMIDITY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_value: 45
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/light-dimmable.yaml]
@@ -464,8 +464,8 @@
       - brightness
       color_mode: brightness
       brightness: 30
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/light-example.yaml]
@@ -488,8 +488,8 @@
       supported_color_modes:
       - onoff
       color_mode: onoff
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/light-rgbw.yaml]
@@ -516,8 +516,8 @@
       - 255
       - 0
       - 255
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/motion-sensor-example.yaml]
@@ -553,8 +553,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/smart-blinds-example.yaml]
@@ -611,8 +611,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/smart-lock-example.yaml]
@@ -661,8 +661,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/smart-plug-example.yaml]
@@ -694,8 +694,8 @@
     state: true
     attributes:
       device_class: switch.SwitchDeviceClass.OUTLET
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/smart-speaker-example.yaml]
@@ -731,8 +731,8 @@
       - media_player.MediaPlayerEntityFeature.TURN_OFF
       - media_player.MediaPlayerEntityFeature.NEXT_TRACK
       - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/switch-example.yaml]
@@ -753,8 +753,8 @@
     state: 'on'
     attributes:
       device_class: switch.SwitchDeviceClass.SWITCH
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/todo-list-example.yaml]
@@ -773,8 +773,8 @@
       - todo.TodoListEntityFeature.CREATE_TODO_ITEM
       - todo.TodoListEntityFeature.DELETE_TODO_ITEM
       todo_items: []
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/vacuum-example.yaml]
@@ -800,8 +800,8 @@
       - vacuum.VacuumEntityFeature.STATE
       - vacuum.VacuumEntityFeature.PAUSE
       - vacuum.VacuumEntityFeature.RETURN_HOME
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/valve-example.yaml]
@@ -844,8 +844,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/weather-example.yaml]
@@ -881,8 +881,8 @@
       - cloudy
       - rainy
       - cloudy
-  
-  
+
+
   '''
 # ---
 # name: test_build[tests/homes/window-sensor-example.yaml]
@@ -920,1018 +920,7 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-  
-  
-  '''
-# ---
-# name: test_list_device_types
-  '''
-  camera:
-    device_type: camera
-    desc: A video camera that supports motion detection and other events.
-    device_states:
-    - name: idle
-      entity_states:
-      - domain: binary_sensor
-        key: motion
-        state: false
-      - domain: binary_sensor
-        key: person
-        state: false
-      - domain: binary_sensor
-        key: sound
-        state: false
-    - name: motion-detected
-      entity_states:
-      - domain: binary_sensor
-        key: motion
-        state: true
-    - name: person-detected
-      entity_states:
-      - domain: binary_sensor
-        key: person
-        state: true
-    - name: sound-detected
-      entity_states:
-      - domain: binary_sensor
-        key: sound
-        state: true
-    entities:
-      binary_sensor:
-      - key: motion
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.MOTION
-      - key: person
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.OCCUPANCY
-      - key: sound
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.SOUND
-  hvac:
-    device_type: hvac
-    desc: A climate device that supports HVAC Cool and Heat modes.
-    device_states:
-    - name: 'off'
-      entity_states:
-      - domain: climate
-        key: hvac
-        state:
-          hvac_mode: 'off'
-          hvac_action: 'off'
-          current_temperature: 22
-          target_temperature: 22
-      - domain: sensor
-        key: temperature
-        state:
-          native_value: 22
-      - domain: sensor
-        key: humidity
-        state:
-          native_value: 45
-    - name: cooling
-      entity_states:
-      - domain: climate
-        key: hvac
-        state:
-          hvac_mode: cool
-          hvac_action: cooling
-          current_temperature: 25
-          target_temperature: 23
-      - domain: sensor
-        key: temperature
-        state:
-          native_value: 25
-      - domain: sensor
-        key: humidity
-        state:
-          native_value: 45
-    - name: very-low
-      entity_states:
-      - domain: climate
-        key: hvac
-        state:
-          hvac_mode: cool
-          hvac_action: cooling
-          current_temperature: 25
-          target_temperature: 12
-      - domain: sensor
-        key: temperature
-        state:
-          native_value: 25
-      - domain: sensor
-        key: humidity
-        state:
-          native_value: 45
-    entities:
-      climate:
-      - key: hvac
-        attributes:
-          unit_of_measurement: "\xB0C"
-          supported_features:
-          - climate.ClimateEntityFeature.FAN_MODE
-          - climate.ClimateEntityFeature.TURN_ON
-          - climate.ClimateEntityFeature.TURN_OFF
-          - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
-          hvac_modes:
-          - 'off'
-          - cool
-          - heat
-          - auto
-      sensor:
-      - key: temperature
-        attributes:
-          native_unit_of_measurement: "\xB0C"
-          device_class: sensor.SensorDeviceClass.TEMPERATURE
-          state_class: sensor.SensorStateClass.MEASUREMENT
-      - key: humidity
-        attributes:
-          native_unit_of_measurement: '%'
-          device_class: sensor.SensorDeviceClass.HUMIDITY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-  switch:
-    device_type: switch
-    desc: A generic switch.
-    device_states:
-    - name: 'on'
-      entity_states:
-      - domain: switch
-        key: switch
-        state: 'on'
-    - name: 'off'
-      entity_states:
-      - domain: switch
-        key: switch
-        state: 'off'
-    entities:
-      switch:
-      - key: switch
-        attributes:
-          device_class: switch.SwitchDeviceClass.SWITCH
-  weather-service:
-    device_type: weather-service
-    desc: A service that provides weather related integrations.
-    device_states:
-    - name: fair
-      entity_states:
-      - domain: weather
-        key: weather
-        state:
-          condition: sunny
-          native_temperature: 72
-          humidity: 60
-          native_wind_speed: 5
-    - name: cloudy
-      entity_states:
-      - domain: weather
-        key: weather
-        state:
-          condition: cloudy
-          native_temperature: 60
-          humidity: 70
-          native_wind_speed: 10
-    - name: rainy
-      entity_states:
-      - domain: weather
-        key: weather
-        state:
-          condition: rainy
-          native_temperature: 50
-          humidity: 80
-          native_wind_speed: 15
-    - name: snowy
-      entity_states:
-      - domain: weather
-        key: weather
-        state:
-          condition: snowy
-          native_temperature: 32
-          humidity: 90
-          native_wind_speed: 20
-    - name: windy
-      entity_states:
-      - domain: weather
-        key: weather
-        state:
-          condition: windy
-          native_temperature: 65
-          humidity: 50
-          native_wind_speed: 30
-    - name: hot
-      entity_states:
-      - domain: weather
-        key: weather
-        state:
-          condition: sunny
-          native_temperature: 90
-          humidity: 40
-          native_wind_speed: 10
-    - name: cold
-      entity_states:
-      - domain: weather
-        key: weather
-        state:
-          condition: partlycloudy
-          native_temperature: 20
-          humidity: 60
-          native_wind_speed: 5
-    entities:
-      weather:
-      - key: weather
-        attributes:
-          native_temperature_unit: "\xB0F"
-          native_wind_speed_unit: mph
-  lock-sensor:
-    device_type: lock-sensor
-    desc: A smart lock device that can be remotely monitored only, but does not support
-      remote control.
-    device_states:
-    - name: locked
-      entity_states:
-      - domain: binary_sensor
-        key: lock
-        state: false
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: unlocked
-      entity_states:
-      - domain: binary_sensor
-        key: lock
-        state: true
-      - domain: sensor
-        key: battery
-        state: 90
-    entities:
-      binary_sensor:
-      - key: lock
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.LOCK
-      - key: tamper
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-      - key: battery
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
-      sensor:
-      - key: battery
-        attributes:
-          device_class: sensor.SensorDeviceClass.BATTERY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-          native_unit_of_measurement: '%'
-  exhaust-fan:
-    device_type: exhaust-fan
-    desc: A mechanical ventilation device which that draws out stale or humid air to
-      improve air quality.
-    device_states:
-    - name: 'off'
-      entity_states:
-      - domain: fan
-        key: exhaust_fan
-        state:
-          state: 'off'
-      - domain: sensor
-        key: humidity
-        state: 45
-    - name: 'on'
-      entity_states:
-      - domain: fan
-        key: exhaust_fan
-        state:
-          state: 'on'
-      - domain: sensor
-        key: humidity
-        state: 45
-    - name: humid
-      entity_states:
-      - domain: sensor
-        key: humidity
-        state: 85
-    entities:
-      fan:
-      - key: exhaust_fan
-        attributes: {}
-      sensor:
-      - key: humidity
-        attributes:
-          native_unit_of_measurement: '%'
-          device_class: sensor.SensorDeviceClass.HUMIDITY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-  smart-lock:
-    device_type: smart-lock
-    desc: A smart lock device that can be remotely controlled.
-    device_states:
-    - name: locked
-      entity_states:
-      - domain: lock
-        key: lock
-        state: locked
-      - domain: binary_sensor
-        key: lock
-        state: false
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: unlocked
-      entity_states:
-      - domain: lock
-        key: lock
-        state: unlocked
-      - domain: binary_sensor
-        key: lock
-        state: true
-      - domain: sensor
-        key: battery
-        state: 90
-    entities:
-      lock:
-      - key: lock
-        attributes: {}
-      binary_sensor:
-      - key: lock
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.LOCK
-      - key: tamper
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-      - key: battery
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
-      sensor:
-      - key: battery
-        attributes:
-          device_class: sensor.SensorDeviceClass.BATTERY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-          native_unit_of_measurement: '%'
-  gate:
-    device_type: gate
-    desc: An movable barrier that can be monitored and opened and closed remotely.
-    device_states:
-    - name: closed
-      entity_states:
-      - domain: cover
-        key: gate
-        state: closed
-    - name: open
-      entity_states:
-      - domain: cover
-        key: gate
-        state: open
-    entities:
-      cover:
-      - key: gate
-        attributes:
-          device_class: cover.CoverDeviceClass.GATE
-          supported_features:
-          - cover.CoverEntityFeature.OPEN
-          - cover.CoverEntityFeature.CLOSE
-  light-rgbw:
-    device_type: light-rgbw
-    desc: A light with rgbw color support.
-    device_states:
-    - name: 'off'
-      entity_states:
-      - domain: light
-        key: light-rgbw
-        state:
-          rgbw_color:
-          - 0
-          - 0
-          - 0
-          - 0
-    - name: white
-      entity_states:
-      - domain: light
-        key: light-rgbw
-        state:
-          rgbw_color:
-          - 0
-          - 0
-          - 0
-          - 255
-    - name: red
-      entity_states:
-      - domain: light
-        key: light-rgbw
-        state:
-          rgbw_color:
-          - 255
-          - 0
-          - 0
-          - 0
-    entities:
-      light:
-      - key: light-rgbw
-        attributes:
-          supported_color_modes:
-          - rgbw
-          color_mode: rgbw
-  fan-oscilating:
-    device_type: fan-oscilating
-    desc: A fan that supports speed and oscillation control.
-    device_states:
-    - name: 'off'
-      entity_states:
-      - domain: fan
-        key: osciliating_fan
-        state:
-          state: 'off'
-          oscillating: false
-    - name: 'on'
-      entity_states:
-      - domain: fan
-        key: osciliating_fan
-        state:
-          state: 'on'
-          oscillating: false
-    - name: oscillating
-      entity_states:
-      - domain: fan
-        key: osciliating_fan
-        state:
-          state: 'on'
-          oscillating: true
-    entities:
-      fan:
-      - key: osciliating_fan
-        attributes:
-          supported_features:
-          - fan.FanEntityFeature.OSCILLATE
-          - fan.FanEntityFeature.SET_SPEED
-  smart-tv:
-    device_type: smart-tv
-    desc: A smart television integrated into the smart home.
-    device_states:
-    - name: playing
-      entity_states:
-      - domain: media_player
-        key: speaker
-        state: playing
-    - name: 'off'
-      entity_states:
-      - domain: media_player
-        key: speaker
-        state: 'off'
-    - name: paused
-      entity_states:
-      - domain: media_player
-        key: speaker
-        state: paused
-    entities:
-      media_player:
-      - key: speaker
-        attributes:
-          device_class: media_player.MediaPlayerDeviceClass.TV
-          supported_features:
-          - media_player.MediaPlayerEntityFeature.PAUSE
-          - media_player.MediaPlayerEntityFeature.VOLUME_STEP
-          - media_player.MediaPlayerEntityFeature.VOLUME_MUTE
-          - media_player.MediaPlayerEntityFeature.VOLUME_SET
-          - media_player.MediaPlayerEntityFeature.TURN_ON
-          - media_player.MediaPlayerEntityFeature.TURN_OFF
-  smart-speaker:
-    device_type: smart-speaker
-    desc: A music speaker that can be controlled remotely.
-    device_states:
-    - name: playing
-      entity_states:
-      - domain: media_player
-        key: speaker
-        state: playing
-    - name: 'off'
-      entity_states:
-      - domain: media_player
-        key: speaker
-        state: 'off'
-    - name: paused
-      entity_states:
-      - domain: media_player
-        key: speaker
-        state: paused
-    entities:
-      media_player:
-      - key: speaker
-        attributes:
-          device_class: media_player.MediaPlayerDeviceClass.SPEAKER
-          supported_features:
-          - media_player.MediaPlayerEntityFeature.PLAY
-          - media_player.MediaPlayerEntityFeature.PAUSE
-          - media_player.MediaPlayerEntityFeature.STOP
-          - media_player.MediaPlayerEntityFeature.VOLUME_STEP
-          - media_player.MediaPlayerEntityFeature.VOLUME_MUTE
-          - media_player.MediaPlayerEntityFeature.VOLUME_SET
-          - media_player.MediaPlayerEntityFeature.TURN_ON
-          - media_player.MediaPlayerEntityFeature.TURN_OFF
-          - media_player.MediaPlayerEntityFeature.NEXT_TRACK
-          - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
-  todo-list:
-    device_type: todo-list
-    desc: A To-do list contains To-do items which are ordered and have a status (complete
-      or in progress).
-    device_states:
-    - name: empty
-      entity_states:
-      - domain: todo
-        key: todo-list
-        state:
-          todo_items: []
-    entities:
-      todo:
-      - key: todo-list
-        attributes:
-          supported_features:
-          - todo.TodoListEntityFeature.CREATE_TODO_ITEM
-          - todo.TodoListEntityFeature.DELETE_TODO_ITEM
-  door-sensor:
-    device_type: door-sensor
-    desc: A device attached to a door that can detect if it is opened or closed.
-    device_states:
-    - name: closed
-      entity_states:
-      - domain: binary_sensor
-        key: door
-        state: false
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: open
-      entity_states:
-      - domain: binary_sensor
-        key: door
-        state: true
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: battery-low
-      entity_states:
-      - domain: binary_sensor
-        key: door
-        state: false
-      - domain: binary_sensor
-        key: battery
-        state: true
-      - domain: sensor
-        key: battery
-        state: 10
-    entities:
-      binary_sensor:
-      - key: door
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.DOOR
-      - key: battery
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
-      sensor:
-      - key: battery
-        attributes:
-          device_class: sensor.SensorDeviceClass.BATTERY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-          native_unit_of_measurement: '%'
-  garage-door:
-    device_type: garage-door
-    desc: A a garage door that can be controlled remotely.
-    device_states:
-    - name: closed
-      entity_states:
-      - domain: cover
-        key: garage-door
-        state: false
-      - domain: light
-        key: light
-        state: false
-    - name: open
-      entity_states:
-      - domain: cover
-        key: garage-door
-        state: true
-      - domain: light
-        key: light
-        state: true
-    entities:
-      cover:
-      - key: garage-door
-        attributes:
-          device_class: cover.CoverDeviceClass.GARAGE
-          supported_features:
-          - cover.CoverEntityFeature.OPEN
-          - cover.CoverEntityFeature.CLOSE
-      light:
-      - key: light
-        attributes:
-          supported_color_modes:
-          - onoff
-          color_mode:
-          - onoff
-  smart-sprinkler:
-    device_type: smart-sprinkler
-    desc: A remote controlled sprinkler irrigation system.
-    device_states:
-    - name: closed
-      entity_states:
-      - domain: valve
-        key: sprinkler
-        state: closed
-    - name: open
-      entity_states:
-      - domain: valve
-        key: sprinkler
-        state: open
-    entities:
-      valve:
-      - key: sprinkler
-        attributes:
-          supported_features:
-          - valve.ValveEntityFeature.OPEN
-          - valve.ValveEntityFeature.CLOSE
-  sensor:
-    device_type: sensor
-    desc: A generic sensor that is taking measurements of some value
-    device_states:
-    - name: zero
-      entity_states:
-      - domain: sensor
-        key: generic
-        state:
-          native_value: 0
-    entities:
-      sensor:
-      - key: generic
-        attributes:
-          state_class: sensor.SensorStateClass.MEASUREMENT
-  light-dimmable:
-    device_type: light-dimmable
-    desc: A light that has adjustable brightness.
-    device_states:
-    - name: 'on'
-      entity_states:
-      - domain: light
-        key: light-dimmable
-        state:
-          brightness: 100
-    - name: 'off'
-      entity_states:
-      - domain: light
-        key: light-dimmable
-        state:
-          brightness: 0
-    - name: dim
-      entity_states:
-      - domain: light
-        key: light-dimmable
-        state:
-          brightness: 5
-    entities:
-      light:
-      - key: light-dimmable
-        attributes:
-          supported_color_modes:
-          - brightness
-          color_mode: brightness
-  water-valve:
-    device_type: water-valve
-    desc: A water shutoff and flow measurement device.
-    device_states:
-    - name: closed
-      entity_states:
-      - domain: valve
-        key: water-valve
-        state:
-          current_valve_position: 0
-      - domain: sensor
-        key: meter-reading
-        state: 2000
-      - domain: sensor
-        key: battery
-        state: 75
-    - name: open
-      entity_states:
-      - domain: valve
-        key: water-valve
-        state:
-          current_valve_position: 100
-      - domain: sensor
-        key: meter-reading
-        state: 2001
-      - domain: sensor
-        key: battery
-        state: 75
-    entities:
-      valve:
-      - key: water-valve
-        attributes:
-          reports_position: true
-          supported_features:
-          - valve.ValveEntityFeature.OPEN
-          - valve.ValveEntityFeature.CLOSE
-          - valve.ValveEntityFeature.SET_POSITION
-      sensor:
-      - key: meter-reading
-        attributes:
-          native_unit_of_measurement: "m\xB3"
-          device_class: sensor.SensorDeviceClass.WATER
-          state_class: sensor.SensorStateClass.TOTAL_INCREASING
-      - key: battery
-        attributes:
-          device_class: sensor.SensorDeviceClass.BATTERY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-          native_unit_of_measurement: '%'
-  smart-blinds:
-    device_type: smart-blinds
-    desc: A remotely controllable set of window blinds.
-    device_states:
-    - name: closed
-      entity_states:
-      - domain: cover
-        key: blind
-        state: closed
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: open
-      entity_states:
-      - domain: cover
-        key: blind
-        state: open
-      - domain: sensor
-        key: battery
-        state: 90
-    entities:
-      cover:
-      - key: blind
-        attributes:
-          device_class: cover.CoverDeviceClass.BLIND
-          supported_features:
-          - cover.CoverEntityFeature.OPEN
-          - cover.CoverEntityFeature.CLOSE
-          - cover.CoverEntityFeature.SET_POSITION
-      sensor:
-      - key: battery
-        attributes:
-          device_class: sensor.SensorDeviceClass.BATTERY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-          native_unit_of_measurement: '%'
-  smart-plug:
-    device_type: smart-plug
-    desc: A smart plug allows remote on/off of electrical devices.
-    device_states:
-    - name: 'on'
-      entity_states:
-      - domain: switch
-        key: outlet
-        state: true
-      - domain: sensor
-        key: energy
-        state: 1
-    - name: 'off'
-      entity_states:
-      - domain: switch
-        key: outlet
-        state: false
-      - domain: sensor
-        key: energy
-        state: 0
-    entities:
-      sensor:
-      - key: energy
-        attributes:
-          device_class: sensor.SensorDeviceClass.ENERGY
-          state_class: sensor.SensorStateClass.TOTAL_INCREASING
-          native_unit_of_measurement: kWh
-      switch:
-      - key: outlet
-        attributes:
-          device_class: switch.SwitchDeviceClass.OUTLET
-  temperature-sensor:
-    device_type: temperature-sensor
-    desc: A device that measures the current temperature and humidity.
-    device_states:
-    - name: mild
-      entity_states:
-      - domain: sensor
-        key: temperature
-        state: 70
-      - domain: sensor
-        key: humidity
-        state: 45
-    - name: hot
-      entity_states:
-      - domain: sensor
-        key: temperature
-        state: 90
-      - domain: sensor
-        key: humidity
-        state: 35
-    - name: cold
-      entity_states:
-      - domain: sensor
-        key: temperature
-        state: 38
-      - domain: sensor
-        key: humidity
-        state: 60
-    entities:
-      sensor:
-      - key: temperature
-        attributes:
-          native_unit_of_measurement: "\xB0C"
-          device_class: sensor.SensorDeviceClass.TEMPERATURE
-          state_class: sensor.SensorStateClass.MEASUREMENT
-      - key: humidity
-        attributes:
-          native_unit_of_measurement: '%'
-          device_class: sensor.SensorDeviceClass.HUMIDITY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-  motion-sensor:
-    device_type: motion-sensor
-    desc: A device that detects motion of a person or object.
-    device_states:
-    - name: 'on'
-      entity_states:
-      - domain: binary_sensor
-        key: motion
-        state: true
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: 'off'
-      entity_states:
-      - domain: binary_sensor
-        key: motion
-        state: false
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: battery-low
-      entity_states:
-      - domain: binary_sensor
-        key: motion
-        state: false
-      - domain: binary_sensor
-        key: battery
-        state: true
-      - domain: sensor
-        key: battery
-        state: 15
-    entities:
-      binary_sensor:
-      - key: motion
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.MOTION
-      - key: battery
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
-      sensor:
-      - key: battery
-        attributes:
-          device_class: sensor.SensorDeviceClass.BATTERY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-          native_unit_of_measurement: '%'
-  window-sensor:
-    device_type: window-sensor
-    desc: A device attached to a window that can detect if it is opened or closed.
-    device_states:
-    - name: closed
-      entity_states:
-      - domain: binary_sensor
-        key: window
-        state: false
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: open
-      entity_states:
-      - domain: binary_sensor
-        key: window
-        state: true
-      - domain: sensor
-        key: battery
-        state: 90
-    - name: battery-low
-      entity_states:
-      - domain: binary_sensor
-        key: window
-        state: false
-      - domain: binary_sensor
-        key: battery
-        state: true
-      - domain: sensor
-        key: battery
-        state: 10
-    entities:
-      binary_sensor:
-      - key: window
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.WINDOW
-      - key: battery
-        attributes:
-          device_class: binary_sensor.BinarySensorDeviceClass.BATTERY
-      sensor:
-      - key: battery
-        attributes:
-          device_class: sensor.SensorDeviceClass.BATTERY
-          state_class: sensor.SensorStateClass.MEASUREMENT
-          native_unit_of_measurement: '%'
-  vacuum:
-    device_type: vacuum
-    desc: A robot vacuum that can be remotely controlled.
-    device_states:
-    - name: 'off'
-      entity_states:
-      - domain: vacuum
-        key: vacuum
-        state: docked
-    - name: cleaning
-      entity_states:
-      - domain: vacuum
-        key: vacuum
-        state: cleaning
-    - name: paused
-      entity_states:
-      - domain: vacuum
-        key: vacuum
-        state: paused
-    - name: returning
-      entity_states:
-      - domain: vacuum
-        key: vacuum
-        state: returning
-    entities:
-      vacuum:
-      - key: vacuum
-        attributes:
-          supported_features:
-          - vacuum.VacuumEntityFeature.START
-          - vacuum.VacuumEntityFeature.STOP
-          - vacuum.VacuumEntityFeature.STATE
-          - vacuum.VacuumEntityFeature.PAUSE
-          - vacuum.VacuumEntityFeature.RETURN_HOME
-  heat-pump:
-    device_type: heat-pump
-    desc: A climate device that only supports heating.
-    device_states:
-    - name: 'off'
-      entity_states:
-      - domain: climate
-        key: heat-pump
-        state:
-          hvac_mode: 'off'
-          hvac_action: 'off'
-          current_temperature: 22
-          target_temperature: 22
-      - domain: sensor
-        key: temperature
-        state: 22
-    - name: heating
-      entity_states:
-      - domain: climate
-        key: heat-pump
-        state:
-          hvac_mode: heat
-          hvac_action: heating
-          current_temperature: 25
-          target_temperature: 27
-      - domain: sensor
-        key: temperature
-        state: 25
-    entities:
-      climate:
-      - key: heat-pump
-        attributes:
-          unit_of_measurement: "\xB0C"
-          hvac_modes:
-          - heat
-          - 'off'
-          supported_features:
-          - climate.ClimateEntityFeature.FAN_MODE
-          - climate.ClimateEntityFeature.TURN_ON
-          - climate.ClimateEntityFeature.TURN_OFF
-      sensor:
-      - key: temperature
-        attributes:
-          native_unit_of_measurement: "\xB0C"
-          device_class: sensor.SensorDeviceClass.TEMPERATURE
-          state_class: sensor.SensorStateClass.MEASUREMENT
-  light:
-    device_type: light
-    desc: A generic light that can be turned on/off.
-    device_states:
-    - name: 'off'
-      entity_states:
-      - domain: light
-        key: light
-        state: 'off'
-    - name: 'on'
-      entity_states:
-      - domain: light
-        key: light
-        state: 'on'
-    entities:
-      light:
-      - key: light
-        attributes:
-          supported_color_modes:
-          - onoff
-          color_mode: onoff
-  
-  
+
+
   '''
 # ---
