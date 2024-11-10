@@ -35,8 +35,8 @@
     state: false
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.SOUND
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/door-sensor-example.yaml]
@@ -74,8 +74,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/fan-example.yaml]
@@ -99,8 +99,8 @@
       - fan.FanEntityFeature.OSCILLATE
       - fan.FanEntityFeature.SET_SPEED
       oscillating: false
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/garage-door-example.yaml]
@@ -134,8 +134,8 @@
       - onoff
       color_mode:
       - onoff
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/gate-example.yaml]
@@ -159,8 +159,8 @@
       supported_features:
       - cover.CoverEntityFeature.OPEN
       - cover.CoverEntityFeature.CLOSE
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/heat-pump-example.yaml]
@@ -204,8 +204,8 @@
       native_unit_of_measurement: "\xB0C"
       device_class: sensor.SensorDeviceClass.TEMPERATURE
       state_class: sensor.SensorStateClass.MEASUREMENT
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/home1.yaml]
@@ -383,8 +383,8 @@
       supported_color_modes:
       - onoff
       color_mode: onoff
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/hvac-example.yaml]
@@ -440,8 +440,8 @@
       device_class: sensor.SensorDeviceClass.HUMIDITY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_value: 45
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/light-dimmable.yaml]
@@ -464,8 +464,8 @@
       - brightness
       color_mode: brightness
       brightness: 30
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/light-example.yaml]
@@ -488,8 +488,8 @@
       supported_color_modes:
       - onoff
       color_mode: onoff
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/light-rgbw.yaml]
@@ -516,8 +516,8 @@
       - 255
       - 0
       - 255
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/motion-sensor-example.yaml]
@@ -553,8 +553,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/smart-blinds-example.yaml]
@@ -611,8 +611,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/smart-lock-example.yaml]
@@ -661,8 +661,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/smart-plug-example.yaml]
@@ -694,8 +694,8 @@
     state: true
     attributes:
       device_class: switch.SwitchDeviceClass.OUTLET
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/smart-speaker-example.yaml]
@@ -731,8 +731,8 @@
       - media_player.MediaPlayerEntityFeature.TURN_OFF
       - media_player.MediaPlayerEntityFeature.NEXT_TRACK
       - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/switch-example.yaml]
@@ -753,8 +753,8 @@
     state: 'on'
     attributes:
       device_class: switch.SwitchDeviceClass.SWITCH
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/todo-list-example.yaml]
@@ -773,8 +773,8 @@
       - todo.TodoListEntityFeature.CREATE_TODO_ITEM
       - todo.TodoListEntityFeature.DELETE_TODO_ITEM
       todo_items: []
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/vacuum-example.yaml]
@@ -800,8 +800,8 @@
       - vacuum.VacuumEntityFeature.STATE
       - vacuum.VacuumEntityFeature.PAUSE
       - vacuum.VacuumEntityFeature.RETURN_HOME
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/valve-example.yaml]
@@ -844,8 +844,8 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/weather-example.yaml]
@@ -881,8 +881,8 @@
       - cloudy
       - rainy
       - cloudy
-
-
+  
+  
   '''
 # ---
 # name: test_build[tests/homes/window-sensor-example.yaml]
@@ -920,7 +920,7 @@
       device_class: sensor.SensorDeviceClass.BATTERY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_unit_of_measurement: '%'
-
-
+  
+  
   '''
 # ---
