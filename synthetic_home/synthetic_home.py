@@ -45,7 +45,7 @@ class Device:
     device_info: common.DeviceInfo | None = None
     """Device make and model information."""
 
-    device_state: str | DeviceState | None = None
+    device_state: str | dict | DeviceState | None = None
     """A list of pre-canned RestorableStateAttributes specified by the key.
 
     These are used for restoring a device into a specific state supported by the
@@ -130,6 +130,9 @@ def build_device_state(device: Device, registry: DeviceTypeRegistry) -> Device:
 @dataclass
 class SyntheticHome:
     """Data about a synthetic home."""
+
+    name: str
+    """A human readable name for the home."""
 
     # Devices by area
     devices: dict[str, list[Device]] = field(default_factory=dict)
