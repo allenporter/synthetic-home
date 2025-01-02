@@ -13,4 +13,4 @@ mashumaro==3.15
 syrupy==4.8.0
 python-slugify==8.0.4
 aiohttp==3.11.11
-pytest-asyncio==0.25.0
+pytest-asyncio==0.25.1
