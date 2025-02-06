@@ -12,5 +12,5 @@ ruff==0.9.4
 mashumaro==3.15
 syrupy==4.8.1
 python-slugify==8.0.4
-aiohttp==3.11.11
+aiohttp==3.11.12
 pytest-asyncio==0.25.3
