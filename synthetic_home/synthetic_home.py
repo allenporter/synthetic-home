@@ -190,6 +190,7 @@ def build_entities(area_id: str | None, device_entry: Device) -> list[inventory.
     entities = []
     device_name = device_entry.name.replace("_", " ").title()
     device_id = slugify.slugify(device_entry.name, separator=DEFAULT_SEPARATOR)
+
     for platform, entity_entries in device_entry.entity_entries.items():
         for entity_entry in entity_entries:
             # Each entity in this platform needs a unique name, but
@@ -231,6 +232,7 @@ def build_inventory(home: SyntheticHome) -> inventory.Inventory:
     if home.services:
         pairs.append((None, home.services))
 
+    device_ids: set[str] = set()
     entities = []
     for area_name, devices in pairs:
         if area_name:
@@ -243,6 +245,11 @@ def build_inventory(home: SyntheticHome) -> inventory.Inventory:
             # Make computer generated device names more friendly
             device_name = device_entry.name.replace("_", " ").title()
             device_id = slugify.slugify(device_entry.name, separator=DEFAULT_SEPARATOR)
+            if device_id in device_ids:
+                device_entry.name = f"{area_name}_{device_entry.name}"
+                device_name = device_entry.name.replace("_", " ").title()
+                device_id = slugify.slugify(device_name, separator=DEFAULT_SEPARATOR)
+            device_ids.add(device_id)
             device = inventory.Device(
                 name=device_name,
                 id=device_id,
