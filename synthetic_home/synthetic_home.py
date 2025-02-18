@@ -88,7 +88,7 @@ def build_device_state(device: Device, registry: DeviceTypeRegistry) -> Device:
             and device.device_state not in device_type.device_states_dict
         ):
             raise SyntheticHomeError(
-                f"Device {device} has state '{device.device_state}' not in: {device_type.device_states_dict}"
+                f"Device {device}\nhas state '{device.device_state}'\n not in: {device_type.device_states_dict}"
             )
         if isinstance(device.device_state, dict):
             _LOGGER.debug(
