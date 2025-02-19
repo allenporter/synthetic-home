@@ -731,6 +731,7 @@
       - media_player.MediaPlayerEntityFeature.TURN_OFF
       - media_player.MediaPlayerEntityFeature.NEXT_TRACK
       - media_player.MediaPlayerEntityFeature.PREVIOUS_TRACK
+      - media_player.MediaPlayerEntityFeature.PLAY_MEDIA
   
   
   '''
