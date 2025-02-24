@@ -1,0 +1,5 @@
+---
+name: Family Farmhouse
+services:
+  - name: Calendar
+    device_type: calendar

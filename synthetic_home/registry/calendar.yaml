@@ -1,0 +1,13 @@
+---
+device_type: calendar
+desc: A calendar contains events at some date or time.
+device_states:
+  empty:
+    calendar.calendar:
+entities:
+  calendar:
+    calendar:
+      supported_features:
+        - calendar.CalendarEntityFeature.CREATE_EVENT
+        - calendar.CalendarEntityFeature.DELETE_EVENT
+        - calendar.CalendarEntityFeature.UPDATE_EVENT
