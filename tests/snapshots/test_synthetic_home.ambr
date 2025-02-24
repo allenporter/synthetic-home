@@ -12,9 +12,9 @@
     attributes:
       code_format: number
       supported_features:
-      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
-      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
-      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm_control_panel.AlarmControlPanelEntityFeature.TRIGGER
   - name: Alarm Tamper
     id: binary_sensor.alarm_tamper
     device: alarm
@@ -49,9 +49,9 @@
     attributes:
       code_format: number
       supported_features:
-      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
-      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
-      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm_control_panel.AlarmControlPanelEntityFeature.TRIGGER
   - name: Alarm Tamper
     id: binary_sensor.alarm_tamper
     device: alarm
@@ -86,9 +86,9 @@
     attributes:
       code_format: number
       supported_features:
-      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
-      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
-      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm_control_panel.AlarmControlPanelEntityFeature.TRIGGER
   - name: Alarm Tamper
     id: binary_sensor.alarm_tamper
     device: alarm
@@ -123,9 +123,9 @@
     attributes:
       code_format: number
       supported_features:
-      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
-      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
-      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm_control_panel.AlarmControlPanelEntityFeature.TRIGGER
   - name: Alarm Tamper
     id: binary_sensor.alarm_tamper
     device: alarm
@@ -160,9 +160,9 @@
     attributes:
       code_format: number
       supported_features:
-      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
-      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
-      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm_control_panel.AlarmControlPanelEntityFeature.TRIGGER
   - name: Alarm Tamper
     id: binary_sensor.alarm_tamper
     device: alarm

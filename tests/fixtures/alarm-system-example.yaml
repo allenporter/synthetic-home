@@ -17,9 +17,9 @@ entities:
   attributes:
     code_format: number
     supported_features:
-    - alarm.AlarmControlPanelEntityFeature.ARM_HOME
-    - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
-    - alarm.AlarmControlPanelEntityFeature.TRIGGER
+    - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_HOME
+    - alarm_control_panel.AlarmControlPanelEntityFeature.ARM_AWAY
+    - alarm_control_panel.AlarmControlPanelEntityFeature.TRIGGER
 - name: Alarm Tamper
   id: binary_sensor.alarm_tamper
   area: entryway
@@ -41,4 +41,3 @@ entities:
   attributes:
     supported_features:
     - alarm.SirenEntityFeature.VOLUME_SET
-
