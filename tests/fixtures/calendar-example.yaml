@@ -1,0 +1,14 @@
+---
+areas: []
+devices:
+- name: Calendar
+  id: calendar
+entities:
+- name: Calendar
+  id: calendar.calendar
+  device: calendar
+  attributes:
+    supported_features:
+    - calendar.CalendarEntityFeature.CREATE_EVENT
+    - calendar.CalendarEntityFeature.DELETE_EVENT
+    - calendar.CalendarEntityFeature.UPDATE_EVENT
