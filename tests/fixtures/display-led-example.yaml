@@ -1,0 +1,34 @@
+---
+areas:
+- name: Family Room
+  id: family_room
+devices:
+- name: Led Display
+  id: led_display
+  area: family_room
+entities:
+- name: Led Display
+  id: light.led_display
+  area: family_room
+  device: led_display
+  attributes:
+    supported_color_modes:
+    - brightness
+    color_mode: brightness
+    brightness: 100
+- name: Led Display
+  id: select.led_display
+  area: family_room
+  device: led_display
+  state: blink
+  attributes:
+    options:
+    - scroll
+    - static
+    - blink
+- name: Led Display
+  id: text.led_display
+  area: family_room
+  device: led_display
+  attributes:
+    mode: text

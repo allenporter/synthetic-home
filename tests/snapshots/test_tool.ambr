@@ -1,4 +1,53 @@
 # serializer version: 1
+# name: test_build[tests/homes/alarm-system-example.yaml]
+  '''
+  ---
+  areas:
+  - name: Entryway
+    id: entryway
+  devices:
+  - name: Alarm
+    id: alarm
+    area: entryway
+    info:
+      manufacturer: Ring
+  entities:
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    area: entryway
+    device: alarm
+    state: disarmed
+    attributes:
+      code_format: number
+      supported_features:
+      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    area: entryway
+    device: alarm
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Alarm
+    id: text.alarm
+    area: entryway
+    device: alarm
+    attributes:
+      mode: text
+  - name: Alarm
+    id: siren.alarm
+    area: entryway
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
+  
+  
+  '''
+# ---
 # name: test_build[tests/homes/calendar-example.yaml]
   '''
   ---
@@ -63,6 +112,46 @@
     state: false
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  
+  '''
+# ---
+# name: test_build[tests/homes/display-led-example.yaml]
+  '''
+  ---
+  areas:
+  - name: Family Room
+    id: family_room
+  devices:
+  - name: Led Display
+    id: led_display
+    area: family_room
+  entities:
+  - name: Led Display
+    id: light.led_display
+    area: family_room
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  - name: Led Display
+    id: select.led_display
+    area: family_room
+    device: led_display
+    state: blink
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    area: family_room
+    device: led_display
+    attributes:
+      mode: text
   
   
   '''

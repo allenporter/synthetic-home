@@ -1,0 +1,39 @@
+---
+device_type: alarm-system
+desc: An alarm system installed in a home
+device_states:
+  disarmed:
+    alarm_control_panel.alarm: disarmed
+    binary_sensor.tamper: false
+  armed-home:
+    alarm_control_panel.alarm: armed_home
+    binary_sensor.tamper: false
+  armed-away:
+    alarm_control_panel.alarm: armed_away
+    binary_sensor.tamper: false
+  triggered:
+    alarm_control_panel.alarm: triggered
+    binary_sensor.tamper: false
+    siren.alarm: "on"
+  fault:
+    alarm_control_panel.alarm: disarmed
+    binary_sensor.tamper: true
+entities:
+  alarm_control_panel:
+    alarm:
+      code_format: number
+      supported_features:
+      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+  binary_sensor:
+    tamper:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  text:
+    display:
+      mode: text
+  siren:
+    alarm:
+      state: "off"
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET

@@ -1,0 +1,35 @@
+---
+device_type: display-led
+desc: An LED display that can be controlled remotely.
+device_states:
+  "on":
+    light.display:
+      brightness: 100
+    select.mode: static
+  "off":
+    light.display:
+      brightness: 0
+    select.mode: static
+  "blink":
+    light.display:
+      brightness: 100
+    select.mode: blink
+  "scroll":
+    light.display:
+      brightness: 100
+    select.mode: scroll
+entities:
+  light:
+    display:
+      supported_color_modes:
+        - brightness
+      color_mode: brightness
+  select:
+    mode:
+      options:
+        - scroll
+        - static
+        - blink
+  text:
+    display:
+      mode: text

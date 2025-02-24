@@ -1,4 +1,189 @@
 # serializer version: 1
+# name: test_device_state_to_entity_state[tests/homes/alarm-system-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
+    state: disarmed
+    attributes:
+      code_format: number
+      supported_features:
+      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Alarm
+    id: text.alarm
+    device: alarm
+    attributes:
+      mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/alarm-system-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
+    state: armed_home
+    attributes:
+      code_format: number
+      supported_features:
+      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Alarm
+    id: text.alarm
+    device: alarm
+    attributes:
+      mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/alarm-system-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
+    state: armed_away
+    attributes:
+      code_format: number
+      supported_features:
+      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Alarm
+    id: text.alarm
+    device: alarm
+    attributes:
+      mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/alarm-system-example.yaml].3
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
+    state: triggered
+    attributes:
+      code_format: number
+      supported_features:
+      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
+    state: false
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Alarm
+    id: text.alarm
+    device: alarm
+    attributes:
+      mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'on'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/alarm-system-example.yaml].4
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
+    state: disarmed
+    attributes:
+      code_format: number
+      supported_features:
+      - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+      - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+      - alarm.AlarmControlPanelEntityFeature.TRIGGER
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
+    state: true
+    attributes:
+      device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+  - name: Alarm
+    id: text.alarm
+    device: alarm
+    attributes:
+      mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
+  
+  '''
+# ---
 # name: test_device_state_to_entity_state[tests/homes/camera-example.yaml]
   '''
   ---
@@ -132,6 +317,130 @@
     state: true
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.SOUND
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: static
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 0
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: static
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: blink
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml].3
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: scroll
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
   
   '''
 # ---
