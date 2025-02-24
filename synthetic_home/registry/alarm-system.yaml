@@ -14,6 +14,7 @@ device_states:
   triggered:
     alarm_control_panel.alarm: triggered
     binary_sensor.tamper: false
+    siren.alarm: "on"
   fault:
     alarm_control_panel.alarm: disarmed
     binary_sensor.tamper: true
@@ -31,3 +32,8 @@ entities:
   text:
     display:
       mode: text
+  siren:
+    alarm:
+      state: "off"
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET

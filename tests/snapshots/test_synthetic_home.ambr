@@ -5,9 +5,9 @@
   areas: []
   devices: []
   entities:
-  - name: Alarm System
-    id: alarm_control_panel.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
     state: disarmed
     attributes:
       code_format: number
@@ -15,17 +15,24 @@
       - alarm.AlarmControlPanelEntityFeature.ARM_HOME
       - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
       - alarm.AlarmControlPanelEntityFeature.TRIGGER
-  - name: Alarm System Tamper
-    id: binary_sensor.alarm_system_tamper
-    device: alarm_system
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
     state: false
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-  - name: Alarm System
-    id: text.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: text.alarm
+    device: alarm
     attributes:
       mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
   
   '''
 # ---
@@ -35,9 +42,9 @@
   areas: []
   devices: []
   entities:
-  - name: Alarm System
-    id: alarm_control_panel.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
     state: armed_home
     attributes:
       code_format: number
@@ -45,17 +52,24 @@
       - alarm.AlarmControlPanelEntityFeature.ARM_HOME
       - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
       - alarm.AlarmControlPanelEntityFeature.TRIGGER
-  - name: Alarm System Tamper
-    id: binary_sensor.alarm_system_tamper
-    device: alarm_system
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
     state: false
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-  - name: Alarm System
-    id: text.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: text.alarm
+    device: alarm
     attributes:
       mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
   
   '''
 # ---
@@ -65,9 +79,9 @@
   areas: []
   devices: []
   entities:
-  - name: Alarm System
-    id: alarm_control_panel.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
     state: armed_away
     attributes:
       code_format: number
@@ -75,17 +89,24 @@
       - alarm.AlarmControlPanelEntityFeature.ARM_HOME
       - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
       - alarm.AlarmControlPanelEntityFeature.TRIGGER
-  - name: Alarm System Tamper
-    id: binary_sensor.alarm_system_tamper
-    device: alarm_system
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
     state: false
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-  - name: Alarm System
-    id: text.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: text.alarm
+    device: alarm
     attributes:
       mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
   
   '''
 # ---
@@ -95,9 +116,9 @@
   areas: []
   devices: []
   entities:
-  - name: Alarm System
-    id: alarm_control_panel.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
     state: triggered
     attributes:
       code_format: number
@@ -105,17 +126,24 @@
       - alarm.AlarmControlPanelEntityFeature.ARM_HOME
       - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
       - alarm.AlarmControlPanelEntityFeature.TRIGGER
-  - name: Alarm System Tamper
-    id: binary_sensor.alarm_system_tamper
-    device: alarm_system
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
     state: false
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-  - name: Alarm System
-    id: text.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: text.alarm
+    device: alarm
     attributes:
       mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'on'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
   
   '''
 # ---
@@ -125,9 +153,9 @@
   areas: []
   devices: []
   entities:
-  - name: Alarm System
-    id: alarm_control_panel.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: alarm_control_panel.alarm
+    device: alarm
     state: disarmed
     attributes:
       code_format: number
@@ -135,17 +163,24 @@
       - alarm.AlarmControlPanelEntityFeature.ARM_HOME
       - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
       - alarm.AlarmControlPanelEntityFeature.TRIGGER
-  - name: Alarm System Tamper
-    id: binary_sensor.alarm_system_tamper
-    device: alarm_system
+  - name: Alarm Tamper
+    id: binary_sensor.alarm_tamper
+    device: alarm
     state: true
     attributes:
       device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
-  - name: Alarm System
-    id: text.alarm_system
-    device: alarm_system
+  - name: Alarm
+    id: text.alarm
+    device: alarm
     attributes:
       mode: text
+  - name: Alarm
+    id: siren.alarm
+    device: alarm
+    state: 'off'
+    attributes:
+      supported_features:
+      - alarm.SirenEntityFeature.VOLUME_SET
   
   '''
 # ---
