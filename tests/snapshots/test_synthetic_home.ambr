@@ -5,6 +5,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera
@@ -32,6 +39,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera
@@ -59,6 +73,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera
@@ -86,6 +107,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera
@@ -739,6 +767,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera
@@ -766,6 +801,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera
@@ -793,6 +835,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera
@@ -820,6 +869,13 @@
   areas: []
   devices: []
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     device: outdoor_camera

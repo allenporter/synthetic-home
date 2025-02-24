@@ -13,9 +13,11 @@ device_states:
   sound-detected:
     binary_sensor.sound: true
 entities:
-  # TODO: The camera entity is not currently implemented
-  # camera:
-  #   camera:
+  camera:
+    camera:
+      supported_features:
+        - camera.CameraEntityFeature.ON_OFF
+        - camera.CameraEntityFeature.STREAM
   binary_sensor:
     motion:
       device_class: binary_sensor.BinarySensorDeviceClass.MOTION

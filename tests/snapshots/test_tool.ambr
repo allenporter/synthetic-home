@@ -14,6 +14,14 @@
       manufacturer: Ring
       sw_version: 2.4.1
   entities:
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    area: backyard
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     area: backyard
@@ -319,6 +327,14 @@
       device_class: sensor.SensorDeviceClass.HUMIDITY
       state_class: sensor.SensorStateClass.MEASUREMENT
       native_value: 45
+  - name: Outdoor Camera
+    id: camera.outdoor_camera
+    area: backyard
+    device: outdoor_camera
+    attributes:
+      supported_features:
+      - camera.CameraEntityFeature.ON_OFF
+      - camera.CameraEntityFeature.STREAM
   - name: Outdoor Camera Motion
     id: binary_sensor.outdoor_camera_motion
     area: backyard
