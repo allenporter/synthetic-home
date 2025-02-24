@@ -285,6 +285,130 @@
   
   '''
 # ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: static
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 0
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: static
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml].2
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: blink
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/display-led-example.yaml].3
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Led Display
+    id: light.led_display
+    device: led_display
+    attributes:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 100
+  - name: Led Display
+    id: select.led_display
+    device: led_display
+    state: scroll
+    attributes:
+      options:
+      - scroll
+      - static
+      - blink
+  - name: Led Display
+    id: text.led_display
+    device: led_display
+    attributes:
+      mode: text
+  
+  '''
+# ---
 # name: test_device_state_to_entity_state[tests/homes/door-sensor-example.yaml]
   '''
   ---

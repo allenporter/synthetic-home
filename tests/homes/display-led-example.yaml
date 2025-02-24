@@ -1,0 +1,8 @@
+---
+name: Family Farmhouse
+devices:
+  Family Room:
+    - name: LED Display
+      device_type: display-led
+      device_state:
+        select.mode: blink
