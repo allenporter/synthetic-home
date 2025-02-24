@@ -1,0 +1,26 @@
+---
+device_type: mobile-phone
+desc: A personal mobile phone
+device_states:
+  idle:
+    device_tracker.mobile_phone: home
+    sensor.battery: 70
+  away:
+    device_tracker.mobile_phone: not_home
+    sensor.battery: 70
+  charging:
+    device_tracker.mobile_phone: home
+    sensor.battery: 95
+  low-battery:
+    device_tracker.mobile_phone: home
+    sensor.battery: 10
+entities:
+  notify:
+    mobile_app: {}
+  device_tracker:
+    mobile_phone: {}
+  sensor:
+    battery:
+      device_class: sensor.SensorDeviceClass.BATTERY
+      state_class: sensor.SensorStateClass.MEASUREMENT
+      native_unit_of_measurement: "%"
