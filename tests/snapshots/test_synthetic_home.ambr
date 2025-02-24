@@ -1751,6 +1751,60 @@
   
   '''
 # ---
+# name: test_device_state_to_entity_state[tests/homes/washer-example.yaml]
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Lg Washer Status
+    id: sensor.lg_washer_status
+    device: lg_washer
+    state: idle
+  - name: Lg Washer Remaining_time
+    id: sensor.lg_washer_remaining_time
+    device: lg_washer
+    state: '0'
+    attributes:
+      device_class: sensor.SensorDeviceClass.DURATION
+  - name: Lg Washer
+    id: event.lg_washer
+    device: lg_washer
+    attributes:
+      event_types:
+      - started
+      - finished
+      - error
+  
+  '''
+# ---
+# name: test_device_state_to_entity_state[tests/homes/washer-example.yaml].1
+  '''
+  ---
+  areas: []
+  devices: []
+  entities:
+  - name: Lg Washer Status
+    id: sensor.lg_washer_status
+    device: lg_washer
+    state: running
+  - name: Lg Washer Remaining_time
+    id: sensor.lg_washer_remaining_time
+    device: lg_washer
+    state: 36min
+    attributes:
+      device_class: sensor.SensorDeviceClass.DURATION
+  - name: Lg Washer
+    id: event.lg_washer
+    device: lg_washer
+    attributes:
+      event_types:
+      - started
+      - finished
+      - error
+  
+  '''
+# ---
 # name: test_device_state_to_entity_state[tests/homes/window-sensor-example.yaml]
   '''
   ---

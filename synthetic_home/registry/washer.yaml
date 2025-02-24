@@ -1,0 +1,21 @@
+---
+device_type: washer
+desc: A smart washing machine device
+device_states:
+  idle:
+    sensor.status: idle
+    sensor.remaining_time: 0
+  running:
+    sensor.status: running
+    sensor.remaining_time: 36min
+entities:
+  sensor:
+    status: {}
+    remaining_time:
+      device_class: sensor.SensorDeviceClass.DURATION
+  event:
+    notification:
+      event_types:
+        - started
+        - finished
+        - error
