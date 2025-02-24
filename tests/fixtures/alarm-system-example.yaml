@@ -1,0 +1,35 @@
+---
+areas:
+- name: Entryway
+  id: entryway
+devices:
+- name: Alarm System
+  id: alarm_system
+  area: entryway
+  info:
+    manufacturer: Ring
+entities:
+- name: Alarm System
+  id: alarm_control_panel.alarm_system
+  area: entryway
+  device: alarm_system
+  state: disarmed
+  attributes:
+    code_format: number
+    supported_features:
+    - alarm.AlarmControlPanelEntityFeature.ARM_HOME
+    - alarm.AlarmControlPanelEntityFeature.ARM_AWAY
+    - alarm.AlarmControlPanelEntityFeature.TRIGGER
+- name: Alarm System Tamper
+  id: binary_sensor.alarm_system_tamper
+  area: entryway
+  device: alarm_system
+  state: false
+  attributes:
+    device_class: binary_sensor.BinarySensorDeviceClass.TAMPER
+- name: Alarm System
+  id: text.alarm_system
+  area: entryway
+  device: alarm_system
+  attributes:
+    mode: text
