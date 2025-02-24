@@ -36,4 +36,4 @@ entities:
     alarm:
       state: "off"
       supported_features:
-      - alarm.SirenEntityFeature.VOLUME_SET
+      - siren.SirenEntityFeature.VOLUME_SET
