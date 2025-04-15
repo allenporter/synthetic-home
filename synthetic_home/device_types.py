@@ -1,7 +1,11 @@
 """Data model for device type definitions.
 
-These device devices and how they map to a set of entities. States can be set
-on a device then translated into how that state affects entities.
+These device types are responsible for:
+- Describing infroation about a device such as name, make, model info.
+- How devices are made from a set of entities
+
+A device type may also pre-define the concept of a device state. The device
+state is a name like "idle" that describes the state of the set of entities.
 """
 
 from functools import cache
@@ -18,6 +22,7 @@ from mashumaro.exceptions import MissingField
 from mashumaro import field_options, DataClassDictMixin
 from mashumaro.types import SerializationStrategy
 
+from .common import NamedAttributes, StateValue
 from .exceptions import SyntheticHomeError
 
 __all__ = [
@@ -26,7 +31,6 @@ __all__ = [
     "DeviceState",
     "EntityState",
     "EntityEntry",
-    "AttributeValueType",
     "load_device_type_registry",
 ]
 
@@ -56,10 +60,6 @@ class KeyedObjectListStrategy(SerializationStrategy):
         raise ValueError(f"Expected 'dict' representing the object list, got: {value}")
 
 
-AttributeValueType = str | list[str] | list[dict[str, Any]]
-"""Type for an entity attribute value."""
-
-
 @dataclass
 class EntityEntry(DataClassDictMixin):
     """Defines an entity type.
@@ -70,7 +70,7 @@ class EntityEntry(DataClassDictMixin):
     key: str
     """The entity description key"""
 
-    attributes: dict[str, AttributeValueType] = field(default_factory=dict)
+    attributes: NamedAttributes = field(default_factory=dict)
     """Attributes supported by this entity."""
 
 
@@ -79,7 +79,7 @@ class EntityDictStrategy(SerializationStrategy):
 
     def deserialize(
         self,
-        value: dict[str, dict[str, dict[str, AttributeValueType]]],
+        value: dict[str, dict[str, NamedAttributes]],
     ) -> dict[str, list[EntityEntry]]:
         """Deserialize the object."""
         return {
@@ -101,7 +101,7 @@ class EntityState(DataClassDictMixin):
     key: str
     """The entity key identifying the entity."""
 
-    state: str | dict[str, Any]
+    state: str | bool | int | NamedAttributes
     """The values that make up the entity state."""
 
     @property
@@ -111,7 +111,7 @@ class EntityState(DataClassDictMixin):
 
     def merge(self, new: "EntityState") -> "EntityState":
         """Merge with an additional value."""
-        merged_state: str | bool | dict[str, Any]
+        merged_state: StateValue | NamedAttributes
         if isinstance(new.state, dict):
             if isinstance(self.state, dict):
                 merged_state = {

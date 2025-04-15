@@ -9,7 +9,12 @@ from mashumaro.mixins.yaml import DataClassYAMLMixin
 from mashumaro.config import BaseConfig
 
 
-__all__ = ["DeviceInfo"]
+__all__ = [
+    "DeviceInfo",
+    "StateValue",
+    "AttributeValue",
+    "NamedAttributes",
+]
 
 
 @dataclass
@@ -28,3 +33,13 @@ class DeviceInfo(DataClassYAMLMixin):
     class Config(BaseConfig):
         code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False
+
+
+StateValue = str | int | float | bool
+"""Type that defines allowed entity state types."""
+
+AttributeValue = StateValue | list[dict[str, StateValue]] | list[StateValue]
+"""Type for an entity attribute value."""
+
+NamedAttributes = dict[str, AttributeValue]
+"""Type for a dictionary of entity named attributes."""
