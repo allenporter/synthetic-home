@@ -7,9 +7,11 @@ entities:
 - name: Tasks
   id: todo.tasks
   device: tasks
+  state: '2'
   attributes:
     supported_features:
     - todo.TodoListEntityFeature.CREATE_TODO_ITEM
     - todo.TodoListEntityFeature.DELETE_TODO_ITEM
-    todo_items: []
-
+    todo_items:
+    - summary: Homework
+    - summary: Call mom

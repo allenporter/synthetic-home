@@ -209,7 +209,9 @@ def build_entities(area_id: str | None, device_entry: Device) -> list[inventory.
             )
             if area_id:
                 entity.area = area_id
-            attributes: dict[str, str | list[str] | int | float] = {}
+            attributes: dict[
+                str, str | list[str] | list[dict[str, Any]] | int | float
+            ] = {}
             if entity_entry.attributes:
                 attributes.update(entity_entry.attributes)
             state = attributes.pop("state", None)
