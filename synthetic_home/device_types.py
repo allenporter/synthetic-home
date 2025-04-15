@@ -56,7 +56,7 @@ class KeyedObjectListStrategy(SerializationStrategy):
         raise ValueError(f"Expected 'dict' representing the object list, got: {value}")
 
 
-AttributeValueType = str | list[str] | list[dict[str, Any]]
+AttributeValueType = str | list[dict[str, Any]] | list[str] | int | float | bool
 """Type for an entity attribute value."""
 
 

@@ -13,6 +13,7 @@ from mashumaro.codecs.yaml import yaml_decode
 
 from . import common
 from .exceptions import SyntheticHomeError
+from .device_types import AttributeValueType
 
 __all__ = [
     "Inventory",
@@ -99,9 +100,7 @@ class Entity(DataClassYAMLMixin):
     state: str | None = None
     """The current state value for the entity."""
 
-    attributes: (
-        dict[str, str | int | float | bool | list[str] | list[dict[str, Any]]] | None
-    ) = None
+    attributes: dict[str, AttributeValueType] | None = None
     """The current state attributes for the entity."""
 
     def __post_init__(self) -> None:
