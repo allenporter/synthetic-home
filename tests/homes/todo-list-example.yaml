@@ -1,5 +1,11 @@
 ---
 name: Family Farmhouse
 services:
-  - name: Tasks
-    device_type: todo-list
+- name: Tasks
+  device_type: todo-list
+  device_state:
+    todo.todo-list:
+      state: '2'
+      todo_items:
+      - summary: Homework
+      - summary: Call mom

@@ -26,6 +26,7 @@ __all__ = [
     "DeviceState",
     "EntityState",
     "EntityEntry",
+    "AttributeValueType",
     "load_device_type_registry",
 ]
 
@@ -55,6 +56,10 @@ class KeyedObjectListStrategy(SerializationStrategy):
         raise ValueError(f"Expected 'dict' representing the object list, got: {value}")
 
 
+AttributeValueType = str | list[str] | list[dict[str, Any]]
+"""Type for an entity attribute value."""
+
+
 @dataclass
 class EntityEntry(DataClassDictMixin):
     """Defines an entity type.
@@ -65,7 +70,7 @@ class EntityEntry(DataClassDictMixin):
     key: str
     """The entity description key"""
 
-    attributes: dict[str, str | list[str]] = field(default_factory=dict)
+    attributes: dict[str, AttributeValueType] = field(default_factory=dict)
     """Attributes supported by this entity."""
 
 
@@ -73,7 +78,8 @@ class EntityDictStrategy(SerializationStrategy):
     """A parser of the entity entry dict."""
 
     def deserialize(
-        self, value: dict[str, dict[str, dict[str, str | list[str]]]]
+        self,
+        value: dict[str, dict[str, dict[str, AttributeValueType]]],
     ) -> dict[str, list[EntityEntry]]:
         """Deserialize the object."""
         return {
