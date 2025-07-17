@@ -1,6 +1,27 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=77.0"]
+
+[project]
+name = "synthetic_home"
+version = "0.0.1"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+description = "Library for managing synthetic home device registry"
+readme = "README.md"
+authors = [{ name = "Allen Porter", email = "allen.porter@gmail.com" }]
+requires-python = ">=3.12"
+classifiers = []
+dependencies = []
+
+[project.urls]
+Source = "https://github.com/allenporter/synthetic_home"
+
+[tool.setuptools.packages.find]
+include = ["synthetic_home*"]
+
 [tool.mypy]
 exclude = [
-  "setup.py",
   "venv/",
 ]
 platform = "linux"
