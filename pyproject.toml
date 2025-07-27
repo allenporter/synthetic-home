@@ -12,10 +12,7 @@ readme = "README.md"
 authors = [{ name = "Allen Porter", email = "allen.porter@gmail.com" }]
 requires-python = ">=3.12"
 classifiers = []
-dependencies = [
-  "mashumaro>=3.13",
-  "aiohttp>=3.9.5",
-]
+dependencies = ["mashumaro>=3.13", "aiohttp>=3.9.5"]
 
 [project.urls]
 Source = "https://github.com/allenporter/synthetic_home"
@@ -23,10 +20,12 @@ Source = "https://github.com/allenporter/synthetic_home"
 [tool.setuptools.packages.find]
 include = ["synthetic_home*"]
 
+[project.entry-points."console_scripts"]
+synthetic-home = "synthetic_home.tool.__main__:main"
+
+
 [tool.mypy]
-exclude = [
-  "venv/",
-]
+exclude = ["venv/"]
 platform = "linux"
 show_error_codes = true
 follow_imports = "normal"
@@ -37,9 +36,7 @@ warn_incomplete_stub = true
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
-disable_error_code = [
-    "import-untyped",
-]
+disable_error_code = ["import-untyped"]
 extra_checks = false
 check_untyped_defs = true
 disallow_incomplete_defs = true
