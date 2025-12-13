@@ -4,7 +4,7 @@ requires = ["setuptools>=77.0"]
 
 [project]
 name = "synthetic_home"
-version = "5.0.0"
+version = "5.0.1"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 description = "Library for managing synthetic home device registry"
@@ -19,6 +19,9 @@ Source = "https://github.com/allenporter/synthetic_home"
 
 [tool.setuptools.packages.find]
 include = ["synthetic_home*"]
+
+[tool.setuptools.package-data]
+synthetic_home = ["*.yaml"]
 
 [project.entry-points."console_scripts"]
 synthetic-home = "synthetic_home.tool.__main__:main"
