@@ -8,7 +8,7 @@ pytest-cov==7.0.0
 pytest==9.0.2
 ruff==0.15.0
 
-mashumaro==3.19
+mashumaro==3.20
 syrupy==5.1.0
 python-slugify==8.0.4
 aiohttp==3.13.3
