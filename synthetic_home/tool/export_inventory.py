@@ -75,7 +75,6 @@ def create_arguments(args: argparse.ArgumentParser) -> None:
 
 
 class Counter:
-
     def __init__(self) -> None:
         """Counter."""
         self._value = 0
