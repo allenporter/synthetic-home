@@ -38,7 +38,7 @@ __all__ = [
 _LOGGER = logging.getLogger(__name__)
 
 
-DEVICE_TYPES_RESOURCE_PATH = resources.files().joinpath("registry")
+DEVICE_TYPES_RESOURCE_PATH = resources.files("synthetic_home").joinpath("registry")
 
 
 class KeyedObjectListStrategy(SerializationStrategy):
@@ -273,7 +273,7 @@ def _read_device_types(
     device_types_path: Traversable,
 ) -> Generator[DeviceType, None, None]:
     """Read device types from the device type directory."""
-    _LOGGER.debug("Loading device type registry from %s", device_types_path.absolute())  # type: ignore[attr-defined]
+    _LOGGER.debug("Loading device type registry from %s", device_types_path)
 
     for device_type_file in device_types_path.iterdir():
         if not device_type_file.name.endswith(".yaml"):
