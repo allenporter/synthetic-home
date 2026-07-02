@@ -9,7 +9,7 @@ pytest==9.1.1
 ruff==0.15.20
 
 mashumaro==3.22
-syrupy==5.3.4
+syrupy==5.4.0
 python-slugify==8.0.4
 aiohttp==3.14.1
 pytest-asyncio==1.4.0
