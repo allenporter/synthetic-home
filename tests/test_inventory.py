@@ -2,7 +2,6 @@
 
 from synthetic_home import inventory
 
-
 INVENTORY = """
 ---
 areas:

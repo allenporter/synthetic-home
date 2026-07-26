@@ -12,12 +12,12 @@ $ synthetic-home --debug export_inventory "${HASS_URL}" "${API_TOKEN}" > invento
 
 import argparse
 import logging
-import slugify
 from typing import Any
 
 import aiohttp
+import slugify
 
-from synthetic_home import inventory, common
+from synthetic_home import common, inventory
 
 _LOGGER = logging.getLogger(__name__)
 
