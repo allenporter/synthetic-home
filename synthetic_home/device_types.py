@@ -205,7 +205,7 @@ class DeviceStateStrategy(SerializationStrategy):
     def deserialize(self, value: tuple[str, Any]) -> DeviceState:
         """Deserialize the object."""
         if not isinstance(value, tuple):
-            raise ValueError(
+            raise TypeError(
                 f"Expected 'tuple' representing the DeviceState object, got: {value}"
             )
         return DeviceState(

@@ -3,7 +3,7 @@
 import logging
 import pathlib
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, ClassVar
 
 import slugify
 import yaml
@@ -50,7 +50,7 @@ class Area(DataClassYAMLMixin):
             self.id = slugify.slugify(self.name, separator=DEFAULT_SEPARATOR)
 
     class Config(BaseConfig):
-        code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
+        code_generation_options: ClassVar[list[str]] = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False
 
 
@@ -71,7 +71,7 @@ class Device(DataClassYAMLMixin):
     """Detailed model information about the device."""
 
     class Config(BaseConfig):
-        code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
+        code_generation_options: ClassVar[list[str]] = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False
 
     def __post_init__(self) -> None:
@@ -108,7 +108,7 @@ class Entity(DataClassYAMLMixin):
             raise SyntheticHomeError("Entity {self.name} had no value for 'id'")
 
     class Config(BaseConfig):
-        code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
+        code_generation_options: ClassVar[list[str]] = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False
 
 
@@ -146,7 +146,7 @@ class Inventory(DataClassYAMLMixin):
         return {area.id: area for area in self.areas if area.id is not None}
 
     class Config(BaseConfig):
-        code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
+        code_generation_options: ClassVar[list[str]] = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False
 
 

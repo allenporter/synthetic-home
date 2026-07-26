@@ -181,7 +181,7 @@ def load_synthetic_home(config_file: pathlib.Path) -> SyntheticHome:
 
 def yaml_state_value(v: Any) -> Any:
     """Convert a entity state value to yaml."""
-    if isinstance(v, bool) or isinstance(v, float) or isinstance(v, list):
+    if isinstance(v, (bool, float, list)):
         return v
     return str(v)
 
