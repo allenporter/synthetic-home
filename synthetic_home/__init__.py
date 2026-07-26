@@ -3,10 +3,10 @@
 """
 
 __all__ = [
+    "inventory",
     "device_types",
     "exceptions",
-    "inventory",
-    "registry",
     "synthetic_home",
+    "registry",
     "tool",
 ]

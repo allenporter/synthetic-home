@@ -1,13 +1,15 @@
 """Tests for the sythethic-home `create_inventory` command."""
 
+import shlex
+import subprocess
 import asyncio
 import logging
 import pathlib
-import shlex
-import subprocess
 
 import pytest
+
 from syrupy.assertion import SnapshotAssertion
+
 
 _LOGGER = logging.getLogger(__name__)
 

@@ -5,7 +5,8 @@ import pathlib
 import pytest
 from syrupy import SnapshotAssertion
 
-from synthetic_home import device_types, inventory, synthetic_home
+from synthetic_home import synthetic_home, device_types, inventory
+
 
 TEST_HOMES = pathlib.Path("tests/homes")
 TEST_FIXTURES = pathlib.Path("tests/fixtures")

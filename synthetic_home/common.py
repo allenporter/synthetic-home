@@ -4,16 +4,16 @@ These are typically small objects reusable in different contexts.
 """
 
 from dataclasses import dataclass
-from typing import ClassVar
 
-from mashumaro.config import BaseConfig
 from mashumaro.mixins.yaml import DataClassYAMLMixin
+from mashumaro.config import BaseConfig
+
 
 __all__ = [
-    "AttributeValue",
     "DeviceInfo",
-    "NamedAttributes",
     "StateValue",
+    "AttributeValue",
+    "NamedAttributes",
 ]
 
 
@@ -31,7 +31,7 @@ class DeviceInfo(DataClassYAMLMixin):
     """The firmware version string of the device e.g. '1.0.2'."""
 
     class Config(BaseConfig):
-        code_generation_options: ClassVar[list[str]] = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
+        code_generation_options = ["TO_DICT_ADD_OMIT_NONE_FLAG"]
         sort_keys = False
 
 
