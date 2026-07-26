@@ -1,15 +1,13 @@
 """Helper scripts for synthetic home."""
 
 import argparse
+import asyncio
 import importlib
 import logging
 import sys
 from pathlib import Path
 
-import asyncio
-
 from . import create_inventory, export_inventory
-
 
 _LOGGER = logging.getLogger(__name__)
 

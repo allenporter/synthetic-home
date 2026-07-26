@@ -8,29 +8,29 @@ A device type may also pre-define the concept of a device state. The device
 state is a name like "idle" that describes the state of the set of entities.
 """
 
-from functools import cache
+import logging
 from collections.abc import Generator
 from dataclasses import dataclass, field
+from functools import cache
 from importlib import resources
 from importlib.resources.abc import Traversable
-import logging
 from typing import Any
-import yaml
 
+import yaml
+from mashumaro import DataClassDictMixin, field_options
 from mashumaro.codecs.yaml import yaml_decode
 from mashumaro.exceptions import MissingField
-from mashumaro import field_options, DataClassDictMixin
 from mashumaro.types import SerializationStrategy
 
 from .common import NamedAttributes, StateValue
 from .exceptions import SyntheticHomeError
 
 __all__ = [
-    "DeviceTypeRegistry",
-    "DeviceType",
     "DeviceState",
-    "EntityState",
+    "DeviceType",
+    "DeviceTypeRegistry",
     "EntityEntry",
+    "EntityState",
     "load_device_type_registry",
 ]
 
@@ -205,7 +205,7 @@ class DeviceStateStrategy(SerializationStrategy):
     def deserialize(self, value: tuple[str, Any]) -> DeviceState:
         """Deserialize the object."""
         if not isinstance(value, tuple):
-            raise ValueError(
+            raise TypeError(
                 f"Expected 'tuple' representing the DeviceState object, got: {value}"
             )
         return DeviceState(
@@ -271,7 +271,7 @@ class DeviceTypeRegistry:
 
 def _read_device_types(
     device_types_path: Traversable,
-) -> Generator[DeviceType, None, None]:
+) -> Generator[DeviceType]:
     """Read device types from the device type directory."""
     _LOGGER.debug("Loading device type registry from %s", device_types_path)
 

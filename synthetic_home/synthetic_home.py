@@ -1,28 +1,29 @@
 """Data model for home assistant synthetic home."""
 
-from dataclasses import dataclass, field
-import pathlib
 import logging
-import slugify
+import pathlib
+from dataclasses import dataclass, field
 from typing import Any
 
+import slugify
 from mashumaro.codecs.yaml import yaml_decode
 
-from synthetic_home.exceptions import SyntheticHomeError
 from synthetic_home.device_types import (
-    DeviceTypeRegistry,
-    DeviceStateStrategy,
     DeviceState,
+    DeviceStateStrategy,
+    DeviceTypeRegistry,
     EntityEntry,
     merge_entity_state_attributes,
 )
+from synthetic_home.exceptions import SyntheticHomeError
+
 from . import common, inventory
-from .inventory import DEFAULT_SEPARATOR
 from .device_types import load_device_type_registry
+from .inventory import DEFAULT_SEPARATOR
 
 __all__ = [
-    "SyntheticHome",
     "Device",
+    "SyntheticHome",
     "build_device_state",
     "load_synthetic_home",
     "read_config_content",
@@ -180,7 +181,7 @@ def load_synthetic_home(config_file: pathlib.Path) -> SyntheticHome:
 
 def yaml_state_value(v: Any) -> Any:
     """Convert a entity state value to yaml."""
-    if isinstance(v, bool) or isinstance(v, float) or isinstance(v, list):
+    if isinstance(v, (bool, float, list)):
         return v
     return str(v)
 
