@@ -5,9 +5,8 @@ These are typically small objects reusable in different contexts.
 
 from dataclasses import dataclass
 
-from mashumaro.mixins.yaml import DataClassYAMLMixin
 from mashumaro.config import BaseConfig
-
+from mashumaro.mixins.yaml import DataClassYAMLMixin
 
 __all__ = [
     "DeviceInfo",

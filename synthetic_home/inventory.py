@@ -1,15 +1,15 @@
 """Data model for the lower level inventory of a home, usable for fixtures and evaluations."""
 
+import logging
 import pathlib
 from dataclasses import dataclass, field
-import logging
-import slugify
 from typing import Any
 
+import slugify
 import yaml
-from mashumaro.mixins.yaml import DataClassYAMLMixin, EncodedData
-from mashumaro.config import BaseConfig
 from mashumaro.codecs.yaml import yaml_decode
+from mashumaro.config import BaseConfig
+from mashumaro.mixins.yaml import DataClassYAMLMixin, EncodedData
 
 from . import common
 from .exceptions import SyntheticHomeError
