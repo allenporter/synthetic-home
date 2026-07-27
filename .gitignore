@@ -165,6 +165,3 @@ cython_debug/
 .ty_cache/
 
 .DS_Store
-
-# Merge conflict rejects
-*.rej
