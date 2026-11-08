@@ -27,11 +27,9 @@ repos:
           - pyi
       - id: ty
         name: ty check
-        entry: uv run --no-project ty check --ignore unresolved-import
+        entry: uv run --no-project ty check . --ignore import-not-found
         language: system
-        types_or:
-          - python
-          - pyi
+        pass_filenames: false
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.3
     hooks:
