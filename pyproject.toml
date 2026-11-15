@@ -54,4 +54,4 @@ warn_unreachable = true
 exclude = ["tests", "examples"]
 
 [tool.ty.rules]
-invalid-attribute-override = "ignore"
+incompatible-attribute-override = "ignore"
